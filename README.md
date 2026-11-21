@@ -1,5 +1,7 @@
 # JobHub
 
+🔗 **Live app:** [https://nitesh123-nits.github.io/Job-Hub/](https://nitesh123-nits.github.io/Job-Hub/) · installable as a PWA (open it on your phone → *Add to Home screen*)
+
 One-page PWA for the job search: job boards, remote sites and company career pages, plus tools to find active jobs and apply.
 
 ## Features
