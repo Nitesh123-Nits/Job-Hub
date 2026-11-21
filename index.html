@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JobHub — Every Job Board in One Place</title>
+<meta name="description" content="One-tap access to top job boards, remote job sites and company career pages.">
+<meta name="theme-color" content="#F3F0E8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F0E8; --ink:#111111; --mute:#6B675E; --line:#111111; --hair:#D6D1C4; --accent:#E8431A;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.bar{border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-weight:700;font-size:17px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.brand i{width:14px;height:14px;background:var(--accent);display:block}
+.meta{font-family:var(--mono);font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:18px}
+.install{display:none;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:9px 14px;cursor:pointer}
+.install:hover{background:var(--accent)}
+
+/* hero */
+.hero{padding:72px 0 40px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:22px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,10vw,132px);line-height:.94;letter-spacing:-.02em;max-width:11ch}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{max-width:520px;margin-top:28px;color:var(--mute);font-size:18px}
+
+/* search + tabs */
+.controls{border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:10}
+.controls .wrap{display:flex;gap:0;align-items:stretch;flex-wrap:wrap}
+.search{flex:1 1 280px;border:0;background:transparent;font:500 17px var(--sans);padding:18px 0;color:var(--ink);outline:none;min-width:0}
+.search::placeholder{color:#9A958A}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;flex:0 1 auto;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;background:transparent;border:0;border-left:1px solid var(--line);padding:0 20px;min-height:58px;font:500 14px var(--sans);color:var(--ink);cursor:pointer;white-space:nowrap}
+.tab:hover{background:var(--hair)}
+.scopebtn{border-left:1px solid var(--line)}
+.scopebtn::before{content:"";display:inline-block;width:10px;height:10px;border:1px solid currentColor;margin-right:8px;vertical-align:-1px}
+.scopebtn.on::before{background:var(--accent);border-color:var(--accent)}
+.tab.scopebtn.on{background:transparent;color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper)}
+.tab small{font-family:var(--mono);font-size:11px;margin-left:6px;opacity:.6}
+.search:focus-visible,.tab:focus-visible,.card:focus-visible,.fav:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* sections */
+section{padding:56px 0 0}
+.sh{display:grid;grid-template-columns:72px 1fr auto;align-items:end;gap:8px 16px;padding-bottom:18px}
+.sh .no{font-family:var(--mono);font-size:13px;color:var(--accent);padding-bottom:8px}
+.sh h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,56px);line-height:1;letter-spacing:-.01em}
+.sh .ct{font-family:var(--mono);font-size:12px;color:var(--mute);padding-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.sh p{grid-column:2/4;color:var(--mute);font-size:15px;max-width:600px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.card{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:36px;min-height:170px;padding:20px;text-decoration:none;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);transition:background .12s,color .12s}
+.card:hover{background:var(--ink);color:var(--paper)}
+.card:hover .ds{color:#B8B3A6}
+.card:hover .arrow{color:var(--accent);transform:translate(3px,-3px)}
+.top{display:flex;justify-content:space-between;align-items:flex-start}
+.logo{width:40px;height:40px;background:#fff;border:1px solid var(--hair);display:grid;place-items:center;overflow:hidden}
+.logo img{width:24px;height:24px;display:block;object-fit:contain}
+.logo b{font:700 16px var(--sans);color:var(--ink)}
+.arrow{font-size:22px;line-height:1;transition:transform .15s,color .15s}
+.tag{display:inline-block;font:500 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;padding:2px 6px;margin-bottom:8px;color:var(--mute)}
+.tag.IN,.tag.RM{color:var(--accent)}
+.nm{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.ds{color:var(--mute);font-size:14px;margin-top:2px;transition:color .12s}
+.fav{position:absolute;right:14px;bottom:12px;background:none;border:0;font-size:18px;line-height:1;padding:6px;cursor:pointer;color:#A8A397}
+.fav:hover{color:var(--accent)}
+.fav.on{color:var(--accent)}
+.empty{display:none;padding:80px 0;font-family:var(--serif);font-size:36px;color:var(--mute)}
+.note{margin-top:64px;border:1px solid var(--line);padding:20px 22px;font-size:15px;max-width:760px}
+.note b{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:6px;font-weight:500}
+footer{margin-top:72px;border-top:1px solid var(--line);padding:22px 0 40px;font-family:var(--mono);font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* role search builder */
+#builder{padding-bottom:8px}
+.bl{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:18px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:transparent;border:1px solid var(--line);color:var(--ink);font:500 14px var(--sans);padding:8px 12px;cursor:pointer}
+.chip:hover{background:var(--hair)}
+.chip.on{background:var(--ink);color:var(--paper)}
+.custom{width:100%;max-width:420px;border:1px solid var(--line);background:transparent;font:500 15px var(--sans);padding:10px 12px;color:var(--ink);outline:none;margin-top:10px}
+.custom:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.now{margin:22px 0 14px;font-family:var(--serif);font-size:clamp(24px,3.4vw,36px);line-height:1.1}
+.now em{color:var(--accent)}
+#smart .card{min-height:128px;gap:18px}
+@media(max-width:640px){
+  .wrap{padding:0 16px}.hero{padding:48px 0 28px}.lede{font-size:16px}
+  .sh{grid-template-columns:1fr auto}.sh .no{grid-column:1/3;padding-bottom:0}.sh p{grid-column:1/3}
+  .grid{grid-template-columns:1fr 1fr}.card{min-height:150px;padding:14px;gap:24px}.nm{font-size:16px}.ds{font-size:13px}
+  .meta span{display:none}
+}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <div class="brand"><i></i>JobHub</div>
+  <div class="meta"><span id="count">—</span><button id="install" class="install">Install app</button></div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Job search · India &amp; Global</div>
+  <h1>Every job board, <em>one page.</em></h1>
+  <p class="lede">Job boards, free remote sites and company career pages. Filtered for India-based or fully remote roles by default.</p>
+</div></header>
+
+<div class="controls"><div class="wrap">
+  <input id="q" class="search" type="search" placeholder="Search — remote, Mumbai, Naukri, Java…" autocomplete="off" aria-label="Search sites">
+  <button id="scope" class="tab scopebtn" aria-pressed="true">India + Remote only</button>
+  <nav class="tabs" id="tabs" aria-label="Categories"></nav>
+</div></div>
+
+<div class="wrap" id="builder"><section>
+  <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick a role and a location. Search links for each board are built for you.</p></div>
+  <div class="bl">Role</div><div class="chips" id="roles"></div>
+  <input id="custom" class="custom" type="text" placeholder="Or type any role…" autocomplete="off" aria-label="Custom role">
+  <div class="bl">Location</div><div class="chips" id="cities"></div>
+  <div class="now" id="now"></div>
+  <div class="grid" id="results"></div>
+</section></div>
+<div class="wrap" id="smart" style="display:none"><section>
+  <div class="sh"><span class="no">00</span><h2>Smart Search</h2><span class="ct" id="scount"></span><p>One-tap searches for people who are hiring right now. Each link is one short search, for example: hiring "Java Developer" Mumbai.</p></div>
+  <div class="bl">Location</div><div class="chips" id="scities"></div>
+  <div class="bl">Posted within</div><div class="chips" id="swins"></div>
+  <input id="scustom" class="custom" type="text" placeholder="Add your own role, e.g. Kafka Engineer" autocomplete="off" aria-label="Custom role">
+  <div class="now" id="snow"></div>
+  <div id="sresults"></div>
+  <div class="note"><b>Tips</b>LinkedIn post search needs you to be signed in. LinkedIn post search has only 24 hours, week and month, so "3 days" uses the past week there. Message the poster within a few hours, never pay to apply, and be careful with unknown email addresses.</div>
+</section></div>
+<main class="wrap" id="main"></main>
+<div class="wrap">
+  <div class="empty" id="empty">Nothing matches that.</div>
+  <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
+</div>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span></div></footer>
+
+<script>
+const DATA=[
+ {id:"builtin",t:"Built In India",d:"Built In's India pages. It organises India by city hub, not by state.",s:[
+  ["Built In · India (All)","https://builtin.com/jobs/as/india","All India tech and startup jobs","IN"],
+  ["Built In · Bangalore","https://builtin.com/jobs/as/india/bangalore","Bengaluru tech hub","IN"],
+  ["Built In · Hyderabad","https://builtin.com/jobs/as/india/hyderabad","Hyderabad","IN"],
+  ["Built In · Pune","https://builtin.com/jobs/as/india/pune","Pune","IN"],
+  ["Built In · Mumbai","https://builtin.com/jobs/as/india/mumbai","Mumbai","IN"],
+  ["Built In · Delhi","https://builtin.com/jobs/as/india/delhi","Delhi","IN"],
+  ["Built In · Gurgaon","https://builtin.com/jobs/as/india/gurgaon","Gurgaon","IN"],
+  ["Built In · Chennai","https://builtin.com/jobs/as/india/chennai","Chennai","IN"],
+  ["Built In · Kolkata","https://builtin.com/jobs/as/india/kolkata","Kolkata","IN"]]},
+ {id:"india",t:"India",d:"Top boards for India, including Mumbai, Bangalore and Kolkata.",s:[
+  ["Naukri","https://www.naukri.com/jobs-in-india","India's largest job portal"],
+  ["LinkedIn · India","https://www.linkedin.com/jobs/search/?location=India","All jobs in India"],
+  ["Instahyre","https://www.instahyre.com/","Companies reach out to you"],
+  ["Hirist","https://www.hirist.tech/","Tech jobs in India"],
+  ["Cutshort","https://cutshort.io/jobs","Startup tech jobs"],
+  ["Foundit","https://www.foundit.in/","Formerly Monster India"],
+  ["Indeed India","https://in.indeed.com/","Job aggregator"],
+  ["Glassdoor India","https://www.glassdoor.co.in/Job/index.htm","Jobs, salaries, reviews"],
+  ["IIMJobs","https://www.iimjobs.com/","Mid to senior roles"],
+  ["Apna","https://apna.co/jobs","Jobs and local hiring"],
+  ["Internshala","https://internshala.com/jobs","Entry level and internships"]]},
+ {id:"remote",t:"Remote",d:"Free to use. Apply directly with the company.",s:[
+  ["We Work Remotely","https://weworkremotely.com/","Largest remote community"],
+  ["Remote OK","https://remoteok.com/","Remote tech jobs"],
+  ["Remotive","https://remotive.com/","Curated remote roles"],
+  ["Himalayas","https://himalayas.app/jobs","Filter by country"],
+  ["Working Nomads","https://www.workingnomads.com/jobs","Remote job feed"],
+  ["Jobspresso","https://jobspresso.co/","Hand-picked remote"],
+  ["JustRemote","https://justremote.co/","Remote job board"],
+  ["Remote.co","https://remote.co/remote-jobs/","Remote jobs"],
+  ["Dynamite Jobs","https://dynamitejobs.com/","Remote-first companies"],
+  ["Jobgether","https://jobgether.com/","Remote matching"],
+  ["Arc","https://arc.dev/remote-jobs","Remote developer jobs"],
+  ["Wellfound","https://wellfound.com/jobs","Startups, direct apply"],
+  ["LinkedIn · Remote","https://www.linkedin.com/jobs/search/?f_WT=2","Remote filter"]]},
+ {id:"global",t:"Global",d:"Large international boards and aggregators.",s:[
+  ["LinkedIn Jobs","https://www.linkedin.com/jobs/","World's largest"],
+  ["Indeed","https://www.indeed.com/","Global aggregator"],
+  ["Glassdoor","https://www.glassdoor.com/Job/index.htm","Jobs and company reviews"],
+  ["Wellfound","https://wellfound.com/jobs","Startup jobs"],
+  ["Welcome to the Jungle","https://www.welcometothejungle.com/en/jobs","Culture-first listings"],
+  ["Work at a Startup","https://www.workatastartup.com/jobs","Y Combinator companies"],
+  ["Hacker News Jobs","https://news.ycombinator.com/jobs","Startup postings"],
+  ["Dice","https://www.dice.com/jobs","US tech jobs"],
+  ["ZipRecruiter","https://www.ziprecruiter.com/jobs-search","US job search"],
+  ["Monster","https://www.monster.com/jobs","Global job search"]]},
+ {id:"bigtech",t:"Big Tech",d:"Top-paying global tech. IN = hires in India, GL = mostly outside India.",s:[
+  ["Google","https://www.google.com/about/careers/applications/jobs/results","Google careers","IN"],
+  ["Amazon","https://www.amazon.jobs/en/","Amazon jobs","IN"],
+  ["Microsoft","https://careers.microsoft.com/","Microsoft careers","IN"],
+  ["Apple","https://jobs.apple.com/en-in/search","Apple jobs, India store","IN"],
+  ["Meta","https://www.metacareers.com/jobs","Meta careers","GL"],
+  ["Netflix","https://jobs.netflix.com/","Netflix jobs","GL"],
+  ["NVIDIA","https://www.nvidia.com/en-us/about-nvidia/careers/","NVIDIA careers","IN"],
+  ["Intel","https://jobs.intel.com/","Intel jobs","IN"],
+  ["Qualcomm","https://careers.qualcomm.com/","Qualcomm careers","IN"],
+  ["Cisco","https://jobs.cisco.com/","Cisco jobs","IN"],
+  ["Oracle","https://careers.oracle.com/","Oracle careers","IN"],
+  ["SAP","https://jobs.sap.com/","SAP jobs","IN"],
+  ["Tesla","https://www.tesla.com/careers","Tesla careers","GL"],
+  ["OpenAI","https://openai.com/careers/","OpenAI careers","GL"],
+  ["Anthropic","https://www.anthropic.com/careers","Anthropic careers","GL"]]},
+ {id:"finance",t:"Banks & Finance",d:"Investment banks, payments and trading firms, with large India tech centres.",s:[
+  ["J.P. Morgan","https://careers.jpmorgan.com/","JPMorgan Chase careers","IN"],
+  ["Morgan Stanley","https://www.morganstanley.com/careers","Morgan Stanley careers","IN"],
+  ["Goldman Sachs","https://www.goldmansachs.com/careers/","Goldman Sachs careers","IN"],
+  ["Deutsche Bank","https://careers.db.com/","Deutsche Bank jobs","IN"],
+  ["Barclays","https://search.jobs.barclays/","Barclays jobs","IN"],
+  ["Citi","https://jobs.citi.com/","Citi jobs","IN"],
+  ["Wells Fargo","https://www.wellsfargojobs.com/","Wells Fargo jobs","IN"],
+  ["Bank of America","https://careers.bankofamerica.com/","Bank of America careers","IN"],
+  ["UBS","https://www.ubs.com/global/en/careers.html","UBS careers","IN"],
+  ["BlackRock","https://careers.blackrock.com/","BlackRock careers","IN"],
+  ["American Express","https://www.americanexpress.com/en-us/careers/","Amex careers","IN"],
+  ["Visa","https://corporate.visa.com/en/jobs/","Visa jobs","IN"],
+  ["Mastercard","https://careers.mastercard.com/","Mastercard careers","IN"],
+  ["PayPal","https://careers.pypl.com/home/","PayPal careers","IN"],
+  ["D. E. Shaw","https://www.deshaw.com/careers","Quant and tech roles","IN"],
+  ["Tower Research","https://www.tower-research.com/open-positions","Trading technology","IN"],
+  ["Jane Street","https://www.janestreet.com/join-jane-street/open-roles/","Trading firm","GL"],
+  ["Citadel","https://www.citadel.com/careers/open-opportunities/","Citadel careers","GL"],
+  ["Optiver","https://optiver.com/working-at-optiver/career-opportunities/","Market maker","GL"]]},
+ {id:"product",t:"Product Companies",d:"Software and platform companies known for strong pay.",s:[
+  ["Adobe","https://careers.adobe.com/","Adobe careers","IN"],
+  ["Salesforce","https://careers.salesforce.com/","Salesforce careers","IN"],
+  ["Intuit","https://jobs.intuit.com/","Intuit jobs","IN"],
+  ["Atlassian","https://www.atlassian.com/company/careers/all-jobs","Atlassian careers","IN"],
+  ["Uber","https://www.uber.com/us/en/careers/","Uber careers","IN"],
+  ["Stripe","https://stripe.com/jobs/search","Stripe jobs","IN"],
+  ["LinkedIn","https://careers.linkedin.com/","LinkedIn careers","IN"],
+  ["Walmart Global Tech","https://careers.walmart.com/","Walmart tech, Bangalore","IN"],
+  ["Databricks","https://www.databricks.com/company/careers","Databricks careers","IN"],
+  ["Snowflake","https://careers.snowflake.com/","Snowflake careers","IN"],
+  ["ServiceNow","https://careers.servicenow.com/","ServiceNow careers","IN"],
+  ["Workday","https://www.workday.com/en-us/company/careers.html","Workday careers","IN"],
+  ["Twilio","https://www.twilio.com/en-us/company/jobs","Twilio jobs","RM"],
+  ["Rubrik","https://www.rubrik.com/company/careers","Rubrik careers","IN"],
+  ["Nutanix","https://www.nutanix.com/company/careers","Nutanix careers","IN"],
+  ["Palo Alto Networks","https://jobs.paloaltonetworks.com/","Security, Bangalore","IN"],
+  ["Zscaler","https://www.zscaler.com/careers","Zscaler careers","IN"],
+  ["MongoDB","https://www.mongodb.com/careers","MongoDB careers","IN"],
+  ["Confluent","https://careers.confluent.io/","Kafka company","RM"],
+  ["Datadog","https://careers.datadoghq.com/","Datadog careers","GL"],
+  ["Airbnb","https://careers.airbnb.com/","Airbnb careers","GL"],
+  ["Spotify","https://www.lifeatspotify.com/jobs","Spotify jobs","GL"],
+  ["Shopify","https://www.shopify.com/careers","Shopify careers","RM"],
+  ["Cloudflare","https://www.cloudflare.com/careers/jobs/","Cloudflare jobs","GL"],
+  ["Coinbase","https://www.coinbase.com/careers","Remote-first","RM"]]},
+ {id:"indiaco",t:"India Startups",d:"Indian product companies and unicorns, hiring in India.",s:[
+  ["Flipkart","https://www.flipkartcareers.com/","Flipkart careers","IN"],
+  ["Swiggy","https://careers.swiggy.com/","Swiggy careers","IN"],
+  ["Razorpay","https://razorpay.com/jobs/","Razorpay jobs","IN"],
+  ["PhonePe","https://www.phonepe.com/careers/","PhonePe careers","IN"],
+  ["Zomato","https://www.zomato.com/careers","Zomato careers","IN"],
+  ["CRED","https://careers.cred.club/","CRED careers","IN"],
+  ["Meesho","https://www.meesho.io/jobs","Meesho jobs","IN"],
+  ["Paytm","https://paytm.com/careers","Paytm careers","IN"],
+  ["Groww","https://groww.in/careers","Groww careers","IN"],
+  ["Zerodha","https://zerodha.com/careers","Zerodha careers","IN"],
+  ["Zoho","https://www.zoho.com/careers/","Zoho careers","IN"],
+  ["Freshworks","https://www.freshworks.com/company/careers/","Freshworks careers","IN"],
+  ["Postman","https://www.postman.com/company/careers/","Postman careers","IN"],
+  ["BrowserStack","https://www.browserstack.com/careers","BrowserStack careers","IN"],
+  ["InMobi","https://www.inmobi.com/company/careers","InMobi careers","IN"],
+  ["Sprinklr","https://www.sprinklr.com/careers/","Sprinklr careers","IN"],
+  ["Thoughtworks","https://www.thoughtworks.com/careers","Thoughtworks careers","IN"],
+  ["Jio","https://careers.jio.com/","Jio careers","IN"]]},
+ {id:"remoteco",t:"Remote-first Companies",d:"Fully distributed teams. Check each role's location rules for India.",s:[
+  ["GitLab","https://about.gitlab.com/jobs/","All-remote company","RM"],
+  ["Automattic","https://automattic.com/work-with-us/","WordPress.com, distributed","RM"],
+  ["Zapier","https://zapier.com/jobs","Remote-first","RM"],
+  ["Canonical","https://canonical.com/careers","Ubuntu, fully remote","RM"],
+  ["Deel","https://www.deel.com/careers","Remote-first","RM"],
+  ["Remote.com","https://remote.com/careers","Remote-first","RM"],
+  ["Supabase","https://supabase.com/careers","Remote-first","RM"],
+  ["Vercel","https://vercel.com/careers","Remote-friendly","RM"],
+  ["Sentry","https://sentry.io/careers/","Remote-friendly","RM"],
+  ["PostHog","https://posthog.com/careers","Remote-first","RM"],
+  ["Mozilla","https://www.mozilla.org/en-US/careers/","Remote roles","RM"],
+  ["Red Hat","https://www.redhat.com/en/jobs","Remote and India roles","RM"],
+  ["DigitalOcean","https://www.digitalocean.com/careers","Remote-friendly","RM"],
+  ["Grafana Labs","https://grafana.com/about/careers/","Remote-first","RM"],
+  ["Elastic","https://www.elastic.co/about/careers/","Distributed company","RM"],
+  ["Toptal","https://www.toptal.com/careers","Remote talent network","RM"],
+  ["Turing","https://www.turing.com/jobs","Remote engineering network","RM"]]}
+];
+
+const KEY="jobhub-favs";let favs=[];try{favs=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(favs))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const all=DATA.flatMap(c=>c.s.map(s=>({name:s[0],url:s[1],desc:s[2],reg:s[3],cat:c})));
+const REG={IN:"India",RM:"Remote",GL:"Outside India"};
+let scope=true;try{scope=localStorage.getItem("jobhub-scope")!=="0"}catch(e){}
+const host=u=>new URL(u).hostname;
+const icon=u=>`https://www.google.com/s2/favicons?domain=${host(u)}&sz=64`;
+$("count").textContent=all.length+" sites";
+let tab="all",q="";
+
+// letter fallback if the official favicon can't load (offline / blocked)
+window.noIcon=img=>{const b=document.createElement("b");b.textContent=img.dataset.l;img.replaceWith(b)};
+
+function card(x){
+  const on=favs.includes(x.url);
+  return `<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+    <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" loading="lazy" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
+    <div>${x.reg?`<span class="tag ${x.reg}">${REG[x.reg]}</span>`:""}<div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div>
+    <button class="fav ${on?"on":""}" data-u="${x.url}" aria-label="${on?"Remove favourite":"Add favourite"}">${on?"★":"☆"}</button></a>`;
+}
+function buildTabs(){
+  const vis=x=>!scope||x.reg!=="GL";
+  $("tabs").innerHTML=[{id:"all",t:"All",n:all.filter(vis).length},{id:"role",t:"Role Search"},{id:"smart",t:"Smart Search"},...DATA.map(c=>({id:c.id,t:c.t,n:all.filter(x=>x.cat===c&&vis(x)).length}))]
+    .map(c=>`<button class="tab ${c.id===tab?"on":""}" data-t="${c.id}">${c.t}${c.n!==undefined?`<small>${c.n}</small>`:""}</button>`).join("");
+}
+function render(){
+  const match=x=>(!scope||x.reg!=="GL")&&(!q||(x.name+" "+x.desc+" "+x.cat.t).toLowerCase().includes(q));
+  let html="",shown=0,n=0;
+  const fv=all.filter(x=>favs.includes(x.url)&&match(x));
+  const sec=(title,desc,items)=>{n++;shown+=items.length;
+    return `<section><div class="sh"><span class="no">${String(n).padStart(2,"0")}</span><h2>${title}</h2><span class="ct">${items.length} sites</span><p>${desc}</p></div><div class="grid">${items.map(card).join("")}</div></section>`};
+  if(tab==="all"&&fv.length)html+=sec("Favourites","Your pinned sites.",fv);
+  DATA.filter(c=>tab==="all"||tab===c.id).forEach(c=>{
+    const items=all.filter(x=>x.cat===c&&match(x));if(items.length)html+=sec(c.t,c.d,items)});
+  buildTabs();
+  $("scope").classList.toggle("on",scope);$("scope").setAttribute("aria-pressed",scope);
+  $("main").innerHTML=html;$("empty").style.display=(shown||tab==="role"||tab==="smart")?"none":"block";
+  $("smart").style.display=tab==="smart"?"block":"none";
+  $("builder").style.display=(tab==="all"||tab==="role")&&!q?"block":"none";
+}
+$("tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;tab=b.dataset.t;render()});
+$("scope").addEventListener("click",()=>{scope=!scope;try{localStorage.setItem("jobhub-scope",scope?"1":"0")}catch(e){}render()});
+$("q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();render()});
+$("main").addEventListener("click",e=>{const f=e.target.closest(".fav");if(!f)return;e.preventDefault();e.stopPropagation();
+  const u=f.dataset.u;favs=favs.includes(u)?favs.filter(x=>x!==u):[...favs,u];save();render()});
+render();
+
+
+// ---- Role search builder ----
+const ROLES=["Backend Developer","Java Backend Developer","Java Developer","Spring Boot Developer","Backend Engineer","Software Engineer","Software Development Engineer","SDE 2","Senior Software Engineer","Senior Java Developer","Senior Backend Engineer","Microservices Developer","Platform Engineer","Distributed Systems Engineer","Technical Lead"];
+const CITIES=[
+ {k:"India",n:"All India",nk:"",li:"India",ind:"India",fo:""},
+ {k:"Remote",n:"Remote",remote:1,li:"India",ind:"Remote",fo:""},
+ {k:"Mumbai",n:"Mumbai",nk:"mumbai",li:"Mumbai, Maharashtra, India",ind:"Mumbai",fo:"Mumbai"},
+ {k:"Navi Mumbai",n:"Navi Mumbai",nk:"navi-mumbai",li:"Navi Mumbai, Maharashtra, India",ind:"Navi Mumbai",fo:"Navi Mumbai"},
+ {k:"Bangalore",n:"Bangalore",nk:"bangalore",li:"Bengaluru, Karnataka, India",ind:"Bengaluru, Karnataka",fo:"Bengaluru"},
+ {k:"Pune",n:"Pune",nk:"pune",li:"Pune, Maharashtra, India",ind:"Pune",fo:"Pune"},
+ {k:"Hyderabad",n:"Hyderabad",nk:"hyderabad",li:"Hyderabad, Telangana, India",ind:"Hyderabad",fo:"Hyderabad"},
+ {k:"Delhi NCR",n:"Delhi NCR",nk:"delhi-ncr",li:"Delhi, India",ind:"New Delhi",fo:"Delhi"},
+ {k:"Gurgaon",n:"Gurgaon",nk:"gurgaon",li:"Gurugram, Haryana, India",ind:"Gurgaon",fo:"Gurgaon"},
+ {k:"Noida",n:"Noida",nk:"noida",li:"Noida, Uttar Pradesh, India",ind:"Noida",fo:"Noida"},
+ {k:"Chennai",n:"Chennai",nk:"chennai",li:"Chennai, Tamil Nadu, India",ind:"Chennai",fo:"Chennai"},
+ {k:"Kolkata",n:"Kolkata",nk:"kolkata",li:"Kolkata, West Bengal, India",ind:"Kolkata",fo:"Kolkata"}];
+let bRole="Java Backend Developer",bCity="India";
+try{bRole=localStorage.getItem("jobhub-role")||bRole;bCity=localStorage.getItem("jobhub-city")||bCity}catch(e){}
+const enc=encodeURIComponent;
+function roleSites(role,c){
+  const slug=role.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  const nk=c.remote?`https://www.naukri.com/${slug}-jobs?wfhType=2`:`https://www.naukri.com/${slug}-jobs${c.nk?"-in-"+c.nk:""}`;
+  const out=[
+   {name:"Naukri",url:nk,desc:"India's largest job portal"},
+   {name:"LinkedIn",url:`https://www.linkedin.com/jobs/search/?keywords=${enc(role)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}`,desc:c.remote?"Remote filter on":"Jobs and referrals"},
+   {name:"Indeed India",url:`https://in.indeed.com/jobs?q=${enc(role)}&l=${enc(c.ind)}`,desc:"Job aggregator"},
+   {name:"Foundit",url:`https://www.foundit.in/srp/results?query=${enc(role+(c.remote?" remote":""))}${c.fo?"&locations="+enc(c.fo):""}`,desc:"Formerly Monster India"},
+   {name:"Google Jobs",url:`https://www.google.com/search?q=${enc(role+" jobs "+(c.remote?"remote India":"in "+c.n))}&ibp=htl%3Bjobs`,desc:"Aggregates many boards"}];
+  if(c.remote)out.push({name:"We Work Remotely",url:`https://weworkremotely.com/remote-jobs/search?term=${enc(role)}`,desc:"Remote-only board"});
+  return out;
+}
+function drawBuilder(){
+  const c=CITIES.find(x=>x.k===bCity)||CITIES[0];
+  $("roles").innerHTML=ROLES.map(r=>`<button class="chip ${r===bRole?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
+  $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${x.k===bCity?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
+  const list=roleSites(bRole,c);
+  $("bcount").textContent=list.length+" searches";
+  $("now").innerHTML=`${esc(bRole)} <em>·</em> ${c.n}`;
+  $("results").innerHTML=list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+    <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
+    <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("");
+  try{localStorage.setItem("jobhub-role",bRole);localStorage.setItem("jobhub-city",bCity)}catch(e){}
+}
+$("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;bRole=b.dataset.r;$("custom").value="";drawBuilder()});
+$("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCity=b.dataset.c;drawBuilder()});
+$("custom").addEventListener("input",e=>{const v=e.target.value.trim();if(v){bRole=v;drawBuilder()}});
+drawBuilder();
+
+// ---- Smart search: who is hiring right now ----
+const SROLES=["Java Developer","Java Backend Developer","Backend Developer","Backend Engineer","Software Engineer","Software Development Engineer","SDE 2","Senior Software Engineer","Spring Boot Developer","Microservices Engineer"];
+const WINS=[
+ {k:"d",n:"24 hours",li:"past-24h",jr:"r86400",g:"d",pl:"24 hours"},
+ {k:"3",n:"3 days",li:"past-week",jr:"r259200",g:"d3",pl:"Past week"},
+ {k:"w",n:"Week",li:"past-week",jr:"r604800",g:"w",pl:"Week"},
+ {k:"m",n:"Month",li:"past-month",jr:"r2592000",g:"m",pl:"Month"}];
+let sC="India",sW="d",sCustom="";
+try{sC=localStorage.getItem("jobhub-sc")||sC;sW=localStorage.getItem("jobhub-sw")||sW}catch(e){}
+if(!WINS.some(x=>x.k===sW))sW="d";
+const favi=d=>`https://www.google.com/s2/favicons?domain=${d}&sz=64`;
+function smartGroups(){
+  const w=WINS.find(x=>x.k===sW), c=CITIES.find(x=>x.k===sC)||CITIES[0];
+  const loc=c.remote?"remote":c.k;
+  const roles=(sCustom?[sCustom]:[]).concat(SROLES);
+  const jobRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Developer","Backend Engineer","Software Engineer","Senior Software Engineer","Spring Boot Developer"]);
+  const atsRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Engineer","Software Engineer","Senior Software Engineer"]);
+  const li=kw=>`https://www.linkedin.com/search/results/content/?keywords=${enc(kw)}&datePosted=${enc('"'+w.li+'"')}&sortBy=${enc('"date_posted"')}&origin=FACETED_SEARCH`;
+  const pe=kw=>`https://www.linkedin.com/search/results/people/?keywords=${enc(kw)}&origin=GLOBAL_SEARCH_HEADER`;
+  const jb=r=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote?"&f_WT=2":""}`;
+  const g=(q,t)=>`https://www.google.com/search?q=${enc(q)}${t===false?"":"&tbs="+enc("qdr:"+w.g)}`;
+  const ATS="(site:boards.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:myworkdayjobs.com)";
+  const L="linkedin.com", PL=w.pl;
+  return [
+   {g:"LinkedIn · hiring posts",items:roles.map(r=>({n:`Hiring ${r}`,d:`Posts: hiring "${r}" ${loc}`,u:li(`hiring "${r}" ${loc}`),tag:PL,ic:L}))},
+   {g:"LinkedIn · referrals and resume posts",items:[
+    {n:"#hiring Java",d:`Hashtag: #hiring java ${loc}`,u:li(`#hiring java ${loc}`),tag:PL,ic:L},
+    {n:"#hiring backend",d:`Hashtag: #hiring backend ${loc}`,u:li(`#hiring backend ${loc}`),tag:PL,ic:L},
+    {n:"Referral · Java",d:`Posts: referral java ${loc}`,u:li(`referral java ${loc}`),tag:PL,ic:L},
+    {n:"Referral · Backend",d:`Posts: referral backend ${loc}`,u:li(`referral backend ${loc}`),tag:PL,ic:L},
+    {n:"Send resume · Java",d:`Posts: "send your resume" java ${loc}`,u:li(`"send your resume" java ${loc}`),tag:PL,ic:L},
+    {n:"Share resume · Backend",d:`Posts: "share your resume" backend ${loc}`,u:li(`"share your resume" backend ${loc}`),tag:PL,ic:L}]},
+   {g:"LinkedIn · recruiters and managers",items:[
+    {n:"Java recruiters",d:`People: technical recruiter java ${loc}`,u:pe(`technical recruiter java ${loc}`),tag:"People",ic:L},
+    {n:"Backend recruiters",d:`People: technical recruiter backend ${loc}`,u:pe(`technical recruiter backend ${loc}`),tag:"People",ic:L},
+    {n:"Engineering managers",d:`People: engineering manager hiring ${loc}`,u:pe(`engineering manager hiring ${loc}`),tag:"People",ic:L}]},
+   {g:"LinkedIn · jobs",items:jobRoles.map(r=>({n:r,d:`Jobs, newest first, ${c.n}`,u:jb(r),tag:w.n,ic:L}))},
+   {g:"Google · hiring posts on LinkedIn",items:roles.map(r=>({n:`Hiring ${r}`,d:`site:linkedin.com/posts hiring "${r}" ${loc}`,u:g(`site:linkedin.com/posts hiring "${r}" ${loc}`),tag:w.n,ic:L}))},
+   {g:"Google · posts with an email address",items:[
+    {n:"Java, resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring "Java Developer" ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L},
+    {n:"Backend, resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring "Backend Engineer" ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L}]},
+   {g:"Google · company job pages",items:atsRoles.map(r=>({n:r,d:"Greenhouse, Lever, Ashby, Workday",u:g(`${ATS} "${r}" ${loc}`),tag:w.n,ic:"greenhouse.io"}))},
+   {g:"Google · more places",items:[
+    {n:"Recruiter profiles",d:"Public LinkedIn recruiter profiles",u:g(`site:linkedin.com/in "technical recruiter" java ${loc}`,false),tag:"Profiles",ic:L},
+    {n:"r/developersIndia",d:"Hiring and referral threads",u:g(`site:reddit.com/r/developersIndia hiring "Java Developer"`),tag:w.n,ic:"reddit.com"},
+    {n:"Google Jobs · Java",d:"Google's own listings",u:`https://www.google.com/search?q=${enc("Java Developer jobs "+loc)}&ibp=htl%3Bjobs`,tag:"Listings",ic:"google.com"},
+    {n:"Google Jobs · Backend",d:"Google's own listings",u:`https://www.google.com/search?q=${enc("Backend Engineer jobs "+loc)}&ibp=htl%3Bjobs`,tag:"Listings",ic:"google.com"}]}];
+}
+function drawSmart(){
+  const ch=(on,attr,val,label)=>`<button class="chip ${on?"on":""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
+  $("scities").innerHTML=CITIES.map(x=>ch(x.k===sC,"data-c",x.k,x.n)).join("");
+  $("swins").innerHTML=WINS.map(x=>ch(x.k===sW,"data-w",x.k,x.n)).join("");
+  const gr=smartGroups();
+  $("scount").textContent=gr.reduce((a,x)=>a+x.items.length,0)+" searches";
+  $("snow").innerHTML=`Hiring now <em>·</em> ${(CITIES.find(x=>x.k===sC)||{}).n} <em>·</em> ${(WINS.find(x=>x.k===sW)||{}).n}`;
+  $("sresults").innerHTML=gr.map(g=>`<div class="bl">${g.g}</div><div class="grid">${g.items.map(x=>`<a class="card" href="${x.u}" target="_blank" rel="noopener noreferrer">
+    <div class="top"><span class="logo"><img src="${favi(x.ic)}" alt="" data-l="${esc(x.n[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
+    <div><span class="tag IN">${esc(x.tag)}</span><div class="nm">${esc(x.n)}</div><div class="ds">${esc(x.d)}</div></div></a>`).join("")}</div>`).join("");
+  try{localStorage.setItem("jobhub-sc",sC);localStorage.setItem("jobhub-sw",sW)}catch(e){}
+}
+$("smart").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+  if(b.dataset.c)sC=b.dataset.c;else if(b.dataset.w)sW=b.dataset.w;drawSmart()});
+$("scustom").addEventListener("input",e=>{sCustom=e.target.value.trim();drawSmart()});
+drawSmart();
+
+// PWA
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+let dp;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("install").style.display="block"});
+$("install").onclick=async()=>{if(!dp)return;dp.prompt();await dp.userChoice;dp=null;$("install").style.display="none"};
+</script>
+</body>
+</html>
