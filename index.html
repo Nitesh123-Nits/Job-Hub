@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var t=JSON.parse(localStorage.getItem("jobhub2-theme")||"null")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 :root{
   --paper:#F3F0E8; --ink:#111111; --mute:#6B675E; --line:#111111; --hair:#D6D1C4; --accent:#E8431A;
@@ -114,6 +115,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 }
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
 </style>
+<link rel="stylesheet" href="premium.css">
 </head>
 <body>
 <div class="bar"><div class="wrap">
@@ -331,7 +333,7 @@ function card(x){
 }
 function buildTabs(){
   const vis=x=>!scope||x.reg!=="GL";
-  $("tabs").innerHTML=[{id:"all",t:"All",n:all.filter(vis).length},{id:"role",t:"Role Search"},{id:"smart",t:"Smart Search"},...DATA.map(c=>({id:c.id,t:c.t,n:all.filter(x=>x.cat===c&&vis(x)).length}))]
+  $("tabs").innerHTML=[{id:"all",t:"All",n:all.filter(vis).length},{id:"role",t:"Role Search"},{id:"smart",t:"Smart Search"},{id:"cmp",t:"Company Search"},{id:"trk",t:"Tracker"},{id:"out",t:"Outreach"},{id:"live",t:"Live Remote"},...DATA.map(c=>({id:c.id,t:c.t,n:all.filter(x=>x.cat===c&&vis(x)).length}))]
     .map(c=>`<button class="tab ${c.id===tab?"on":""}" data-t="${c.id}">${c.t}${c.n!==undefined?`<small>${c.n}</small>`:""}</button>`).join("");
 }
 function render(){
@@ -345,9 +347,10 @@ function render(){
     const items=all.filter(x=>x.cat===c&&match(x));if(items.length)html+=sec(c.t,c.d,items)});
   buildTabs();
   $("scope").classList.toggle("on",scope);$("scope").setAttribute("aria-pressed",scope);
-  $("main").innerHTML=html;$("empty").style.display=(shown||tab==="role"||tab==="smart")?"none":"block";
+  $("main").innerHTML=html;$("empty").style.display=(shown||["role","smart","cmp","trk","out","live"].includes(tab))?"none":"block";
   $("smart").style.display=tab==="smart"?"block":"none";
   $("builder").style.display=(tab==="all"||tab==="role")&&!q?"block":"none";
+  if(window.PREMIUM)PREMIUM.onTab(tab);
 }
 $("tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;tab=b.dataset.t;render()});
 $("scope").addEventListener("click",()=>{scope=!scope;try{localStorage.setItem("jobhub-scope",scope?"1":"0")}catch(e){}render()});
@@ -474,5 +477,6 @@ if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.ser
 let dp;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("install").style.display="block"});
 $("install").onclick=async()=>{if(!dp)return;dp.prompt();await dp.userChoice;dp=null;$("install").style.display="none"};
 </script>
+<script src="premium.js"></script>
 </body>
 </html>

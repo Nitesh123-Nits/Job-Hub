@@ -1,0 +1,491 @@
+/* JobHub premium layer: company search, application tracker, outreach templates,
+   live remote-jobs feed, dark mode and backup/restore.
+   Loaded after the inline script in index.html; reuses its globals (DATA, CITIES, WINS, noIcon).
+   All user data stays in this browser's localStorage under "jobhub2-*" keys. */
+(() => {
+"use strict";
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const enc = encodeURIComponent;
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+};
+const K = { track: "jobhub2-track", watch: "jobhub2-watch", prof: "jobhub2-profile", cmp: "jobhub2-cmp",
+            out: "jobhub2-out", theme: "jobhub2-theme", live: "jobhub2-live", fetches: "jobhub2-fetches" };
+const pad = n => String(n).padStart(2, "0");
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const today = () => iso(new Date());
+const addDays = (s, n) => { const d = new Date(s + "T00:00:00"); d.setDate(d.getDate() + n); return iso(d); };
+const daysBetween = (a, b) => Math.round((new Date(b + "T00:00:00") - new Date(a + "T00:00:00")) / 864e5);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const favicon = d => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
+
+let toastTimer;
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) {
+    const a = document.createElement("textarea"); a.value = text; a.style.cssText = "position:fixed;opacity:0";
+    document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (_) {} a.remove();
+  }
+  toast("Copied");
+}
+const cardHTML = x => `<a class="card" href="${esc(x.u)}" target="_blank" rel="noopener noreferrer">
+  <div class="top"><span class="logo"><img src="${favicon(x.ic)}" alt="" loading="lazy" data-l="${esc(x.n[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
+  <div><span class="tag IN">${esc(x.tag)}</span><div class="nm">${esc(x.n)}</div><div class="ds">${esc(x.d)}</div></div></a>`;
+const chip = (on, attr, val, label) => `<button class="chip ${on ? "on" : ""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
+
+/* ---------- state ---------- */
+let prof = Object.assign({ name: "", role: "", years: "", skills: "" }, store.get(K.prof, {}));
+let track = store.get(K.track, []);
+let watch = store.get(K.watch, []);
+let cs = Object.assign({ name: "", role: "", city: "India", win: "w", easy: false, exp: "" }, store.get(K.cmp, {}));
+if (!cs.role) cs.role = prof.role || "Java Backend Developer";
+let os = Object.assign({ company: "", contact: "", role: "" }, store.get(K.out, {}));
+const saveTrack = () => { store.set(K.track, track); drawStats(); };
+
+/* ---------- inject UI ---------- */
+$("main").insertAdjacentHTML("beforebegin", `
+<div class="wrap pane" id="cmp" hidden><section>
+  <div class="sh"><span class="no">00</span><h2>Company Search</h2><span class="ct" id="ccount"></span><p>Type a company. Get its jobs, career pages, hiring posts, recruiters and reviews as ready-made searches.</p></div>
+  <div class="row">
+    <input id="c-name" class="custom" list="c-list" placeholder="Company, e.g. Razorpay" autocomplete="off" aria-label="Company name">
+    <input id="c-role" class="custom" placeholder="Role (optional)" autocomplete="off" aria-label="Role">
+  </div>
+  <datalist id="c-list"></datalist>
+  <div class="bl">Location</div><div class="chips" id="c-cities"></div>
+  <div class="bl">Posted within</div><div class="chips" id="c-wins"></div>
+  <div class="bl">Filters (LinkedIn)</div><div class="chips" id="c-flt"></div>
+  <div class="bl">Watchlist</div><div class="chips" id="c-watch"></div>
+  <div class="now" id="c-now"></div>
+  <div class="actions" id="c-act"></div>
+  <div id="c-results"></div>
+</section></div>
+
+<div class="wrap pane" id="trk" hidden><section>
+  <div class="sh"><span class="no">00</span><h2>Tracker</h2><span class="ct" id="tcount"></span><p>Every job you save or apply to, with a follow-up date so nothing goes cold. Stored only in this browser.</p></div>
+  <div class="addform">
+    <div class="row">
+      <input id="t-co" class="custom" placeholder="Company" autocomplete="off" aria-label="Company">
+      <input id="t-role" class="custom" placeholder="Role" autocomplete="off" aria-label="Role">
+      <input id="t-url" class="custom" placeholder="Job link (optional)" autocomplete="off" aria-label="Job link">
+      <select id="t-st" class="sel" aria-label="Status"></select>
+      <button class="btn" id="t-add" style="margin-top:10px">Add</button>
+    </div>
+  </div>
+  <div class="actions" style="margin-top:14px">
+    <button class="btn ghost" id="t-exp">Export backup</button>
+    <button class="btn ghost" id="t-imp">Import backup</button>
+    <input type="file" id="t-file" accept="application/json" hidden>
+  </div>
+  <div class="board" id="board"></div>
+</section></div>
+
+<div class="wrap pane" id="out" hidden><section>
+  <div class="sh"><span class="no">00</span><h2>Outreach</h2><span class="ct">6 templates</span><p>Fill the fields once. Messages for LinkedIn, recruiters, referrals and follow-ups are written for you to copy.</p></div>
+  <div class="bl">About you (saved in this browser)</div>
+  <div class="row">
+    <input id="o-name" class="custom" placeholder="Your name" autocomplete="off" aria-label="Your name">
+    <input id="o-years" class="custom" placeholder="Years of experience" autocomplete="off" inputmode="numeric" aria-label="Years of experience">
+    <input id="o-skills" class="custom" placeholder="Key skills, e.g. Java, Spring Boot, Kafka" autocomplete="off" aria-label="Key skills">
+  </div>
+  <div class="bl">This application</div>
+  <div class="row">
+    <input id="o-company" class="custom" placeholder="Company" autocomplete="off" aria-label="Company">
+    <input id="o-role" class="custom" placeholder="Role" autocomplete="off" aria-label="Role">
+    <input id="o-contact" class="custom" placeholder="Recruiter / referrer name" autocomplete="off" aria-label="Contact name">
+  </div>
+  <div id="o-tpls"></div>
+</section></div>
+
+<div class="wrap pane" id="live" hidden><section>
+  <div class="sh"><span class="no">00</span><h2>Live Remote Jobs</h2><span class="ct" id="lcount"></span><p>Current remote software listings pulled into the page. Apply on the original posting.</p></div>
+  <div class="row">
+    <input id="l-q" class="custom" placeholder="Filter, e.g. java, backend, kafka" autocomplete="off" aria-label="Filter jobs">
+    <button class="btn ghost" id="l-ref" style="margin-top:10px">Refresh</button>
+  </div>
+  <div class="chips" id="l-chips" style="margin-top:10px"></div>
+  <div class="live-meta" id="l-meta"></div>
+  <div id="l-err"></div>
+  <div id="l-list"></div>
+</section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>`);
+
+// hero: stats tiles + quick company search
+document.querySelector(".lede").insertAdjacentHTML("afterend", `
+<div class="stats" id="stats"></div>
+<form class="qc" id="qc" autocomplete="off"><input id="qc-in" list="c-list" placeholder="Company name, e.g. Razorpay" aria-label="Quick company search"><button type="submit">Search</button></form>`);
+
+// theme toggle
+$("install").insertAdjacentHTML("beforebegin", `<button class="themebtn" id="theme" aria-label="Toggle dark mode"></button>`);
+
+/* ---------- theme ---------- */
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  $("theme").textContent = t === "dark" ? "Light" : "Dark";
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "dark" ? "#0F0F0D" : "#F3F0E8";
+}
+$("theme").addEventListener("click", () => {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  store.set(K.theme, t); applyTheme(t);
+});
+applyTheme(store.get(K.theme, null) || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+
+/* ---------- stats ---------- */
+const ST = [["saved", "Saved"], ["applied", "Applied"], ["interview", "Interview"], ["offer", "Offer"], ["rejected", "Rejected"]];
+const isDue = j => j.status === "applied" && j.follow && j.follow <= today();
+function drawStats() {
+  const applied = track.filter(j => j.applied).length;
+  const interviews = track.filter(j => j.status === "interview").length;
+  const due = track.filter(isDue).length;
+  $("stats").innerHTML = [["Tracked", track.length, ""], ["Applied", applied, ""], ["Interviews", interviews, ""], ["Follow-ups due", due, due ? "alert" : ""]]
+    .map(s => `<button class="stat ${s[2]}" data-go="trk"><b>${s[1]}</b><span>${s[0]}</span></button>`).join("");
+}
+$("stats").addEventListener("click", () => goTab("trk"));
+function goTab(id) { const b = document.querySelector(`.tab[data-t="${id}"]`); if (b) { b.click(); window.scrollTo({ top: document.querySelector(".controls").offsetTop, behavior: "smooth" }); } }
+
+/* ---------- company search ---------- */
+const CAT_IDS = ["bigtech", "finance", "product", "indiaco", "remoteco"];
+$("c-list").innerHTML = [...new Set(DATA.filter(c => CAT_IDS.includes(c.id)).flatMap(c => c.s.map(s => s[0])))].sort()
+  .map(n => `<option value="${esc(n)}">`).join("");
+const FROMAGE = { d: 1, "3": 3, w: 7, m: 14 }; // Indeed supports 1, 3, 7, 14 days
+const EXP = [["", "Any level"], ["2", "Entry"], ["3", "Associate"], ["4", "Mid-Senior"]];
+
+function companyLinks() {
+  const n = cs.name.trim(); if (!n) return { groups: [], jobsUrl: "" };
+  const c = CITIES.find(x => x.k === cs.city) || CITIES[0];
+  const w = WINS.find(x => x.k === cs.win) || WINS[2];
+  const role = cs.role.trim();
+  const kw = [role, n].filter(Boolean).join(" ");
+  const loc = c.remote ? "remote India" : (c.k === "India" ? "India" : c.n);
+  const q = `"${n}"`;
+  const g = (s, timed) => `https://www.google.com/search?q=${enc(s)}${timed === false ? "" : "&tbs=" + enc("qdr:" + w.g)}`;
+  const li = s => `https://www.linkedin.com/search/results/content/?keywords=${enc(s)}&datePosted=${enc('"' + w.li + '"')}&sortBy=${enc('"date_posted"')}&origin=FACETED_SEARCH`;
+  const pe = s => `https://www.linkedin.com/search/results/people/?keywords=${enc(s)}&origin=GLOBAL_SEARCH_HEADER`;
+  const jobsUrl = `https://www.linkedin.com/jobs/search/?keywords=${enc(kw)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote ? "&f_WT=2" : ""}${cs.easy ? "&f_AL=true" : ""}${cs.exp ? "&f_E=" + cs.exp : ""}`;
+  const ATS = "(site:boards.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:myworkdayjobs.com)";
+  const L = "linkedin.com", GG = "google.com";
+  const rl = role ? ` ${role}` : "";
+  const groups = [
+    { g: `Jobs at ${n}`, items: [
+      { n: "LinkedIn Jobs", d: `${kw}, newest first${cs.easy ? ", Easy Apply" : ""}`, u: jobsUrl, tag: w.n, ic: L },
+      { n: "Indeed India", d: `${kw} in ${c.ind}`, u: `https://in.indeed.com/jobs?q=${enc(kw)}&l=${enc(c.ind)}&fromage=${FROMAGE[w.k]}&sort=date`, tag: w.n, ic: "indeed.com" },
+      { n: "Google Jobs", d: "Aggregates many boards", u: `https://www.google.com/search?q=${enc(`${n}${rl} jobs ${loc}`)}&ibp=htl%3Bjobs`, tag: "Listings", ic: GG },
+      { n: "Naukri", d: `Naukri listings found through Google`, u: g(`site:naukri.com ${q}${rl}`), tag: w.n, ic: "naukri.com" }] },
+    { g: `${n} career pages`, items: [
+      { n: "Official careers", d: `${n} careers${rl}`, u: g(`${q} careers${rl} ${loc}`, false), tag: "Careers", ic: GG },
+      { n: "Greenhouse, Lever, Ashby, Workday", d: "Company job boards", u: g(`${ATS} ${q}${rl}`), tag: w.n, ic: "greenhouse.io" }] },
+    { g: "Hiring posts", items: [
+      { n: "LinkedIn hiring posts", d: `Posts: hiring ${n}${rl}`, u: li(`hiring ${n}${rl}`), tag: w.pl, ic: L },
+      { n: "LinkedIn referral posts", d: `Posts: ${n} referral`, u: li(`${n} referral${rl}`), tag: w.pl, ic: L },
+      { n: "Google · LinkedIn posts", d: `site:linkedin.com/posts hiring ${n}`, u: g(`site:linkedin.com/posts hiring ${q}${rl}`), tag: w.n, ic: L }] },
+    { g: "People to message", items: [
+      { n: "Recruiters", d: `${n} technical recruiter`, u: pe(`${n} technical recruiter`), tag: "People", ic: L },
+      { n: "Talent acquisition", d: `${n} talent acquisition India`, u: pe(`${n} talent acquisition India`), tag: "People", ic: L },
+      { n: "Engineering managers", d: `${n} engineering manager`, u: pe(`${n} engineering manager`), tag: "People", ic: L },
+      { n: "Employees for referral", d: `${n}${rl}`, u: pe(`${n}${rl}`), tag: "People", ic: L }] },
+    { g: "Research the company", items: [
+      { n: "LinkedIn company page", d: `Company search: ${n}`, u: `https://www.linkedin.com/search/results/companies/?keywords=${enc(n)}&origin=GLOBAL_SEARCH_HEADER`, tag: "Company", ic: L },
+      { n: "Glassdoor", d: "Reviews, salaries, interviews", u: `https://www.glassdoor.co.in/Search/results.htm?keyword=${enc(n)}`, tag: "Reviews", ic: "glassdoor.co.in" },
+      { n: "Interview experiences", d: `${n}${rl} interview experience`, u: g(`${q}${rl} interview experience`, false), tag: "Prep", ic: GG },
+      { n: "Salary data", d: "AmbitionBox, Levels.fyi, Glassdoor", u: g(`${q}${rl} salary India (site:ambitionbox.com OR site:levels.fyi OR site:glassdoor.co.in)`, false), tag: "Pay", ic: GG },
+      { n: "Hiring and layoff news", d: `News about ${n}`, u: `https://www.google.com/search?q=${enc(`${n} hiring OR layoffs`)}&tbm=nws`, tag: "News", ic: GG }] }
+  ];
+  return { groups, jobsUrl };
+}
+function drawCompany() {
+  $("c-cities").innerHTML = CITIES.map(x => chip(x.k === cs.city, "data-c", x.k, x.n)).join("");
+  $("c-wins").innerHTML = WINS.map(x => chip(x.k === cs.win, "data-w", x.k, x.n)).join("");
+  $("c-flt").innerHTML = chip(cs.easy, "data-easy", "1", "Easy Apply only") + EXP.map(e => chip(cs.exp === e[0], "data-e", e[0], e[1])).join("");
+  $("c-watch").innerHTML = watch.length
+    ? watch.map(w => `<button class="chip x ${cs.name.toLowerCase() === w.toLowerCase() ? "on" : ""}" data-w="${esc(w)}">${esc(w)}<i data-rm="${esc(w)}" title="Remove">✕</i></button>`).join("")
+    : `<span class="hint" style="margin:0">Star a company to keep it here.</span>`;
+  const { groups } = companyLinks();
+  const total = groups.reduce((a, x) => a + x.items.length, 0);
+  $("ccount").textContent = total ? total + " searches" : "";
+  $("c-now").innerHTML = cs.name.trim() ? `${esc(cs.name.trim())} <em>·</em> ${esc((CITIES.find(x => x.k === cs.city) || {}).n)}` : "";
+  $("c-act").innerHTML = cs.name.trim()
+    ? `<button class="btn ghost" id="c-star">${watch.some(w => w.toLowerCase() === cs.name.trim().toLowerCase()) ? "★ Watching" : "☆ Watch company"}</button><button class="btn ghost" id="c-track">+ Track this company</button>`
+    : "";
+  $("c-results").innerHTML = groups.length
+    ? groups.map(g => `<div class="bl">${esc(g.g)}</div><div class="grid">${g.items.map(cardHTML).join("")}</div>`).join("")
+    : `<div class="hint">Start with a company name above, for example a firm from the Big Tech or Banks lists.</div>`;
+  store.set(K.cmp, cs);
+}
+$("c-name").addEventListener("input", e => { cs.name = e.target.value; drawCompany(); });
+$("c-role").addEventListener("input", e => { cs.role = e.target.value; drawCompany(); });
+$("cmp").addEventListener("click", e => {
+  const rm = e.target.closest("[data-rm]");
+  if (rm) { e.stopPropagation(); watch = watch.filter(w => w !== rm.dataset.rm); store.set(K.watch, watch); drawCompany(); return; }
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.c) cs.city = b.dataset.c;
+  else if (b.dataset.easy) cs.easy = !cs.easy;
+  else if (b.dataset.e !== undefined) cs.exp = b.dataset.e;
+  else if (b.dataset.w && b.closest("#c-wins")) cs.win = b.dataset.w;
+  else if (b.dataset.w) { cs.name = b.dataset.w; $("c-name").value = cs.name; }
+  else if (b.id === "c-star") {
+    const n = cs.name.trim(), has = watch.some(w => w.toLowerCase() === n.toLowerCase());
+    watch = has ? watch.filter(w => w.toLowerCase() !== n.toLowerCase()) : [...watch, n];
+    store.set(K.watch, watch);
+  } else if (b.id === "c-track") {
+    addJob({ company: cs.name.trim(), role: cs.role.trim(), url: companyLinks().jobsUrl, status: "saved" });
+    toast("Added to tracker"); return;
+  } else return;
+  drawCompany();
+});
+$("qc").addEventListener("submit", e => {
+  e.preventDefault(); const v = $("qc-in").value.trim(); if (!v) return;
+  cs.name = v; $("c-name").value = v; goTab("cmp"); $("qc-in").value = "";
+});
+
+/* ---------- tracker ---------- */
+$("t-st").innerHTML = ST.map(s => `<option value="${s[0]}">${s[1]}</option>`).join("");
+function addJob(j) {
+  const now = today();
+  const job = { id: uid(), company: j.company || "Untitled", role: j.role || "", url: j.url || "", status: j.status || "saved",
+                added: now, applied: "", follow: "", notes: "" };
+  if (job.status !== "saved") stampApplied(job);
+  track.unshift(job); saveTrack(); if (!$("trk").hidden) drawTracker();
+}
+function stampApplied(job) {
+  if (!job.applied) job.applied = today();
+  if (job.status === "applied" && !job.follow) job.follow = addDays(job.applied, 7);
+}
+function ago(dateStr) {
+  const d = daysBetween(dateStr, today());
+  return d <= 0 ? "today" : d === 1 ? "1d ago" : d + "d ago";
+}
+function drawTracker() {
+  $("tcount").textContent = track.length + " jobs";
+  $("board").innerHTML = ST.map(([key, label]) => {
+    const items = track.filter(j => j.status === key);
+    return `<div class="col"><h3>${label}<em>${items.length}</em></h3>${items.length ? items.map(tkCard).join("") : `<div class="none">Nothing here</div>`}</div>`;
+  }).join("");
+}
+function tkCard(j) {
+  const due = isDue(j);
+  const meta = [`Added ${ago(j.added)}`, j.applied ? `Applied ${ago(j.applied)}` : "", due ? `<span class="due">Follow up now</span>` : ""].filter(Boolean).join(" · ");
+  return `<article class="tk" data-id="${j.id}">
+    <div class="tk-h"><b>${esc(j.company)}</b><button data-act="del" aria-label="Delete">✕</button></div>
+    ${j.role ? `<div class="tk-r">${esc(j.role)}</div>` : ""}
+    <div class="tk-m">${meta}</div>
+    <textarea data-act="note" placeholder="Notes: contact, round, next step" aria-label="Notes">${esc(j.notes)}</textarea>
+    <div class="tk-f">
+      <select class="sel" data-act="status" aria-label="Status">${ST.map(s => `<option value="${s[0]}" ${s[0] === j.status ? "selected" : ""}>${s[1]}</option>`).join("")}</select>
+      <input type="date" class="dt" data-act="follow" value="${esc(j.follow)}" aria-label="Follow-up date" title="Follow-up date">
+      ${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">Open ↗</a>` : ""}
+    </div></article>`;
+}
+$("t-add").addEventListener("click", () => {
+  const co = $("t-co").value.trim(); if (!co) { $("t-co").focus(); return; }
+  let url = $("t-url").value.trim();
+  if (url && !/^https?:\/\//i.test(url)) url = "https://" + url;
+  addJob({ company: co, role: $("t-role").value.trim(), url, status: $("t-st").value });
+  ["t-co", "t-role", "t-url"].forEach(i => $(i).value = ""); toast("Added");
+});
+$("t-co").addEventListener("keydown", e => { if (e.key === "Enter") $("t-add").click(); });
+$("board").addEventListener("click", e => {
+  const b = e.target.closest('[data-act="del"]'); if (!b) return;
+  if (!b.classList.contains("sure")) { b.classList.add("sure"); b.textContent = "Sure?"; setTimeout(() => { b.classList.remove("sure"); b.textContent = "✕"; }, 2500); return; }
+  const id = b.closest(".tk").dataset.id; track = track.filter(j => j.id !== id); saveTrack(); drawTracker();
+});
+$("board").addEventListener("change", e => {
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const job = track.find(j => j.id === el.closest(".tk").dataset.id); if (!job) return;
+  if (el.dataset.act === "note") job.notes = el.value;
+  else if (el.dataset.act === "follow") job.follow = el.value;
+  else if (el.dataset.act === "status") {
+    job.status = el.value;
+    if (job.status === "applied") { job.follow = ""; stampApplied(job); }
+    else if (job.status !== "saved") stampApplied(job);
+  }
+  saveTrack(); if (el.dataset.act !== "note") drawTracker();
+});
+// backup and restore
+$("t-exp").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify({ app: "jobhub", version: 1, exported: new Date().toISOString(), track, watch, profile: prof }, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `jobhub-backup-${today()}.json`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast("Backup downloaded");
+});
+$("t-imp").addEventListener("click", () => $("t-file").click());
+$("t-file").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  try {
+    const d = JSON.parse(await f.text());
+    if (d.app !== "jobhub" || !Array.isArray(d.track)) throw new Error("bad file");
+    const have = new Set(track.map(j => j.id));
+    const clean = d.track.filter(j => j && typeof j.id === "string" && !have.has(j.id)).map(j => ({
+      id: j.id, company: String(j.company || "Untitled"), role: String(j.role || ""), url: /^https?:\/\//i.test(j.url || "") ? j.url : "",
+      status: ST.some(s => s[0] === j.status) ? j.status : "saved", added: String(j.added || today()), applied: String(j.applied || ""),
+      follow: String(j.follow || ""), notes: String(j.notes || "") }));
+    track = [...clean, ...track]; saveTrack();
+    if (Array.isArray(d.watch)) { watch = [...new Set([...watch, ...d.watch.map(String)])]; store.set(K.watch, watch); }
+    drawTracker(); toast(`Imported ${clean.length} jobs`);
+  } catch (err) { toast("That file isn't a JobHub backup"); }
+});
+
+/* ---------- outreach ---------- */
+const v = (x, ph) => (x && String(x).trim()) || ph;
+function templates() {
+  const name = v(prof.name, "[Your name]"), years = v(prof.years, "[X]"), skills = v(prof.skills, "[your key skills]");
+  const co = v(os.company, "[Company]"), role = v(os.role || prof.role, "[Role]"), who = v(os.contact, "[Name]");
+  return [
+    { t: "LinkedIn connection note", max: 300, body:
+`Hi ${who}, I'm a ${role} with ${years}+ years in ${skills}. I'm interested in the work at ${co} and would love to connect.` },
+    { t: "LinkedIn message to a recruiter", body:
+`Hi ${who},
+
+I saw the ${role} opening at ${co}. I have ${years}+ years of experience in ${skills}, and the role looks like a close match for my background.
+
+Could you tell me the next steps, or point me to the right person? I can share my resume right away.
+
+Thanks,
+${name}` },
+    { t: "Email to HR", subject: `Application for ${role} – ${name}`, body:
+`Hi ${who},
+
+I'm writing to apply for the ${role} position at ${co}. I have ${years}+ years of experience in ${skills}.
+
+My resume is attached. I'd be glad to discuss how I can contribute to your team and am available for a call at your convenience.
+
+Regards,
+${name}` },
+    { t: "Referral request", body:
+`Hi ${who},
+
+Hope you're doing well. I noticed ${co} is hiring for ${role} and I'd like to apply. I have ${years}+ years of experience in ${skills}.
+
+Would you be comfortable referring me? I can send my resume and a short summary so it's easy for you. Thanks either way!
+
+${name}` },
+    { t: "Follow-up after applying", subject: `Following up: ${role} application – ${name}`, body:
+`Hi ${who},
+
+I applied for the ${role} role at ${co} and wanted to follow up. I'm still very interested and happy to share anything that would help with your review.
+
+Could you let me know where the application stands?
+
+Thanks,
+${name}` },
+    { t: "Thank-you after an interview", subject: `Thank you – ${role} interview`, body:
+`Hi ${who},
+
+Thank you for taking the time to speak with me about the ${role} role at ${co}. I enjoyed the conversation and I'm excited about the team's work.
+
+Please let me know if you need anything else from me.
+
+Best regards,
+${name}` }
+  ];
+}
+let tplCache = [];
+function drawTemplates() {
+  tplCache = templates();
+  $("o-tpls").innerHTML = tplCache.map((t, i) => {
+    const n = t.body.length, over = t.max && n > t.max;
+    return `<div class="tpl"><div class="tpl-h"><b>${esc(t.t)}</b>${t.max ? `<span class="cnt ${over ? "over" : ""}">${n}/${t.max}</span>` : ""}</div>
+      ${t.subject ? `<div class="ds" style="margin-bottom:8px">Subject: ${esc(t.subject)}</div>` : ""}
+      <pre>${esc(t.body)}</pre>
+      <div class="actions"><button class="btn" data-copy="${i}">Copy</button>
+      ${t.subject ? `<a class="btn ghost" href="mailto:?subject=${enc(t.subject)}&body=${enc(t.body)}">Open in mail</a>` : ""}</div></div>`;
+  }).join("");
+}
+function drawOutreach() {
+  $("o-name").value = prof.name; $("o-years").value = prof.years; $("o-skills").value = prof.skills;
+  $("o-company").value = os.company; $("o-role").value = os.role; $("o-contact").value = os.contact;
+  drawTemplates();
+}
+const bindO = (id, obj, key, storeKey) => $(id).addEventListener("input", e => { obj[key] = e.target.value; store.set(storeKey, obj); drawTemplates(); });
+bindO("o-name", prof, "name", K.prof); bindO("o-years", prof, "years", K.prof); bindO("o-skills", prof, "skills", K.prof);
+bindO("o-company", os, "company", K.out); bindO("o-role", os, "role", K.out); bindO("o-contact", os, "contact", K.out);
+$("o-tpls").addEventListener("click", e => {
+  const b = e.target.closest("[data-copy]"); if (!b) return;
+  const t = tplCache[+b.dataset.copy]; copy(t.subject ? `Subject: ${t.subject}\n\n${t.body}` : t.body);
+});
+
+/* ---------- live remote jobs (Remotive public API) ----------
+   Remotive asks for at most ~4 fetches a day, a credit link, and delays listings by 24h.
+   We fetch once per 6h at most, cap at 4 per rolling 24h, and cache in localStorage. */
+const LIVE_URL = "https://remotive.com/api/remote-jobs?category=software-dev&limit=250";
+let liveJobs = [], liveQ = "", liveIndia = true, liveLoaded = false, liveFetchedAt = 0;
+const LIVE_CHIPS = ["Java", "Backend", "Spring", "Kafka", "Microservices", "Platform"];
+const inIndia = j => /india|asia|apac|worldwide|anywhere/i.test(j.loc || "");
+async function loadLive(force) {
+  const cached = store.get(K.live, null);
+  const fresh = cached && Date.now() - cached.t < 6 * 36e5;
+  if (cached) { liveJobs = cached.jobs; liveFetchedAt = cached.t; }
+  if (fresh && !force) { drawLive(); return; }
+  const log = store.get(K.fetches, []).filter(t => Date.now() - t < 864e5);
+  if (log.length >= 4) { drawLive("Daily fetch limit reached (Remotive allows about 4 a day). Showing saved results."); return; }
+  $("l-meta").textContent = "Loading…";
+  try {
+    const r = await fetch(LIVE_URL);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json();
+    liveJobs = (j.jobs || []).map(x => ({ id: x.id, url: x.url, title: x.title, company: x.company_name, date: x.publication_date,
+      loc: x.candidate_required_location, type: x.job_type, salary: x.salary }));
+    liveFetchedAt = Date.now();
+    store.set(K.live, { t: liveFetchedAt, jobs: liveJobs }); log.push(liveFetchedAt); store.set(K.fetches, log);
+    drawLive();
+  } catch (e) {
+    drawLive("Couldn't load the live feed right now" + (liveJobs.length ? ". Showing the last saved results." : "."));
+  }
+}
+function drawLive(err) {
+  liveLoaded = true;
+  const rx = liveQ.trim().toLowerCase();
+  const list = liveJobs.filter(j => (!liveIndia || inIndia(j)) && (!rx || `${j.title} ${j.company} ${j.loc}`.toLowerCase().includes(rx)))
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  $("lcount").textContent = list.length + " jobs";
+  $("l-chips").innerHTML = chip(liveIndia, "data-india", "1", "India-eligible") + LIVE_CHIPS.map(c => chip(rx === c.toLowerCase(), "data-k", c, c)).join("");
+  $("l-meta").innerHTML = `Source: <a href="https://remotive.com" target="_blank" rel="noopener noreferrer">Remotive</a> · listings are delayed 24 hours · ${liveFetchedAt ? "fetched " + new Date(liveFetchedAt).toLocaleString() : "not fetched yet"}`;
+  $("l-err").innerHTML = err ? `<div class="live-err">${esc(err)} <a href="https://remotive.com/remote-jobs/software-dev" target="_blank" rel="noopener noreferrer">Open Remotive</a></div>` : "";
+  $("l-list").innerHTML = list.slice(0, 80).map((j, i) => {
+    const d = j.date ? daysBetween(String(j.date).slice(0, 10), today()) : null;
+    return `<article class="lj"><div><div class="nm">${esc(j.title)}</div>
+      <div class="ds">${esc([j.company, j.loc, j.type && String(j.type).replace("_", " "), j.salary].filter(Boolean).join(" · "))}</div></div>
+      <div class="lj-a">${d !== null ? `<span class="tag IN">${d <= 0 ? "Today" : d + "d ago"}</span>` : ""}
+      <a class="btn" href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">Apply ↗</a>
+      <button class="btn ghost" data-trk="${esc(j.id)}">+ Track</button></div></article>`;
+  }).join("") || `<div class="hint">No listings match. Try another filter or switch off India-eligible.</div>`;
+}
+$("l-q").addEventListener("input", e => { liveQ = e.target.value; if (liveLoaded) drawLive(); });
+$("l-ref").addEventListener("click", () => loadLive(true));
+$("live").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.india) liveIndia = !liveIndia;
+  else if (b.dataset.k) { liveQ = liveQ.toLowerCase() === b.dataset.k.toLowerCase() ? "" : b.dataset.k; $("l-q").value = liveQ; }
+  else if (b.dataset.trk) {
+    const j = liveJobs.find(x => String(x.id) === b.dataset.trk);
+    if (j) { addJob({ company: j.company, role: j.title, url: j.url, status: "saved" }); toast("Added to tracker"); }
+    return;
+  } else return;
+  drawLive();
+});
+
+/* ---------- tab routing (called from index.html render()) ---------- */
+function onTab(t) {
+  for (const id of ["cmp", "trk", "out", "live"]) $(id).hidden = id !== t;
+  if (t === "cmp") { $("c-name").value = cs.name; $("c-role").value = cs.role; drawCompany(); }
+  else if (t === "trk") drawTracker();
+  else if (t === "out") drawOutreach();
+  else if (t === "live" && !liveLoaded) loadLive(false);
+}
+window.PREMIUM = { onTab };
+
+/* ---------- global shortcut: "/" focuses the main search ---------- */
+document.addEventListener("keydown", e => {
+  if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+  e.preventDefault(); $("q").focus();
+});
+
+drawStats();
+})();
