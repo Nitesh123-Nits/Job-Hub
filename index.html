@@ -385,31 +385,45 @@ catch(e){}
 try{const o=localStorage.getItem("jobhub-role");if(o&&!localStorage.getItem("jobhub-roles"))bRoles=[o]}catch(e){}
 bCities=loadCities("jobhub-cities","jobhub-city");
 const enc=encodeURIComponent;
-function roleSites(role,c){
-  const slug=role.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-  const nk=c.remote?`https://www.naukri.com/${slug}-jobs?wfhType=2`:`https://www.naukri.com/${slug}-jobs${c.nk?"-in-"+c.nk:""}`;
-  const out=[
-   {name:"Naukri",url:nk,desc:"India's largest job portal"},
-   {name:"LinkedIn",url:`https://www.linkedin.com/jobs/search/?keywords=${enc(role)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}`,desc:c.remote?"Remote filter on":"Jobs and referrals"},
-   {name:"Indeed India",url:`https://in.indeed.com/jobs?q=${enc(role)}&l=${enc(c.ind)}`,desc:"Job aggregator"},
-   {name:"Foundit",url:`https://www.foundit.in/srp/results?query=${enc(role+(c.remote?" remote":""))}${c.fo?"&locations="+enc(c.fo):""}`,desc:"Formerly Monster India"},
-   {name:"Google Jobs",url:`https://www.google.com/search?q=${enc(role+" jobs "+(c.remote?"remote India":"in "+c.n))}&ibp=htl%3Bjobs`,desc:"Aggregates many boards"}];
-  if(c.remote)out.push({name:"We Work Remotely",url:`https://weworkremotely.com/remote-jobs/search?term=${enc(role)}`,desc:"Remote-only board"});
-  return out;
+// One combined search per board when several roles are picked (boolean OR). Boards whose
+// search can't be combined reliably (Naukri URL path, Foundit, WWR) also get one link per role in `extras`.
+function roleSites(roles,c){
+  const multi=roles.length>1;
+  const expr=multi?"("+roles.map(r=>`"${r}"`).join(" OR ")+")":roles[0];
+  const slug=r=>r.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  const nk=(r,k)=>{
+    let u=c.remote?`https://www.naukri.com/${slug(r)}-jobs?wfhType=2`:`https://www.naukri.com/${slug(r)}-jobs${c.nk?"-in-"+c.nk:""}`;
+    if(k)u+=(u.includes("?")?"&":"?")+"k="+enc(k)+(c.nk&&!c.remote?"&l="+enc(c.nk):"");
+    return u};
+  const fo=r=>`https://www.foundit.in/srp/results?query=${enc(r+(c.remote?" remote":""))}${c.fo?"&locations="+enc(c.fo):""}`;
+  const main=[
+   {name:"Naukri",url:nk(roles[0],multi?expr:""),desc:multi?"All roles in one search":"India's largest job portal"},
+   {name:"LinkedIn",url:`https://www.linkedin.com/jobs/search/?keywords=${enc(expr)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}`,desc:multi?"All roles in one search":(c.remote?"Remote filter on":"Jobs and referrals")},
+   {name:"Indeed India",url:`https://in.indeed.com/jobs?q=${enc(expr)}&l=${enc(c.ind)}`,desc:multi?"All roles in one search":"Job aggregator"}];
+  if(!multi)main.push({name:"Foundit",url:fo(roles[0]),desc:"Formerly Monster India"});
+  main.push({name:"Google Jobs",url:`https://www.google.com/search?q=${enc(expr+" jobs "+(c.remote?"remote India":"in "+c.n))}&ibp=htl%3Bjobs`,desc:"Aggregates many boards"});
+  if(c.remote&&!multi)main.push({name:"We Work Remotely",url:`https://weworkremotely.com/remote-jobs/search?term=${enc(roles[0])}`,desc:"Remote-only board"});
+  const extras=[];
+  if(multi)roles.forEach(r=>{
+    extras.push({name:`Naukri · ${r}`,url:nk(r),desc:"One role per link"});
+    extras.push({name:`Foundit · ${r}`,url:fo(r),desc:"One role per link"});
+    if(c.remote)extras.push({name:`We Work Remotely · ${r}`,url:`https://weworkremotely.com/remote-jobs/search?term=${enc(r)}`,desc:"One role per link"})});
+  return{main,extras};
 }
 function drawBuilder(){
   const cs=pickCities(bCities);
   const allRoles=[...ROLES,...bRoles.filter(r=>!ROLES.includes(r))];
   $("roles").innerHTML=allRoles.map(r=>`<button class="chip ${bRoles.includes(r)?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
   $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${bCities.includes(x.k)?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
-  let total=0,html="";
-  cs.forEach(c=>bRoles.forEach(r=>{
-    const list=roleSites(r,c);total+=list.length;
-    const head=[bRoles.length>1?r:"",cs.length>1?c.n:""].filter(Boolean).join(" · ");
-    html+=(head?`<div class="bl">${esc(head)}</div>`:"")+`<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+  const cardsOf=(list,c)=>`<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
     <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("")}</div>`;
-  }));
+  let total=0,html="";
+  cs.forEach(c=>{
+    const {main,extras}=roleSites(bRoles,c);total+=main.length+extras.length;
+    html+=(cs.length>1?`<div class="bl">${c.n}</div>`:"")+cardsOf(main,c);
+    if(extras.length)html+=`<div class="bl">${cs.length>1?c.n+" · ":""}One role per link</div>`+cardsOf(extras,c);
+  });
   $("results").innerHTML=html;
   $("bcount").textContent=total+" searches";
   $("now").innerHTML=`${bRoles.map(esc).join(", ")} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
