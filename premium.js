@@ -150,7 +150,7 @@ function applyStyle(s) {
 }
 function paintBrowserBar() {
   const dark = document.documentElement.dataset.theme === "dark", modern = document.documentElement.dataset.style === "modern";
-  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? (modern ? "#0B0D14" : "#0F0F0D") : (modern ? "#F4F5FA" : "#F3F0E8");
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? (modern ? "#1B1611" : "#0F0F0D") : (modern ? "#EEE5D0" : "#F3F0E8");
 }
 $("style").addEventListener("click", () => {
   const s = document.documentElement.dataset.style === "modern" ? "classic" : "modern";
