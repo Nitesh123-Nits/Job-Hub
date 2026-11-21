@@ -46,8 +46,15 @@ let prof = Object.assign({ name: "", role: "", years: "", skills: "" }, store.ge
 let track = store.get(K.track, []);
 let watch = store.get(K.watch, []);
 const savedCmp = store.get(K.cmp, null);
-let cs = Object.assign({ name: "", role: "", city: "India", win: "w", easy: false, exp: "" }, savedCmp || {});
-if (!savedCmp) cs.role = prof.role || "Java Backend Developer";
+let cs = Object.assign({ name: "", role: "", roles: [], city: "India", win: "w", easy: false, exp: "" }, savedCmp || {});
+if (!savedCmp) cs.roles = [prof.role || "Java Backend Developer"];
+else if (!Array.isArray(savedCmp.roles)) { // migrate the single-role value saved by an earlier version
+  const hit = ROLES.find(r => r.toLowerCase() === String(savedCmp.role || "").trim().toLowerCase());
+  cs.roles = hit ? [hit] : []; cs.role = hit ? "" : String(savedCmp.role || "");
+}
+// selected quick-role chips plus any typed role, de-duplicated
+const activeRoles = () => { const t = cs.role.trim(); const a = [...cs.roles]; if (t && !a.some(r => r.toLowerCase() === t.toLowerCase())) a.push(t); return a; };
+const roleExpr = list => list.length > 1 ? `(${list.map(r => `"${r}"`).join(" OR ")})` : (list[0] || "");
 let os = Object.assign({ company: "", contact: "", role: "" }, store.get(K.out, {}));
 const saveTrack = () => { store.set(K.track, track); drawStats(); };
 
@@ -57,10 +64,10 @@ $("main").insertAdjacentHTML("beforebegin", `
   <div class="sh"><span class="no">00</span><h2>Company Search</h2><span class="ct" id="ccount"></span><p>Type a company. Get its jobs, career pages, hiring posts, recruiters and reviews as ready-made searches.</p></div>
   <div class="row">
     <input id="c-name" class="custom" list="c-list" placeholder="Company, e.g. Razorpay" autocomplete="off" aria-label="Company name">
-    <input id="c-role" class="custom" placeholder="Role (optional)" autocomplete="off" aria-label="Role">
+    <input id="c-role" class="custom" placeholder="Or type a role (optional)" autocomplete="off" aria-label="Role">
   </div>
   <datalist id="c-list"></datalist>
-  <div class="bl">Quick roles (tap again to clear)</div><div class="chips" id="c-roles"></div>
+  <div class="bl">Quick roles (pick any, tap again to clear)</div><div class="chips" id="c-roles"></div>
   <div class="bl">Location</div><div class="chips" id="c-cities"></div>
   <div class="bl">Posted within</div><div class="chips" id="c-wins"></div>
   <div class="bl">Filters (LinkedIn)</div><div class="chips" id="c-flt"></div>
@@ -163,7 +170,7 @@ function companyLinks() {
   const n = cs.name.trim(); if (!n) return { groups: [], jobsUrl: "" };
   const c = CITIES.find(x => x.k === cs.city) || CITIES[0];
   const w = WINS.find(x => x.k === cs.win) || WINS[2];
-  const role = cs.role.trim();
+  const role = roleExpr(activeRoles());
   const kw = [role, n].filter(Boolean).join(" ");
   const loc = c.remote ? "remote India" : (c.k === "India" ? "India" : c.n);
   const q = `"${n}"`;
@@ -202,7 +209,7 @@ function companyLinks() {
   return { groups, jobsUrl };
 }
 function drawCompany() {
-  $("c-roles").innerHTML = ROLES.map(r => chip(cs.role.trim().toLowerCase() === r.toLowerCase(), "data-r", r, r)).join("");
+  $("c-roles").innerHTML = ROLES.map(r => chip(cs.roles.includes(r), "data-r", r, r)).join("");
   $("c-cities").innerHTML = CITIES.map(x => chip(x.k === cs.city, "data-c", x.k, x.n)).join("");
   $("c-wins").innerHTML = WINS.map(x => chip(x.k === cs.win, "data-w", x.k, x.n)).join("");
   $("c-flt").innerHTML = chip(cs.easy, "data-easy", "1", "Easy Apply only") + EXP.map(e => chip(cs.exp === e[0], "data-e", e[0], e[1])).join("");
@@ -227,7 +234,7 @@ $("cmp").addEventListener("click", e => {
   const rm = e.target.closest("[data-rm]");
   if (rm) { e.stopPropagation(); watch = watch.filter(w => w !== rm.dataset.rm); store.set(K.watch, watch); drawCompany(); return; }
   const b = e.target.closest("button"); if (!b) return;
-  if (b.dataset.r !== undefined) { cs.role = cs.role.trim().toLowerCase() === b.dataset.r.toLowerCase() ? "" : b.dataset.r; $("c-role").value = cs.role; }
+  if (b.dataset.r !== undefined) cs.roles = cs.roles.includes(b.dataset.r) ? cs.roles.filter(r => r !== b.dataset.r) : [...cs.roles, b.dataset.r];
   else if (b.dataset.c) cs.city = b.dataset.c;
   else if (b.dataset.easy) cs.easy = !cs.easy;
   else if (b.dataset.e !== undefined) cs.exp = b.dataset.e;
@@ -238,7 +245,7 @@ $("cmp").addEventListener("click", e => {
     watch = has ? watch.filter(w => w.toLowerCase() !== n.toLowerCase()) : [...watch, n];
     store.set(K.watch, watch);
   } else if (b.id === "c-track") {
-    addJob({ company: cs.name.trim(), role: cs.role.trim(), url: companyLinks().jobsUrl, status: "saved" });
+    addJob({ company: cs.name.trim(), role: activeRoles().join(", "), url: companyLinks().jobsUrl, status: "saved" });
     toast("Added to tracker"); return;
   } else return;
   drawCompany();

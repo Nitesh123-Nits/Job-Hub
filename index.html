@@ -136,9 +136,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></div>
 
 <div class="wrap" id="builder"><section>
-  <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick a role and one or more locations. Search links for each board are built for you.</p></div>
+  <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick one or more roles and locations. Search links for each board are built for you.</p></div>
   <div class="bl">Role</div><div class="chips" id="roles"></div>
-  <input id="custom" class="custom" type="text" placeholder="Or type any role…" autocomplete="off" aria-label="Custom role">
+  <input id="custom" class="custom" type="text" placeholder="Or type a role and press Enter" autocomplete="off" aria-label="Custom role">
   <div class="bl">Location</div><div class="chips" id="cities"></div>
   <div class="now" id="now"></div>
   <div id="results"></div>
@@ -375,12 +375,14 @@ const CITIES=[
  {k:"Noida",n:"Noida",nk:"noida",li:"Noida, Uttar Pradesh, India",ind:"Noida",fo:"Noida"},
  {k:"Chennai",n:"Chennai",nk:"chennai",li:"Chennai, Tamil Nadu, India",ind:"Chennai",fo:"Chennai"},
  {k:"Kolkata",n:"Kolkata",nk:"kolkata",li:"Kolkata, West Bengal, India",ind:"Kolkata",fo:"Kolkata"}];
-let bRole="Java Backend Developer",bCities=["India"];
+let bRoles=["Java Backend Developer"],bCities=["India"];
 // multi-select locations: stored as a JSON array; falls back to the old single-city key
 const loadCities=(k,old)=>{try{const a=JSON.parse(localStorage.getItem(k));if(Array.isArray(a)){const v=a.filter(x=>CITIES.some(c=>c.k===x));if(v.length)return v}}catch(e){}try{const o=localStorage.getItem(old);if(o&&CITIES.some(c=>c.k===o))return[o]}catch(e){}return["India"]};
 const pickCities=a=>CITIES.filter(c=>a.includes(c.k));
 const toggleCity=(a,k)=>a.includes(k)?(a.length>1?a.filter(x=>x!==k):a):[...a,k];
-try{bRole=localStorage.getItem("jobhub-role")||bRole}catch(e){}
+try{const a=JSON.parse(localStorage.getItem("jobhub-roles"));if(Array.isArray(a)&&a.length)bRoles=a.map(String)}
+catch(e){}
+try{const o=localStorage.getItem("jobhub-role");if(o&&!localStorage.getItem("jobhub-roles"))bRoles=[o]}catch(e){}
 bCities=loadCities("jobhub-cities","jobhub-city");
 const enc=encodeURIComponent;
 function roleSites(role,c){
@@ -397,20 +399,25 @@ function roleSites(role,c){
 }
 function drawBuilder(){
   const cs=pickCities(bCities);
-  $("roles").innerHTML=ROLES.map(r=>`<button class="chip ${r===bRole?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
+  const allRoles=[...ROLES,...bRoles.filter(r=>!ROLES.includes(r))];
+  $("roles").innerHTML=allRoles.map(r=>`<button class="chip ${bRoles.includes(r)?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
   $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${bCities.includes(x.k)?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
-  let total=0;
-  $("results").innerHTML=cs.map(c=>{const list=roleSites(bRole,c);total+=list.length;
-    return `${cs.length>1?`<div class="bl">${c.n}</div>`:""}<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+  let total=0,html="";
+  cs.forEach(c=>bRoles.forEach(r=>{
+    const list=roleSites(r,c);total+=list.length;
+    const head=[bRoles.length>1?r:"",cs.length>1?c.n:""].filter(Boolean).join(" · ");
+    html+=(head?`<div class="bl">${esc(head)}</div>`:"")+`<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
-    <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("")}</div>`}).join("");
+    <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("")}</div>`;
+  }));
+  $("results").innerHTML=html;
   $("bcount").textContent=total+" searches";
-  $("now").innerHTML=`${esc(bRole)} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
-  try{localStorage.setItem("jobhub-role",bRole);localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
+  $("now").innerHTML=`${bRoles.map(esc).join(", ")} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
+  try{localStorage.setItem("jobhub-roles",JSON.stringify(bRoles));localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
 }
-$("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;bRole=b.dataset.r;$("custom").value="";drawBuilder()});
+$("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;const r=b.dataset.r;bRoles=bRoles.includes(r)?(bRoles.length>1?bRoles.filter(x=>x!==r):bRoles):[...bRoles,r];drawBuilder()});
 $("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCities=toggleCity(bCities,b.dataset.c);drawBuilder()});
-$("custom").addEventListener("input",e=>{const v=e.target.value.trim();if(v){bRole=v;drawBuilder()}});
+$("custom").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const v=e.target.value.trim();if(!v)return;if(!bRoles.some(r=>r.toLowerCase()===v.toLowerCase()))bRoles=[...bRoles,v];e.target.value="";drawBuilder()});
 drawBuilder();
 
 // ---- Smart search: who is hiring right now ----
