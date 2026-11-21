@@ -116,10 +116,10 @@ $("main").insertAdjacentHTML("beforebegin", `
 </section></div>
 
 <div class="wrap pane" id="live" hidden><section>
-  <div class="sh"><span class="no">00</span><h2>Live Remote Jobs</h2><span class="ct" id="lcount"></span><p>Current remote software listings pulled into the page. Apply on the original posting.</p></div>
+  <div class="sh"><span class="no">00</span><h2>Live Remote Jobs</h2><span class="ct" id="lcount"></span><p>Remote software listings gathered from several free job feeds. Apply on the original posting.</p></div>
   <div class="row">
     <input id="l-q" class="custom" placeholder="Filter, e.g. java, backend, kafka" autocomplete="off" aria-label="Filter jobs">
-    <button class="btn ghost" id="l-ref" style="margin-top:10px">Refresh</button>
+    <button class="btn ghost" id="l-ref" style="margin-top:10px">Reload</button>
   </div>
   <div class="chips" id="l-chips" style="margin-top:10px"></div>
   <div class="live-meta" id="l-meta"></div>
@@ -441,27 +441,39 @@ $("o-tpls").addEventListener("click", e => {
   const t = tplCache[+b.dataset.copy]; copy(t.subject ? `Subject: ${t.subject}\n\n${t.body}` : t.body);
 });
 
-/* ---------- live remote jobs (Remotive public API) ----------
-   Remotive asks for at most ~4 fetches a day, a credit link, and delays listings by 24h.
-   We fetch once per 6h at most, cap at 4 per rolling 24h, and cache in localStorage. */
+/* ---------- live remote jobs ----------
+   Primary source: data/jobs.json, refreshed three times a day by the "Update live jobs" GitHub Action, which pulls
+   Remotive, Jobicy, Remote OK and Arbeitnow on the server (no CORS problems, no per-visitor rate limits).
+   Fallback when that file is empty or missing: Remotive straight from the browser, cached 6h and capped at
+   4 fetches per rolling 24h, as Remotive asks. Every listing keeps its original link and source name. */
 const LIVE_URL = "https://remotive.com/api/remote-jobs?category=software-dev&limit=250";
-let liveJobs = [], liveQ = "", liveIndia = true, liveLoaded = false, liveFetchedAt = 0;
+const SRC_URL = { "Remotive": "https://remotive.com", "Jobicy": "https://jobicy.com", "Remote OK": "https://remoteok.com", "Arbeitnow": "https://www.arbeitnow.com" };
+let liveJobs = [], liveQ = "", liveIndia = true, liveSrc = "", liveLoaded = false, liveFetchedAt = 0, liveMode = "", liveSources = [];
 const LIVE_CHIPS = ["Java", "Backend", "Spring", "Kafka", "Microservices", "Platform"];
-const inIndia = j => /india|asia|apac|worldwide|anywhere/i.test(j.loc || "");
-async function loadLive(force) {
+// blank location = not stated by the source, so keep it
+const inIndia = j => !j.loc || /india|asia|apac|worldwide|anywhere|global/i.test(j.loc);
+
+async function loadFile() {
+  const r = await fetch("data/jobs.json", { cache: "no-cache" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const d = await r.json();
+  if (!d || !Array.isArray(d.jobs) || !d.jobs.length) throw new Error("empty");
+  liveJobs = d.jobs; liveSources = d.sources || []; liveFetchedAt = d.updated ? Date.parse(d.updated) : 0; liveMode = "file";
+}
+async function loadRemotiveDirect(force) {
+  liveMode = "direct"; liveSources = [{ name: "Remotive", ok: true }];
   const cached = store.get(K.live, null);
   const fresh = cached && Date.now() - cached.t < 6 * 36e5;
   if (cached) { liveJobs = cached.jobs; liveFetchedAt = cached.t; }
   if (fresh && !force) { drawLive(); return; }
   const log = store.get(K.fetches, []).filter(t => Date.now() - t < 864e5);
   if (log.length >= 4) { drawLive("Daily fetch limit reached (Remotive allows about 4 a day). Showing saved results."); return; }
-  $("l-meta").textContent = "Loading…";
   try {
     const r = await fetch(LIVE_URL);
     if (!r.ok) throw new Error("HTTP " + r.status);
     const j = await r.json();
-    liveJobs = (j.jobs || []).map(x => ({ id: x.id, url: x.url, title: x.title, company: x.company_name, date: x.publication_date,
-      loc: x.candidate_required_location, type: x.job_type, salary: x.salary }));
+    liveJobs = (j.jobs || []).map(x => ({ id: "remotive-" + x.id, url: x.url, title: x.title, company: x.company_name, date: x.publication_date,
+      loc: x.candidate_required_location, type: x.job_type, salary: x.salary, source: "Remotive" }));
     liveFetchedAt = Date.now();
     store.set(K.live, { t: liveFetchedAt, jobs: liveJobs }); log.push(liveFetchedAt); store.set(K.fetches, log);
     drawLive();
@@ -469,20 +481,39 @@ async function loadLive(force) {
     drawLive("Couldn't load the live feed right now" + (liveJobs.length ? ". Showing the last saved results." : "."));
   }
 }
+async function loadLive(force) {
+  $("l-meta").textContent = "Loading…";
+  try { await loadFile(); drawLive(); }
+  catch (e) { await loadRemotiveDirect(force); }
+}
+function ageText(iso) {
+  const d = iso ? daysBetween(String(iso).slice(0, 10), today()) : null;
+  return d === null ? "" : d <= 0 ? "Today" : d + "d ago";
+}
 function drawLive(err) {
   liveLoaded = true;
   const rx = liveQ.trim().toLowerCase();
-  const list = liveJobs.filter(j => (!liveIndia || inIndia(j)) && (!rx || `${j.title} ${j.company} ${j.loc}`.toLowerCase().includes(rx)))
-    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
-  $("lcount").textContent = list.length + " jobs";
-  $("l-chips").innerHTML = chip(liveIndia, "data-india", "1", "India-eligible") + LIVE_CHIPS.map(c => chip(rx === c.toLowerCase(), "data-k", c, c)).join("");
-  $("l-meta").innerHTML = `Source: <a href="https://remotive.com" target="_blank" rel="noopener noreferrer">Remotive</a> · listings are delayed 24 hours · ${liveFetchedAt ? "fetched " + new Date(liveFetchedAt).toLocaleString() : "not fetched yet"}`;
+  const matches = liveJobs.filter(j => (!liveIndia || inIndia(j)) && (!liveSrc || j.source === liveSrc) &&
+    (!rx || `${j.title} ${j.company} ${j.loc} ${(j.tags || []).join(" ")}`.toLowerCase().includes(rx)))
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  const shown = matches.slice(0, 120);
+  $("lcount").textContent = matches.length + " jobs";
+  const names = [...new Set(liveJobs.map(j => j.source).filter(Boolean))];
+  $("l-chips").innerHTML = chip(liveIndia, "data-india", "1", "India-eligible")
+    + (names.length > 1 ? chip(!liveSrc, "data-s", "", "All sources") + names.map(n => chip(liveSrc === n, "data-s", n, `${n} ${liveJobs.filter(j => j.source === n).length}`)).join("") : "")
+    + LIVE_CHIPS.map(c => chip(rx === c.toLowerCase(), "data-k", c, c)).join("");
+  const credit = names.map(n => SRC_URL[n] ? `<a href="${SRC_URL[n]}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>` : esc(n)).join(", ");
+  const failed = liveSources.filter(s => s.ok === false).map(s => s.name);
+  $("l-meta").innerHTML = `Sources: ${credit || "none yet"} · ${liveFetchedAt ? "updated " + new Date(liveFetchedAt).toLocaleString() : "not fetched yet"}`
+    + (liveMode === "file" ? " · refreshed automatically 3 times a day" : " · Remotive listings are delayed 24 hours")
+    + (failed.length ? ` · last refresh failed for ${esc(failed.join(", "))} (older listings kept)` : "")
+    + (matches.length > shown.length ? ` · showing the newest ${shown.length}` : "");
   $("l-err").innerHTML = err ? `<div class="live-err">${esc(err)} <a href="https://remotive.com/remote-jobs/software-dev" target="_blank" rel="noopener noreferrer">Open Remotive</a></div>` : "";
-  $("l-list").innerHTML = list.slice(0, 80).map((j, i) => {
-    const d = j.date ? daysBetween(String(j.date).slice(0, 10), today()) : null;
+  $("l-list").innerHTML = shown.map(j => {
+    const age = ageText(j.date);
     return `<article class="lj"><div><div class="nm">${esc(j.title)}</div>
-      <div class="ds">${esc([j.company, j.loc, j.type && String(j.type).replace("_", " "), j.salary].filter(Boolean).join(" · "))}</div></div>
-      <div class="lj-a">${d !== null ? `<span class="tag IN">${d <= 0 ? "Today" : d + "d ago"}</span>` : ""}
+      <div class="ds">${esc([j.company, j.loc, j.type, j.salary].filter(Boolean).join(" · "))}</div></div>
+      <div class="lj-a">${age ? `<span class="tag IN">${age}</span>` : ""}${j.source ? `<span class="tag">${esc(j.source)}</span>` : ""}
       <a class="btn" href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">Apply ↗</a>
       <button class="btn ghost" data-trk="${esc(j.id)}">+ Track</button></div></article>`;
   }).join("") || `<div class="hint">No listings match. Try another filter or switch off India-eligible.</div>`;
@@ -492,6 +523,7 @@ $("l-ref").addEventListener("click", () => loadLive(true));
 $("live").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   if (b.dataset.india) liveIndia = !liveIndia;
+  else if (b.dataset.s !== undefined) liveSrc = b.dataset.s;
   else if (b.dataset.k) { liveQ = liveQ.toLowerCase() === b.dataset.k.toLowerCase() ? "" : b.dataset.k; $("l-q").value = liveQ; }
   else if (b.dataset.trk) {
     const j = liveJobs.find(x => String(x.id) === b.dataset.trk);
