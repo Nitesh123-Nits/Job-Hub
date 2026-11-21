@@ -1,1 +1,1497 @@
-{"updated":null,"sources":[],"jobs":[]}
+{
+ "updated": "2026-11-21T09:48:47+00:00",
+ "sources": [
+  {
+   "name": "Remotive",
+   "ok": true,
+   "count": 16
+  },
+  {
+   "name": "Jobicy",
+   "ok": true,
+   "count": 41
+  },
+  {
+   "name": "Remote OK",
+   "ok": true,
+   "count": 48
+  },
+  {
+   "name": "Arbeitnow",
+   "ok": true,
+   "count": 6
+  }
+ ],
+ "jobs": [
+  {
+   "id": "jobicy-156249",
+   "title": "Database Support Engineer (Japanese Speaking)",
+   "company": "Supabase",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-21T03:25:25+00:00",
+   "url": "https://jobicy.com/jobs/156249-database-support-engineer-japanese-speaking",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156195",
+   "title": "Customer Success Architect, Japan",
+   "company": "GitLab",
+   "loc": "Japan",
+   "type": "Full-Time",
+   "date": "2026-11-21T03:20:19+00:00",
+   "url": "https://jobicy.com/jobs/156195-customer-success-architect-japan",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-151014",
+   "title": "Associate Linux Support Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-21T03:05:12+00:00",
+   "url": "https://jobicy.com/jobs/151014-associate-linux-support-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-150994",
+   "title": "Software Engineer - Secure Container Images",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-21T03:05:11+00:00",
+   "url": "https://jobicy.com/jobs/150994-software-engineer-secure-container-images",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-151013",
+   "title": "Distributed Systems Testing Software Engineer, Python / Go",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-21T03:00:25+00:00",
+   "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-ai-fabric-architect-51975",
+   "title": "AI Fabric Architect",
+   "company": "Fal Ai",
+   "loc": "Remote",
+   "type": "Full Time",
+   "date": "2026-11-20T21:40:14+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/fal-ai/remote-ai-fabric-architect-51975",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-backend-software-developer-hilversum-417173",
+   "title": "Backend Software Developer",
+   "company": "Dawn Technology",
+   "loc": "Werken op afstand",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-20T21:31:27+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/dawn-technology/remote-backend-software-developer-hilversum-417173",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Dawn Technology",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-platform-engineer-amsterdam-429264",
+   "title": "Senior Platform Engineer",
+   "company": "Treatwell",
+   "loc": "Amsterdam, Netherlands",
+   "type": "Full time, mid-senior",
+   "date": "2026-11-20T13:20:10+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/treatwell/remote-senior-platform-engineer-amsterdam-429264",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Internet",
+    "Tech",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-solution-architect-customer-touchpoints-cloud-transformation-zurich-83687",
+   "title": "Solution Architect Customer Touchpoints & Cloud Transformation",
+   "company": "Coopers Group AG",
+   "loc": "Zürich",
+   "type": "Trainee-programm, traineeship, berufserfahren",
+   "date": "2026-11-20T10:01:30+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/coopers-group-ag/solution-architect-customer-touchpoints-cloud-transformation-zurich-83687",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "remoteok-1137906",
+   "title": "Senior Sales Engineer",
+   "company": "Natera",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T09:40:03+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-sales-engineer-natera-1137906",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "jobicy-163536",
+   "title": "Senior Customer Engineer, AI-Factory",
+   "company": "Armada",
+   "loc": "Australia",
+   "type": "Full-Time",
+   "date": "2026-11-20T09:39:23+00:00",
+   "url": "https://jobicy.com/jobs/163536-senior-customer-engineer-ai-factory",
+   "source": "Jobicy",
+   "salary": "AUD 213,000–266,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163534",
+   "title": "Android Engineer (APAC Remote)",
+   "company": "Binance",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-20T09:39:20+00:00",
+   "url": "https://jobicy.com/jobs/163534-android-engineer-apac-remote",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163533",
+   "title": "Data Center Construction Manager",
+   "company": "Armada",
+   "loc": "Australia",
+   "type": "Full-Time",
+   "date": "2026-11-20T09:39:18+00:00",
+   "url": "https://jobicy.com/jobs/163533-data-center-construction-manager",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137903",
+   "title": "Data Strategy Operations Manager",
+   "company": "Abnormal",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T08:40:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-data-strategy-operations-manager-abnormal-1137903",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "exec"
+   ]
+  },
+  {
+   "id": "jobicy-163453",
+   "title": "Developer Support Engineer",
+   "company": "RevenueCat",
+   "loc": "APAC,  EMEA,  LATAM,  Canada,  USA",
+   "type": "Full-Time",
+   "date": "2026-11-20T08:39:27+00:00",
+   "url": "https://jobicy.com/jobs/163453-developer-support-engineer-2",
+   "source": "Jobicy",
+   "salary": "USD 118,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137902",
+   "title": "Sr Sales Ops Analyst",
+   "company": "BeyondTrust",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T08:20:16+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-sr-sales-ops-analyst-beyondtrust-1137902",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137901",
+   "title": "Art Director",
+   "company": "Abnormal",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T08:20:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-art-director-abnormal-1137901",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137900",
+   "title": "Senior Product Architect",
+   "company": "Storyblok",
+   "loc": "Worldwide",
+   "type": "",
+   "date": "2026-11-20T08:00:15+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-product-architect-storyblok-1137900",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "product"
+   ]
+  },
+  {
+   "id": "remoteok-1137898",
+   "title": "Security Analyst - Governance, Risk, and Compliance",
+   "company": "LaunchDarkly",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T07:40:18+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-security-analyst-governance-risk-and-compliance-launchdarkly-1137898",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137897",
+   "title": "Staff Security Engineer - AppSec",
+   "company": "6sense",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T07:40:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-staff-security-engineer-appsec-6sense-1137897",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137896",
+   "title": "Advisory Solutions Architect, MSP (New Product Intro)",
+   "company": "Rubrik Job Board",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T07:20:36+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-advisory-solutions-architect-msp-new-product-intro-rubrik-job-board-1137896",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "product"
+   ]
+  },
+  {
+   "id": "remoteok-1137890",
+   "title": "Sr Director, L2C Process Owner",
+   "company": "BeyondTrust",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T06:15:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-sr-director-l2c-process-owner-beyondtrust-1137890",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137884",
+   "title": "Director, Sales",
+   "company": "Ping Identity",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T04:45:30+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-director-sales-ping-identity-1137884",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-account-manager-warehouse-automation-benelux-netherlands-21998",
+   "title": "Senior Account Manager - Warehouse Automation - BENELUX",
+   "company": "Exotec",
+   "loc": "Netherlands",
+   "type": "Full time",
+   "date": "2026-11-20T04:20:15+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/exotec/remote-senior-account-manager-warehouse-automation-benelux-netherlands-21998",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering",
+    "Logistics and Supply Chain",
+    "Maintenance",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-account-manager-warehouse-automation-japanese-speaking-benelux-netherlands-325427",
+   "title": "Senior Account Manager - Warehouse Automation (Japanese Speaking) - BENELUX",
+   "company": "Exotec",
+   "loc": "Netherlands",
+   "type": "Full time, mid-senior",
+   "date": "2026-11-20T04:20:15+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/exotec/remote-senior-account-manager-warehouse-automation-japanese-speaking-benelux-netherlands-325427",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering",
+    "Logistics and Supply Chain",
+    "Maintenance",
+    "Remote"
+   ]
+  },
+  {
+   "id": "jobicy-150935",
+   "title": "Customer Engineer, APAC",
+   "company": "Cresta",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-20T03:10:07+00:00",
+   "url": "https://jobicy.com/jobs/150935-customer-engineer-apac",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137877",
+   "title": "PreSales Solutions Engineer",
+   "company": "Sumo Logic",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T03:00:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-presales-solutions-engineer-sumo-logic-1137877",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137874",
+   "title": "Senior Atlassian Cloud Administrator",
+   "company": "Dropbox",
+   "loc": "Europe",
+   "type": "",
+   "date": "2026-11-20T02:15:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-atlassian-cloud-administrator-dropbox-1137874",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137872",
+   "title": "Senior Software Developer - Canada",
+   "company": "Clover Health",
+   "loc": "Canada Only",
+   "type": "",
+   "date": "2026-11-20T01:45:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-developer-canada-clover-health-1137872",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137871",
+   "title": "Senior Software Engineer",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T01:30:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-clover-health-1137871",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137867",
+   "title": "Customer Success Engineer",
+   "company": "GitLab",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T00:30:12+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-customer-success-engineer-gitlab-1137867",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137865",
+   "title": "Senior Product Engineer",
+   "company": "Arbor Education",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-20T00:00:47+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-product-engineer-arbor-education-1137865",
+   "source": "Remote OK",
+   "salary": "USD 70,000–80,000/year",
+   "tags": [
+    "design",
+    "react",
+    "backend",
+    "education",
+    "consulting",
+    "docker"
+   ]
+  },
+  {
+   "id": "remoteok-1137864",
+   "title": "IT Manager",
+   "company": "1mind",
+   "loc": "United States",
+   "type": "",
+   "date": "2026-11-20T00:00:41+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-it-manager-1mind-1137864",
+   "source": "Remote OK",
+   "salary": "USD 140,000–170,000/year",
+   "tags": [
+    "exec",
+    "saas",
+    "infosec",
+    "recruiter",
+    "customer support",
+    "dev"
+   ]
+  },
+  {
+   "id": "remoteok-1137861",
+   "title": "Customer Success Architect - East",
+   "company": "GitLab",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T00:00:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-customer-success-architect-east-gitlab-1137861",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137860",
+   "title": "Senior Atlassian Cloud Admininstrator",
+   "company": "Dropbox",
+   "loc": "North America",
+   "type": "",
+   "date": "2026-11-19T21:15:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-atlassian-cloud-admininstrator-dropbox-1137860",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137858",
+   "title": "Principal DevSecOps Engineer",
+   "company": "Upgrade",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T20:45:40+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-principal-devsecops-engineer-upgrade-1137858",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137857",
+   "title": "Infrastructure Software Engineer",
+   "company": "Dropbox",
+   "loc": "North America",
+   "type": "",
+   "date": "2026-11-19T20:30:17+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-infrastructure-software-engineer-dropbox-1137857",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137856",
+   "title": "Senior Software Engineer",
+   "company": "Tebra",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T20:15:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-tebra-1137856",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137855",
+   "title": "Engineering Manager",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T20:00:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-clover-health-1137855",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137853",
+   "title": "Engineering Lead, Growth",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T19:30:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-lead-growth-clover-health-1137853",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137852",
+   "title": "Engineering Lead, Clinical Operations",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T19:15:15+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-lead-clinical-operations-clover-health-1137852",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137851",
+   "title": "Senior GTM Engineer",
+   "company": "Salesloft",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T19:00:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-gtm-engineer-salesloft-1137851",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137849",
+   "title": "Senior Software Engineer Guest & Host",
+   "company": "Airbnb",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T18:30:15+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-guest-host-airbnb-1137849",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137848",
+   "title": "Engineering Manager, External Search & AI Optimization",
+   "company": "Airbnb",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T18:15:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-external-search-ai-optimization-airbnb-1137848",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137846",
+   "title": "Senior Data Engineer Tech Foundations",
+   "company": "Airbnb",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T17:45:24+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-data-engineer-tech-foundations-airbnb-1137846",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137844",
+   "title": "Staff Software Engineer (Interfaces)",
+   "company": "Netlify",
+   "loc": "Worldwide",
+   "type": "",
+   "date": "2026-11-19T17:15:52+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-staff-software-engineer-interfaces-netlify-1137844",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137839",
+   "title": "Engineer Software Defined Vehicle Simulation and Development",
+   "company": "NIKI Digital Engineering",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-19T16:00:34+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineer-software-defined-vehicle-simulation-and-development-niki-digital-engineering-1137839",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "dev",
+    "design",
+    "embedded",
+    "sys admin",
+    "infosec",
+    "python"
+   ]
+  },
+  {
+   "id": "remoteok-1137838",
+   "title": "Marketing and Communications Officer",
+   "company": "NIKI Digital Engineering",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-19T16:00:27+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-marketing-and-communications-officer-niki-digital-engineering-1137838",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "design",
+    "consulting",
+    "technical",
+    "customer support",
+    "exec",
+    "marketing"
+   ]
+  },
+  {
+   "id": "remoteok-1137837",
+   "title": "Postdoc PhD PhD cand. Physics Computer Science",
+   "company": "NIKI Digital Engineering",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-19T16:00:21+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-postdoc-phd-phd-cand-physics-computer-science-niki-digital-engineering-1137837",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "design",
+    "python",
+    "consulting",
+    "technical",
+    "exec",
+    "c"
+   ]
+  },
+  {
+   "id": "remoteok-1137835",
+   "title": "Technical Lead Norm Compliance",
+   "company": "Norm",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-19T16:00:15+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-technical-lead-norm-compliance-norm-1137835",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "design",
+    "python",
+    "education",
+    "technical",
+    "customer support",
+    "dev"
+   ]
+  },
+  {
+   "id": "remotive-2091177",
+   "title": "Content Reviewer - United States",
+   "company": "TELUS Digital",
+   "loc": "USA",
+   "type": "part time",
+   "date": "2026-11-19T14:58:42+00:00",
+   "url": "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-2091177",
+   "source": "Remotive",
+   "salary": "$14/hour",
+   "tags": [
+    "android",
+    "ios",
+    "social media",
+    "teaching",
+    "AI/ML",
+    "research"
+   ]
+  },
+  {
+   "id": "remoteok-1137826",
+   "title": "Enterprise Solutions Engineer, East",
+   "company": "Glean",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T13:45:02+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-enterprise-solutions-engineer-east-glean-1137826",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "sales"
+   ]
+  },
+  {
+   "id": "remoteok-1137821",
+   "title": "L1 Technical Support Engineer (Spanish-Speaking)",
+   "company": "Abnormal",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T12:30:02+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-l1-technical-support-engineer-spanish-speaking-abnormal-1137821",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137820",
+   "title": "Designated Technical Support Engineer - West",
+   "company": "Glean",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T12:15:01+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-designated-technical-support-engineer-west-glean-1137820",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "jobicy-163297",
+   "title": "Site Reliability Engineer (Australia, Remote)",
+   "company": "Axon",
+   "loc": "Australia",
+   "type": "Full-Time",
+   "date": "2026-11-19T11:35:17+00:00",
+   "url": "https://jobicy.com/jobs/163297-site-reliability-engineer-australia-remote",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163286",
+   "title": "Customer Success Engineer, Singapore",
+   "company": "GitLab",
+   "loc": "Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-19T11:34:16+00:00",
+   "url": "https://jobicy.com/jobs/163286-customer-success-engineer-singapore-2",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163284",
+   "title": "Customer Success Architect, Australia",
+   "company": "GitLab",
+   "loc": "Australia",
+   "type": "Full-Time",
+   "date": "2026-11-19T11:34:14+00:00",
+   "url": "https://jobicy.com/jobs/163284-customer-success-architect-australia",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137815",
+   "title": "Customer Success Engineer, India",
+   "company": "GitLab",
+   "loc": "Asia",
+   "type": "",
+   "date": "2026-11-19T11:00:01+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-customer-success-engineer-india-gitlab-1137815",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137813",
+   "title": "Customer Success Architect - West",
+   "company": "GitLab",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T10:30:01+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-customer-success-architect-west-gitlab-1137813",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137809",
+   "title": "Senior Analytics Engineer",
+   "company": "Tebra",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-19T09:58:02+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-analytics-engineer-tebra-1137809",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137808",
+   "title": "Software Engineer AI Coding Tasks",
+   "company": "Askable",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-19T05:56:01+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-software-engineer-ai-coding-tasks-askable-1137808",
+   "source": "Remote OK",
+   "salary": "USD 10,000/year",
+   "tags": [
+    "dev",
+    "golang",
+    "python",
+    "javascript",
+    "typescript",
+    "java"
+   ]
+  },
+  {
+   "id": "jobicy-155939",
+   "title": "Full-Stack Engineer (Backend Leaning) - Creative Agents",
+   "company": "Elevenlabs",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-19T03:30:18+00:00",
+   "url": "https://jobicy.com/jobs/155939-full-stack-engineer-backend-leaning-creative-agents",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-146254",
+   "title": "Atlassian Administrator 1726",
+   "company": "Softgic",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-19T02:40:17+00:00",
+   "url": "https://jobicy.com/jobs/146254-atlassian-administrator-1726",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137805",
+   "title": "SEO Full Stack Engineer",
+   "company": "Treatwell",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-18T16:00:31+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-seo-full-stack-engineer-treatwell-1137805",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "full stack",
+    "react",
+    "rabbitmq",
+    "front end",
+    "technical",
+    "customer support"
+   ]
+  },
+  {
+   "id": "remoteok-1137804",
+   "title": "Manager EDI",
+   "company": "Gravie",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-18T16:00:25+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-manager-edi-gravie-1137804",
+   "source": "Remote OK",
+   "salary": "USD 110,625–147,500/year",
+   "tags": [
+    "exec",
+    "sys admin",
+    "infosec",
+    "education",
+    "technical",
+    "testing"
+   ]
+  },
+  {
+   "id": "remoteok-1137803",
+   "title": "Legal Engineering Counsel",
+   "company": "Stedi",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-18T16:00:19+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-legal-engineering-counsel-stedi-1137803",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "design",
+    "saas",
+    "education",
+    "exec",
+    "legal",
+    "technical"
+   ]
+  },
+  {
+   "id": "remoteok-1137802",
+   "title": "Business Development Manager",
+   "company": "Maya HTT",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-18T16:00:13+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-business-development-manager-maya-htt-1137802",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "product manager",
+    "exec",
+    "salesforce",
+    "hr",
+    "education",
+    "consulting"
+   ]
+  },
+  {
+   "id": "jobicy-163153",
+   "title": "Manager, Developer Advocacy, APJ",
+   "company": "Temporal Technologies",
+   "loc": "Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:42+00:00",
+   "url": "https://jobicy.com/jobs/163153-manager-developer-advocacy-apj",
+   "source": "Jobicy",
+   "salary": "SGD 208,000–273,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163152",
+   "title": "Service Desk Engineer",
+   "company": "RFA",
+   "loc": "Philippines",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:40+00:00",
+   "url": "https://jobicy.com/jobs/163152-service-desk-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163151",
+   "title": "Senior Solutions Architect, APJ",
+   "company": "Temporal Technologies",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:14+00:00",
+   "url": "https://jobicy.com/jobs/163151-senior-solutions-architect-apj",
+   "source": "Jobicy",
+   "salary": "SGD 134,400–176,400/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163150",
+   "title": "Senior Service Desk Engineer",
+   "company": "RFA",
+   "loc": "Philippines",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:12+00:00",
+   "url": "https://jobicy.com/jobs/163150-senior-service-desk-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163149",
+   "title": "Senior Developer Success Engineer, APJ",
+   "company": "Temporal Technologies",
+   "loc": "Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:10+00:00",
+   "url": "https://jobicy.com/jobs/163149-senior-developer-success-engineer-apj",
+   "source": "Jobicy",
+   "salary": "SGD 132,000–173,250/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-163148",
+   "title": "Senior Network Engineer",
+   "company": "RFA",
+   "loc": "Philippines",
+   "type": "Full-Time",
+   "date": "2026-11-18T14:00:08+00:00",
+   "url": "https://jobicy.com/jobs/163148-senior-network-engineer-2",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-155669",
+   "title": "Technical Support Engineer, APAC",
+   "company": "Socket",
+   "loc": "Australia",
+   "type": "Full-Time",
+   "date": "2026-11-18T04:00:10+00:00",
+   "url": "https://jobicy.com/jobs/155669-technical-support-engineer-apac",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-153449",
+   "title": "Software Engineer - Auth",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-18T03:05:09+00:00",
+   "url": "https://jobicy.com/jobs/153449-software-engineer-auth",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-153446",
+   "title": "Postgres Deployment Engineer (Nix)",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-18T03:05:06+00:00",
+   "url": "https://jobicy.com/jobs/153446-postgres-deployment-engineer-nix",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-162979",
+   "title": "Platform Engineer - Compute",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-17T13:39:12+00:00",
+   "url": "https://jobicy.com/jobs/162979-platform-engineer-compute",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-155601",
+   "title": "Staff Software Engineer (SRE)",
+   "company": "Phantom",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-17T03:00:18+00:00",
+   "url": "https://jobicy.com/jobs/155601-staff-software-engineer-sre-2",
+   "source": "Jobicy",
+   "salary": "USD 200,000–250,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "remoteok-1137797",
+   "title": "Engineering Manager Network Engineering",
+   "company": "PatientPoint",
+   "loc": "Remote",
+   "type": "",
+   "date": "2026-11-17T00:00:17+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-network-engineering-patientpoint-1137797",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "exec",
+    "design",
+    "infosec",
+    "technical",
+    "dev",
+    "travel"
+   ]
+  },
+  {
+   "id": "jobicy-162556",
+   "title": "Senior Cloud Infrastructure Engineer",
+   "company": "Tala",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-16T11:52:01+00:00",
+   "url": "https://jobicy.com/jobs/162556-senior-cloud-infrastructure-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-153195",
+   "title": "Senior+ Backend Software Engineer - Asia",
+   "company": "Palmstreet",
+   "loc": "China",
+   "type": "Full-Time",
+   "date": "2026-11-16T03:11:43+00:00",
+   "url": "https://jobicy.com/jobs/153195-senior-backend-software-engineer-asia",
+   "source": "Jobicy",
+   "salary": "CNY 600,000–1,000,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-162315",
+   "title": "IT Department Lead - Remote, Worldwide",
+   "company": "Nethermind",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-15T10:20:16+00:00",
+   "url": "https://jobicy.com/jobs/162315-it-department-lead-remote-worldwide",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-155391",
+   "title": "Site Reliability Engineer",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-15T03:45:14+00:00",
+   "url": "https://jobicy.com/jobs/155391-site-reliability-engineer-4",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-155389",
+   "title": "Platform Engineer, Managed Postgres",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-15T03:45:12+00:00",
+   "url": "https://jobicy.com/jobs/155389-platform-engineer-managed-postgres",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-155385",
+   "title": "AI Platform Engineer",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-15T03:45:11+00:00",
+   "url": "https://jobicy.com/jobs/155385-ai-platform-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "remotive-2069746",
+   "title": "Tech Lead Full-Stack Rails Engineer",
+   "company": "Mitre Media",
+   "loc": "USA, Canada, USA timezones",
+   "type": "full time",
+   "date": "2026-11-14T20:33:53+00:00",
+   "url": "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746",
+   "source": "Remotive",
+   "salary": "$170k - $200k",
+   "tags": [
+    "api",
+    "CSS",
+    "docker",
+    "elasticsearch",
+    "fullstack",
+    "html"
+   ]
+  },
+  {
+   "id": "remotive-2091173",
+   "title": "Content Creator - YouTube",
+   "company": "Metics Media",
+   "loc": "USA, Canada",
+   "type": "full time",
+   "date": "2026-11-13T17:29:57+00:00",
+   "url": "https://remotive.com/remote-jobs/marketing/content-creator-youtube-2091173",
+   "source": "Remotive",
+   "salary": "$85k - $155k",
+   "tags": [
+    "ecommerce",
+    "shopify",
+    "video",
+    "AI/ML",
+    "research",
+    "digital marketing"
+   ]
+  },
+  {
+   "id": "remoteok-1137795",
+   "title": "Scaled Account Manager EMEA",
+   "company": "DoiT",
+   "loc": "Estonia",
+   "type": "",
+   "date": "2026-11-13T08:00:15+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-scaled-account-manager-emea-doit-1137795",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "exec",
+    "marketing",
+    "cloud",
+    "microsoft"
+   ]
+  },
+  {
+   "id": "remotive-1680495",
+   "title": "Remote Office Assistant",
+   "company": "Coalition Technologies",
+   "loc": "Worldwide",
+   "type": "full time",
+   "date": "2026-11-11T20:17:48+00:00",
+   "url": "https://remotive.com/remote-jobs/marketing/remote-office-assistant-1680495",
+   "source": "Remotive",
+   "salary": "$35,3k- $52k",
+   "tags": [
+    "CSS",
+    "excel",
+    "frontend",
+    "git",
+    "html",
+    "illustrator"
+   ]
+  },
+  {
+   "id": "remotive-2091137",
+   "title": "Senior Data Engineer",
+   "company": "Lemon.io",
+   "loc": "LATAM, Europe, USA, Canada, APAC",
+   "type": "full time",
+   "date": "2026-11-11T18:39:59+00:00",
+   "url": "https://remotive.com/remote-jobs/data/senior-data-engineer-2091137",
+   "source": "Remotive",
+   "salary": "",
+   "tags": [
+    ".Net",
+    "android",
+    "apache",
+    "AWS",
+    "azure",
+    "C"
+   ]
+  },
+  {
+   "id": "remotive-2091171",
+   "title": "Customer Service Representative",
+   "company": "ShyftOff",
+   "loc": "USA",
+   "type": "contract",
+   "date": "2026-11-11T09:11:58+00:00",
+   "url": "https://remotive.com/remote-jobs/customer-service/customer-service-representative-2091171",
+   "source": "Remotive",
+   "salary": "$14 - $20/hour",
+   "tags": [
+    "video",
+    "healthcare",
+    "retail",
+    "onboarding",
+    "financial services",
+    "insurance"
+   ]
+  },
+  {
+   "id": "remotive-2091136",
+   "title": "Senior React Full-stack Developer",
+   "company": "Lemon.io",
+   "loc": "LATAM, Europe, USA, Canada, APAC",
+   "type": "full time",
+   "date": "2026-11-10T14:25:05+00:00",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091136",
+   "source": "Remotive",
+   "salary": "",
+   "tags": [
+    ".Net",
+    "android",
+    "AWS",
+    "azure",
+    "C",
+    "C#"
+   ]
+  },
+  {
+   "id": "remotive-2086540",
+   "title": "Inside Sales Contractor",
+   "company": "Credit Wellness, LLC",
+   "loc": "Worldwide",
+   "type": "full time",
+   "date": "2026-11-08T21:47:58+00:00",
+   "url": "https://remotive.com/remote-jobs/sales/inside-sales-contractor-2086540",
+   "source": "Remotive",
+   "salary": "OTE $25k - $35k",
+   "tags": [
+    "CRM",
+    "google sheets",
+    "financial services",
+    "Inside Sales"
+   ]
+  },
+  {
+   "id": "remotive-2091045",
+   "title": "Tier III Service Desk Engineer",
+   "company": "Unio Digital",
+   "loc": "Worldwide",
+   "type": "full time",
+   "date": "2026-11-07T01:10:55+00:00",
+   "url": "https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045",
+   "source": "Remotive",
+   "salary": "",
+   "tags": [
+    "azure",
+    "cisco",
+    "security",
+    "video",
+    "documentation",
+    "hardware"
+   ]
+  },
+  {
+   "id": "remotive-2091168",
+   "title": "US Remote Patient Care Advocate (Customer Service)",
+   "company": "VXI Global Solutions",
+   "loc": "USA",
+   "type": "full time",
+   "date": "2026-11-06T08:51:01+00:00",
+   "url": "https://remotive.com/remote-jobs/customer-service/us-remote-patient-care-advocate-customer-service-2091168",
+   "source": "Remotive",
+   "salary": "$25k - $35k",
+   "tags": [
+    "healthcare",
+    "insurance"
+   ]
+  },
+  {
+   "id": "remotive-1185979",
+   "title": "Freelance Writer",
+   "company": "IAPWE",
+   "loc": "Worldwide",
+   "type": "freelance",
+   "date": "2026-11-04T16:53:35+00:00",
+   "url": "https://remotive.com/remote-jobs/writing/freelance-writer-1185979",
+   "source": "Remotive",
+   "salary": "$50-$75 /hour",
+   "tags": [
+    "REST"
+   ]
+  },
+  {
+   "id": "remotive-1749306",
+   "title": "Freelance Copywriter",
+   "company": "Coalition Technologies",
+   "loc": "Worldwide",
+   "type": "freelance",
+   "date": "2026-11-02T20:01:00+00:00",
+   "url": "https://remotive.com/remote-jobs/writing/freelance-copywriter-1749306",
+   "source": "Remotive",
+   "salary": "$20k -$35k",
+   "tags": [
+    "accounting",
+    "excel",
+    "research",
+    "data analysis",
+    "bookkeeping",
+    "google sheets"
+   ]
+  },
+  {
+   "id": "remotive-2091165",
+   "title": "Full-Stack Developer",
+   "company": "Fluence International, Inc.",
+   "loc": "Worldwide",
+   "type": "contract",
+   "date": "2026-10-29T18:22:41+00:00",
+   "url": "https://remotive.com/remote-jobs/software-development/full-stack-developer-2091165",
+   "source": "Remotive",
+   "salary": "$3.5k–$5k/month",
+   "tags": [
+    "admin",
+    "api",
+    "AWS",
+    "backend",
+    "cloud",
+    "docker"
+   ]
+  },
+  {
+   "id": "remotive-2091135",
+   "title": "Senior Back-end Developer",
+   "company": "Lemon.io",
+   "loc": "Europe, USA, Canada, Australia, Singapore, Mexico, Saudi Arabia",
+   "type": "full time",
+   "date": "2026-10-27T12:56:13+00:00",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-developer-2091135",
+   "source": "Remotive",
+   "salary": "",
+   "tags": [
+    ".Net",
+    "android",
+    "C",
+    "C#",
+    "C++",
+    "cloud"
+   ]
+  },
+  {
+   "id": "remotive-2091161",
+   "title": "AI Trainer - Video Annotation",
+   "company": "iMerit Technology",
+   "loc": "Worldwide",
+   "type": "freelance",
+   "date": "2026-10-22T18:40:19+00:00",
+   "url": "https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161",
+   "source": "Remotive",
+   "salary": "70K-80K",
+   "tags": [
+    "video",
+    "AI/ML",
+    "robotics"
+   ]
+  }
+ ]
+}
