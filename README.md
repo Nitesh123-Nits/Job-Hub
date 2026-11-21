@@ -8,7 +8,7 @@ One-page PWA for the job search: job boards, remote sites and company career pag
 - **Tracker**: Saved / Applied / Interview / Offer / Rejected board with follow-up dates and notes. Export and import a JSON backup.
 - **Outreach**: LinkedIn note, recruiter message, HR email, referral request, follow-up and thank-you templates filled from your details.
 - **Live Remote Jobs**: current remote software listings from the [Remotive](https://remotive.com) public API (listings are delayed 24h; cached, at most 4 fetches per day as Remotive asks).
-- Dark mode, installable, works offline for the page itself.
+- Two looks: Modern (default) and Classic, switchable in the top bar, each with dark mode. Installable, works offline for the page itself.
 
 All personal data (tracker, profile, watchlist) stays in your browser's localStorage. Nothing is sent to a server.
 

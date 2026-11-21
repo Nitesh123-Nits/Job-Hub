@@ -14,7 +14,7 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
 };
 const K = { track: "jobhub2-track", watch: "jobhub2-watch", prof: "jobhub2-profile", cmp: "jobhub2-cmp",
-            out: "jobhub2-out", theme: "jobhub2-theme", live: "jobhub2-live", fetches: "jobhub2-fetches" };
+            out: "jobhub2-out", theme: "jobhub2-theme", style: "jobhub2-style", live: "jobhub2-live", fetches: "jobhub2-fetches" };
 const pad = n => String(n).padStart(2, "0");
 const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 const today = () => iso(new Date());
@@ -134,18 +134,33 @@ document.querySelector(".lede").insertAdjacentHTML("afterend", `
 <form class="qc" id="qc" autocomplete="off"><input id="qc-in" list="c-list" placeholder="Company name, e.g. Razorpay" aria-label="Quick company search"><button type="submit">Search</button></form>`);
 
 // theme toggle
-$("install").insertAdjacentHTML("beforebegin", `<button class="themebtn" id="theme" aria-label="Toggle dark mode"></button>`);
+$("install").insertAdjacentHTML("beforebegin", `<button class="themebtn" id="style" aria-label="Switch design"></button><button class="themebtn" id="theme" aria-label="Toggle dark mode"></button>`);
 
 /* ---------- theme ---------- */
 function applyTheme(t) {
   document.documentElement.dataset.theme = t;
   $("theme").textContent = t === "dark" ? "Light" : "Dark";
-  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "dark" ? "#0F0F0D" : "#F3F0E8";
+  paintBrowserBar();
 }
+// "modern" (default) or "classic" (the original editorial look)
+function applyStyle(s) {
+  document.documentElement.dataset.style = s;
+  $("style").textContent = s === "modern" ? "Classic look" : "Modern look";
+  paintBrowserBar();
+}
+function paintBrowserBar() {
+  const dark = document.documentElement.dataset.theme === "dark", modern = document.documentElement.dataset.style === "modern";
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? (modern ? "#0B0D14" : "#0F0F0D") : (modern ? "#F4F5FA" : "#F3F0E8");
+}
+$("style").addEventListener("click", () => {
+  const s = document.documentElement.dataset.style === "modern" ? "classic" : "modern";
+  store.set(K.style, s); applyStyle(s);
+});
 $("theme").addEventListener("click", () => {
   const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   store.set(K.theme, t); applyTheme(t);
 });
+applyStyle(store.get(K.style, null) || "modern");
 applyTheme(store.get(K.theme, null) || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
 
 /* ---------- stats ---------- */
@@ -278,7 +293,7 @@ function ago(dateStr) {
   return d <= 0 ? "today" : d === 1 ? "1d ago" : d + "d ago";
 }
 function drawTracker() {
-  $("tcount").textContent = track.length + " jobs";
+  $("tcount").textContent = track.length + (track.length === 1 ? " job" : " jobs");
   $("board").innerHTML = ST.map(([key, label]) => {
     const items = track.filter(j => j.status === key);
     return `<div class="col"><h3>${label}<em>${items.length}</em></h3>${items.length ? items.map(tkCard).join("") : `<div class="none">Nothing here</div>`}</div>`;

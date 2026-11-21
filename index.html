@@ -13,8 +13,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>try{var t=JSON.parse(localStorage.getItem("jobhub2-theme")||"null")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}</script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var t=JSON.parse(localStorage.getItem("jobhub2-theme")||"null")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;document.documentElement.dataset.style=JSON.parse(localStorage.getItem("jobhub2-style")||"null")||"modern"}catch(e){document.documentElement.dataset.style="modern"}</script>
 <style>
 :root{
   --paper:#F3F0E8; --ink:#111111; --mute:#6B675E; --line:#111111; --hair:#D6D1C4; --accent:#E8431A;
@@ -116,6 +116,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="premium.css">
+<link rel="stylesheet" href="theme-modern.css">
 </head>
 <body>
 <div class="bar"><div class="wrap">
@@ -160,7 +161,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="empty" id="empty">Nothing matches that.</div>
   <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
 </div>
-<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 5</span></div></footer>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 6</span></div></footer>
 
 <script>
 const DATA=[
