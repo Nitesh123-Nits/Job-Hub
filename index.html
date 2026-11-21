@@ -164,7 +164,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="empty" id="empty">Nothing matches that.</div>
   <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
 </div>
-<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 10</span></div></footer>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 11</span></div></footer>
 
 <script>
 const DATA=[
@@ -483,14 +483,18 @@ const INJ={
 for(const x of all)if(x.cat.id==="builtin")INJ[x.url]={u:r=>x.url+"?search="+enc(r)};
 const HUB={Bangalore:"Bangalore",Hyderabad:"Hyderabad",Pune:"Pune",Mumbai:"Mumbai","Navi Mumbai":"Mumbai","Delhi NCR":"Delhi",Noida:"Delhi",Gurgaon:"Gurgaon",Chennai:"Chennai",Kolkata:"Kolkata"};
 // with specific cities picked, Built In shows "India (All)" plus only the matching city hubs
-const hubOk=x=>{if(!inject||x.cat.id!=="builtin"||bCities.includes("India")||x.name.includes("(All)"))return true;
-  return bCities.some(k=>HUB[k]&&x.name.endsWith("· "+HUB[k]))||!bCities.some(k=>HUB[k])};
+const hubOk=x=>{if(!inject||x.cat.id!=="builtin"||x.name.includes("(All)"))return true;
+  if(bCities.includes("India"))return false;
+  return bCities.some(k=>HUB[k]&&x.name.endsWith("· "+HUB[k]))};
 function variants(x){
   const g=INJ[x.url];if(!inject||!g)return[x];
-  const rs=bRoles,multi=rs.length>1,role=g.b&&multi?"("+rs.map(r=>`"${r}"`).join(" OR ")+")":rs[0];
-  const rl=g.b?(multi?rs.length+" roles, one search":rs[0]):rs[0]+(multi?" (first of "+rs.length+" roles)":"");
-  const cs=g.l?pickCities(bCities):[null];
-  return cs.map(c=>({f:1,url:g.u(role,c||CITIES[0],rs),name:c&&cs.length>1?`${x.name} · ${c.n}`:x.name,desc:rl+(c&&!c.remote&&c.k!=="India"?" · "+c.n:c&&c.remote?" · Remote":"")}));
+  const rs=bRoles,multi=rs.length>1,cs=g.l?pickCities(bCities):[null];
+  // boolean boards: one search with every role; the rest: one card per role so none is dropped
+  const roleSets=g.b?[{expr:multi?"("+rs.map(r=>`"${r}"`).join(" OR ")+")":rs[0],label:multi?rs.length+" roles, one search":rs[0],tag:""}]:rs.map(r=>({expr:r,label:r,tag:multi?r:""}));
+  return cs.flatMap(c=>roleSets.map(R=>{
+    const place=c&&!c.remote&&c.k!=="India"?c.n:(c&&c.remote?"Remote":"");
+    const bits=[cs.length>1&&c?c.n:"",R.tag].filter(Boolean);
+    return{f:1,url:g.u(R.expr,c||CITIES[0],rs),name:bits.length?`${x.name} · ${bits.join(" · ")}`:x.name,desc:R.label+(place?" · "+place:"")}}));
 }
 
 // One combined search per board when several roles are picked (boolean OR). Boards whose
