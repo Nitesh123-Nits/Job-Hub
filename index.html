@@ -140,6 +140,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="bl">Role</div><div class="chips" id="roles"></div>
   <input id="custom" class="custom" type="text" placeholder="Or type a role and press Enter" autocomplete="off" aria-label="Custom role">
   <div class="bl">Location</div><div class="chips" id="cities"></div>
+  <div class="bl">LinkedIn filters</div><div class="chips" id="rfilt"></div>
   <div class="now" id="now"></div>
   <div id="results"></div>
 </section></div>
@@ -147,7 +148,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="sh"><span class="no">00</span><h2>Smart Search</h2><span class="ct" id="scount"></span><p>One-tap searches for people who are hiring right now. Pick one or more locations. Each link is one short search, for example: hiring "Java Developer" Mumbai.</p></div>
   <div class="bl">Location</div><div class="chips" id="scities"></div>
   <div class="bl">Posted within</div><div class="chips" id="swins"></div>
-  <input id="scustom" class="custom" type="text" placeholder="Add your own role, e.g. Kafka Engineer" autocomplete="off" aria-label="Custom role">
+  <div class="bl">Roles</div><div class="chips" id="sroles"></div>
+  <input id="scustom" class="custom" type="text" placeholder="Or type a role and press Enter" autocomplete="off" aria-label="Custom role">
+  <div class="bl">LinkedIn filters</div><div class="chips" id="sfilt"></div>
   <div class="now" id="snow"></div>
   <div id="sresults"></div>
   <div class="note"><b>Tips</b>LinkedIn post search needs you to be signed in. LinkedIn post search has only 24 hours, week and month, so "3 days" uses the past week there. Message the poster within a few hours, never pay to apply, and be careful with unknown email addresses.</div>
@@ -157,7 +160,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="empty" id="empty">Nothing matches that.</div>
   <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
 </div>
-<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span></div></footer>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 4</span></div></footer>
 
 <script>
 const DATA=[
@@ -379,7 +382,18 @@ let bRoles=["Java Backend Developer"],bCities=["India"];
 // multi-select locations: stored as a JSON array; falls back to the old single-city key
 const loadCities=(k,old)=>{try{const a=JSON.parse(localStorage.getItem(k));if(Array.isArray(a)){const v=a.filter(x=>CITIES.some(c=>c.k===x));if(v.length)return v}}catch(e){}try{const o=localStorage.getItem(old);if(o&&CITIES.some(c=>c.k===o))return[o]}catch(e){}return["India"]};
 const pickCities=a=>CITIES.filter(c=>a.includes(c.k));
-const toggleCity=(a,k)=>a.includes(k)?(a.length>1?a.filter(x=>x!==k):a):[...a,k];
+// "All India" is exclusive: picking it clears the cities, picking a city drops it; removing the last city falls back to it
+const toggleCity=(a,k)=>{if(k==="India")return["India"];const b=a.filter(x=>x!=="India");return b.includes(k)?(b.length>1?b.filter(x=>x!==k):["India"]):[...b,k]};
+const toggleRole=(a,r)=>a.includes(r)?(a.length>1?a.filter(x=>x!==r):a):[...a,r];
+// several roles become one boolean search: ("A" OR "B"); a single role stays "A"
+const roleExpr=l=>l.length>1?"("+l.map(r=>`"${r}"`).join(" OR ")+")":(l[0]?`"${l[0]}"`:"");
+// LinkedIn filters shared by Role, Smart and Company search (experience is multi-select)
+const EXPS=[["2","Entry"],["3","Associate"],["4","Mid-Senior"]];
+let FILT={easy:false,exps:[]};
+try{const f=JSON.parse(localStorage.getItem("jobhub-filters"));if(f)FILT={easy:!!f.easy,exps:(f.exps||[]).filter(x=>EXPS.some(e=>e[0]===x))}}catch(e){}
+const liFilt=()=>(FILT.easy?"&f_AL=true":"")+(FILT.exps.length?"&f_E="+FILT.exps.join(","):"");
+const filtChips=()=>`<button class="chip ${FILT.easy?"on":""}" data-easy="1">Easy Apply only</button>`+EXPS.map(e=>`<button class="chip ${FILT.exps.includes(e[0])?"on":""}" data-e="${e[0]}">${e[1]}</button>`).join("");
+const toggleFilt=b=>{if(b.dataset.easy)FILT.easy=!FILT.easy;else if(b.dataset.e)FILT.exps=FILT.exps.includes(b.dataset.e)?FILT.exps.filter(x=>x!==b.dataset.e):[...FILT.exps,b.dataset.e];try{localStorage.setItem("jobhub-filters",JSON.stringify(FILT))}catch(e){}};
 try{const a=JSON.parse(localStorage.getItem("jobhub-roles"));if(Array.isArray(a)&&a.length)bRoles=a.map(String)}
 catch(e){}
 try{const o=localStorage.getItem("jobhub-role");if(o&&!localStorage.getItem("jobhub-roles"))bRoles=[o]}catch(e){}
@@ -398,7 +412,7 @@ function roleSites(roles,c){
   const fo=r=>`https://www.foundit.in/srp/results?query=${enc(r+(c.remote?" remote":""))}${c.fo?"&locations="+enc(c.fo):""}`;
   const main=[
    {name:"Naukri",url:nk(roles[0],multi?expr:""),desc:multi?"All roles in one search":"India's largest job portal"},
-   {name:"LinkedIn",url:`https://www.linkedin.com/jobs/search/?keywords=${enc(expr)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}`,desc:multi?"All roles in one search":(c.remote?"Remote filter on":"Jobs and referrals")},
+   {name:"LinkedIn",url:`https://www.linkedin.com/jobs/search/?keywords=${enc(expr)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}${liFilt()}`,desc:multi?"All roles in one search":(c.remote?"Remote filter on":"Jobs and referrals")},
    {name:"Indeed India",url:`https://in.indeed.com/jobs?q=${enc(expr)}&l=${enc(c.ind)}`,desc:multi?"All roles in one search":"Job aggregator"}];
   if(!multi)main.push({name:"Foundit",url:fo(roles[0]),desc:"Formerly Monster India"});
   main.push({name:"Google Jobs",url:`https://www.google.com/search?q=${enc(expr+" jobs "+(c.remote?"remote India":"in "+c.n))}&ibp=htl%3Bjobs`,desc:"Aggregates many boards"});
@@ -415,6 +429,7 @@ function drawBuilder(){
   const allRoles=[...ROLES,...bRoles.filter(r=>!ROLES.includes(r))];
   $("roles").innerHTML=allRoles.map(r=>`<button class="chip ${bRoles.includes(r)?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
   $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${bCities.includes(x.k)?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
+  $("rfilt").innerHTML=filtChips();
   const cardsOf=(list,c)=>`<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
     <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("")}</div>`;
@@ -430,18 +445,19 @@ function drawBuilder(){
   try{localStorage.setItem("jobhub-roles",JSON.stringify(bRoles));localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
 }
 $("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;const r=b.dataset.r;bRoles=bRoles.includes(r)?(bRoles.length>1?bRoles.filter(x=>x!==r):bRoles):[...bRoles,r];drawBuilder()});
+$("rfilt").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;toggleFilt(b);drawBuilder();drawSmart()});
 $("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCities=toggleCity(bCities,b.dataset.c);drawBuilder()});
 $("custom").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const v=e.target.value.trim();if(!v)return;if(!bRoles.some(r=>r.toLowerCase()===v.toLowerCase()))bRoles=[...bRoles,v];e.target.value="";drawBuilder()});
 drawBuilder();
 
 // ---- Smart search: who is hiring right now ----
-const SROLES=["Java Developer","Java Backend Developer","Backend Developer","Backend Engineer","Software Engineer","Software Development Engineer","SDE 2","Senior Software Engineer","Spring Boot Developer","Microservices Engineer"];
 const WINS=[
  {k:"d",n:"24 hours",li:"past-24h",jr:"r86400",g:"d",pl:"24 hours"},
  {k:"3",n:"3 days",li:"past-week",jr:"r259200",g:"d3",pl:"Past week"},
  {k:"w",n:"Week",li:"past-week",jr:"r604800",g:"w",pl:"Week"},
  {k:"m",n:"Month",li:"past-month",jr:"r2592000",g:"m",pl:"Month"}];
-let sCs=loadCities("jobhub-scs","jobhub-sc"),sW="d",sCustom="";
+let sCs=loadCities("jobhub-scs","jobhub-sc"),sW="d",sRoles=["Java Developer","Backend Engineer","Software Engineer"];
+try{const a=JSON.parse(localStorage.getItem("jobhub-sroles"));if(Array.isArray(a)&&a.length)sRoles=a.map(String)}catch(e){}
 try{sW=localStorage.getItem("jobhub-sw")||sW}catch(e){}
 if(!WINS.some(x=>x.k===sW))sW="d";
 const favi=d=>`https://www.google.com/s2/favicons?domain=${d}&sz=64`;
@@ -450,59 +466,65 @@ function smartGroups(){
   // several locations are combined with OR in keyword searches; location-based job searches get one link per city
   const q1=x=>x.remote?"remote":(/\s/.test(x.k)?`"${x.k}"`:x.k);
   const loc=cs.length===1?(cs[0].remote?"remote":cs[0].k):"("+cs.map(q1).join(" OR ")+")";
-  const roles=(sCustom?[sCustom]:[]).concat(SROLES);
-  const jobRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Developer","Backend Engineer","Software Engineer","Senior Software Engineer","Spring Boot Developer"]);
-  const atsRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Engineer","Software Engineer","Senior Software Engineer"]);
+  const rl=sRoles, combo=roleExpr(rl), multi=rl.length>1;
   const li=kw=>`https://www.linkedin.com/search/results/content/?keywords=${enc(kw)}&datePosted=${enc('"'+w.li+'"')}&sortBy=${enc('"date_posted"')}&origin=FACETED_SEARCH`;
   const pe=kw=>`https://www.linkedin.com/search/results/people/?keywords=${enc(kw)}&origin=GLOBAL_SEARCH_HEADER`;
-  const jb=(r,c)=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote?"&f_WT=2":""}`;
+  const jb=(r,c)=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote?"&f_WT=2":""}${liFilt()}`;
   const g=(q,t)=>`https://www.google.com/search?q=${enc(q)}${t===false?"":"&tbs="+enc("qdr:"+w.g)}`;
   const ATS="(site:boards.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:myworkdayjobs.com)";
   const L="linkedin.com", PL=w.pl;
+  // with several roles: one combined (OR) card first, then one card per role
+  const each=mk=>[...(multi?[mk(combo,"All selected roles")]:[]),...rl.map(r=>mk(`"${r}"`,r))];
   return [
-   {g:"LinkedIn · hiring posts",items:roles.map(r=>({n:`Hiring ${r}`,d:`Posts: hiring "${r}" ${loc}`,u:li(`hiring "${r}" ${loc}`),tag:PL,ic:L}))},
+   {g:"LinkedIn · hiring posts",items:each((e,n)=>({n:multi&&n==="All selected roles"?n:`Hiring ${n}`,d:`Posts: hiring ${e} ${loc}`,u:li(`hiring ${e} ${loc}`),tag:PL,ic:L}))},
    {g:"LinkedIn · referrals and resume posts",items:[
+    {n:"Referral posts",d:`Posts: referral ${combo} ${loc}`,u:li(`referral ${combo} ${loc}`),tag:PL,ic:L},
+    {n:"Send your resume posts",d:`Posts: "send your resume" ${combo} ${loc}`,u:li(`"send your resume" ${combo} ${loc}`),tag:PL,ic:L},
+    {n:"Share your resume posts",d:`Posts: "share your resume" ${combo} ${loc}`,u:li(`"share your resume" ${combo} ${loc}`),tag:PL,ic:L},
     {n:"#hiring Java",d:`Hashtag: #hiring java ${loc}`,u:li(`#hiring java ${loc}`),tag:PL,ic:L},
-    {n:"#hiring backend",d:`Hashtag: #hiring backend ${loc}`,u:li(`#hiring backend ${loc}`),tag:PL,ic:L},
-    {n:"Referral · Java",d:`Posts: referral java ${loc}`,u:li(`referral java ${loc}`),tag:PL,ic:L},
-    {n:"Referral · Backend",d:`Posts: referral backend ${loc}`,u:li(`referral backend ${loc}`),tag:PL,ic:L},
-    {n:"Send resume · Java",d:`Posts: "send your resume" java ${loc}`,u:li(`"send your resume" java ${loc}`),tag:PL,ic:L},
-    {n:"Share resume · Backend",d:`Posts: "share your resume" backend ${loc}`,u:li(`"share your resume" backend ${loc}`),tag:PL,ic:L}]},
+    {n:"#hiring backend",d:`Hashtag: #hiring backend ${loc}`,u:li(`#hiring backend ${loc}`),tag:PL,ic:L}]},
    {g:"LinkedIn · recruiters and managers",items:[
-    {n:"Java recruiters",d:`People: technical recruiter java ${loc}`,u:pe(`technical recruiter java ${loc}`),tag:"People",ic:L},
-    {n:"Backend recruiters",d:`People: technical recruiter backend ${loc}`,u:pe(`technical recruiter backend ${loc}`),tag:"People",ic:L},
+    {n:"Technical recruiters",d:`People: technical recruiter ${loc}`,u:pe(`technical recruiter ${rl[0]} ${loc}`),tag:"People",ic:L},
     {n:"Engineering managers",d:`People: engineering manager hiring ${loc}`,u:pe(`engineering manager hiring ${loc}`),tag:"People",ic:L}]},
-   {g:"LinkedIn · jobs",items:cs.flatMap(c=>jobRoles.map(r=>({n:r,d:`Jobs, newest first, ${c.n}`,u:jb(r,c),tag:w.n,ic:L})))},
-   {g:"Google · hiring posts on LinkedIn",items:roles.map(r=>({n:`Hiring ${r}`,d:`site:linkedin.com/posts hiring "${r}" ${loc}`,u:g(`site:linkedin.com/posts hiring "${r}" ${loc}`),tag:w.n,ic:L}))},
+   {g:"LinkedIn · jobs",items:cs.flatMap(c=>[...(multi?[{n:"All selected roles",d:`Jobs, newest first, ${c.n}`,u:jb(combo,c),tag:w.n,ic:L}]:[]),...rl.map(r=>({n:r,d:`Jobs, newest first, ${c.n}`,u:jb(r,c),tag:w.n,ic:L}))])},
+   {g:"Google · hiring posts on LinkedIn",items:each((e,n)=>({n:multi&&n==="All selected roles"?n:`Hiring ${n}`,d:`site:linkedin.com/posts hiring ${e} ${loc}`,u:g(`site:linkedin.com/posts hiring ${e} ${loc}`),tag:w.n,ic:L}))},
    {g:"Google · posts with an email address",items:[
-    {n:"Java, resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring "Java Developer" ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L},
-    {n:"Backend, resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring "Backend Engineer" ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L}]},
-   {g:"Google · company job pages",items:atsRoles.map(r=>({n:r,d:"Greenhouse, Lever, Ashby, Workday",u:g(`${ATS} "${r}" ${loc}`),tag:w.n,ic:"greenhouse.io"}))},
+    {n:"Resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring ${combo} ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L}]},
+   {g:"Google · company job pages",items:each((e,n)=>({n,d:"Greenhouse, Lever, Ashby, Workday",u:g(`${ATS} ${e} ${loc}`),tag:w.n,ic:"greenhouse.io"}))},
    {g:"Google · more places",items:[
-    {n:"Recruiter profiles",d:"Public LinkedIn recruiter profiles",u:g(`site:linkedin.com/in "technical recruiter" java ${loc}`,false),tag:"Profiles",ic:L},
-    {n:"r/developersIndia",d:"Hiring and referral threads",u:g(`site:reddit.com/r/developersIndia hiring "Java Developer"`),tag:w.n,ic:"reddit.com"},
-    {n:"Google Jobs · Java",d:"Google's own listings",u:`https://www.google.com/search?q=${enc("Java Developer jobs "+loc)}&ibp=htl%3Bjobs`,tag:"Listings",ic:"google.com"},
-    {n:"Google Jobs · Backend",d:"Google's own listings",u:`https://www.google.com/search?q=${enc("Backend Engineer jobs "+loc)}&ibp=htl%3Bjobs`,tag:"Listings",ic:"google.com"}]}];
+    {n:"Recruiter profiles",d:"Public LinkedIn recruiter profiles",u:g(`site:linkedin.com/in "technical recruiter" ${rl[0]} ${loc}`,false),tag:"Profiles",ic:L},
+    {n:"r/developersIndia",d:"Hiring and referral threads",u:g(`site:reddit.com/r/developersIndia hiring ${combo}`),tag:w.n,ic:"reddit.com"},
+    {n:"Google Jobs",d:`Google's own listings: ${rl.join(", ")}`,u:`https://www.google.com/search?q=${enc(combo+" jobs "+loc)}&ibp=htl%3Bjobs`,tag:"Listings",ic:"google.com"}]}];
 }
 function drawSmart(){
   const ch=(on,attr,val,label)=>`<button class="chip ${on?"on":""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
   $("scities").innerHTML=CITIES.map(x=>ch(sCs.includes(x.k),"data-c",x.k,x.n)).join("");
   $("swins").innerHTML=WINS.map(x=>ch(x.k===sW,"data-w",x.k,x.n)).join("");
+  $("sroles").innerHTML=[...ROLES,...sRoles.filter(r=>!ROLES.includes(r))].map(r=>ch(sRoles.includes(r),"data-r",r,r)).join("");
+  $("sfilt").innerHTML=filtChips();
   const gr=smartGroups();
   $("scount").textContent=gr.reduce((a,x)=>a+x.items.length,0)+" searches";
-  $("snow").innerHTML=`Hiring now <em>·</em> ${pickCities(sCs).map(c=>c.n).join(", ")} <em>·</em> ${(WINS.find(x=>x.k===sW)||{}).n}`;
+  $("snow").innerHTML=`${sRoles.map(esc).join(", ")} <em>·</em> ${pickCities(sCs).map(c=>c.n).join(", ")} <em>·</em> ${(WINS.find(x=>x.k===sW)||{}).n}`;
   $("sresults").innerHTML=gr.map(g=>`<div class="bl">${g.g}</div><div class="grid">${g.items.map(x=>`<a class="card" href="${x.u}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${favi(x.ic)}" alt="" data-l="${esc(x.n[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
     <div><span class="tag IN">${esc(x.tag)}</span><div class="nm">${esc(x.n)}</div><div class="ds">${esc(x.d)}</div></div></a>`).join("")}</div>`).join("");
-  try{localStorage.setItem("jobhub-scs",JSON.stringify(sCs));localStorage.setItem("jobhub-sw",sW)}catch(e){}
+  try{localStorage.setItem("jobhub-scs",JSON.stringify(sCs));localStorage.setItem("jobhub-sroles",JSON.stringify(sRoles));localStorage.setItem("jobhub-sw",sW)}catch(e){}
 }
 $("smart").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
-  if(b.dataset.c)sCs=toggleCity(sCs,b.dataset.c);else if(b.dataset.w)sW=b.dataset.w;drawSmart()});
-$("scustom").addEventListener("input",e=>{sCustom=e.target.value.trim();drawSmart()});
+  if(b.closest("#sfilt")){toggleFilt(b);drawBuilder()}
+  else if(b.dataset.c)sCs=toggleCity(sCs,b.dataset.c);
+  else if(b.dataset.w)sW=b.dataset.w;
+  else if(b.dataset.r!==undefined)sRoles=toggleRole(sRoles,b.dataset.r);
+  drawSmart()});
+$("scustom").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const v=e.target.value.trim();if(!v)return;if(!sRoles.some(r=>r.toLowerCase()===v.toLowerCase()))sRoles=[...sRoles,v];e.target.value="";drawSmart()});
 drawSmart();
 
 // PWA
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker" in navigator){
+  const had=!!navigator.serviceWorker.controller;let reloaded=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had&&!reloaded){reloaded=true;location.reload()}});
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(()=>{}));
+}
 let dp;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("install").style.display="block"});
 $("install").onclick=async()=>{if(!dp)return;dp.prompt();await dp.userChoice;dp=null;$("install").style.display="none"};
 </script>

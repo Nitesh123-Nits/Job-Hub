@@ -46,7 +46,9 @@ let prof = Object.assign({ name: "", role: "", years: "", skills: "" }, store.ge
 let track = store.get(K.track, []);
 let watch = store.get(K.watch, []);
 const savedCmp = store.get(K.cmp, null);
-let cs = Object.assign({ name: "", role: "", roles: [], city: "India", win: "w", easy: false, exp: "" }, savedCmp || {});
+let cs = Object.assign({ name: "", role: "", roles: [], cities: ["India"], win: "w" }, savedCmp || {});
+if (!Array.isArray(cs.cities) || !cs.cities.length) cs.cities = [savedCmp && savedCmp.city ? savedCmp.city : "India"]; // migrate single-city value
+cs.cities = cs.cities.filter(k => CITIES.some(c => c.k === k)); if (!cs.cities.length) cs.cities = ["India"];
 if (!savedCmp) cs.roles = [prof.role || "Java Backend Developer"];
 else if (!Array.isArray(savedCmp.roles)) { // migrate the single-role value saved by an earlier version
   const hit = ROLES.find(r => r.toLowerCase() === String(savedCmp.role || "").trim().toLowerCase());
@@ -164,29 +166,33 @@ const CAT_IDS = ["bigtech", "finance", "product", "indiaco", "remoteco"];
 $("c-list").innerHTML = [...new Set(DATA.filter(c => CAT_IDS.includes(c.id)).flatMap(c => c.s.map(s => s[0])))].sort()
   .map(n => `<option value="${esc(n)}">`).join("");
 const FROMAGE = { d: 1, "3": 3, w: 7, m: 14 }; // Indeed supports 1, 3, 7, 14 days
-const EXP = [["", "Any level"], ["2", "Entry"], ["3", "Associate"], ["4", "Mid-Senior"]];
 
 function companyLinks() {
   const n = cs.name.trim(); if (!n) return { groups: [], jobsUrl: "" };
-  const c = CITIES.find(x => x.k === cs.city) || CITIES[0];
+  const cl = pickCities(cs.cities), multiLoc = cl.length > 1;
   const w = WINS.find(x => x.k === cs.win) || WINS[2];
   const role = roleExpr(activeRoles());
   const kw = [role, n].filter(Boolean).join(" ");
-  const loc = c.remote ? "remote India" : (c.k === "India" ? "India" : c.n);
+  const locOf = c => c.remote ? "remote India" : (c.k === "India" ? "India" : c.n);
+  const loc = multiLoc ? "(" + cl.map(c => c.remote ? "remote" : (c.k === "India" ? "India" : (/\s/.test(c.n) ? `"${c.n}"` : c.n))).join(" OR ") + ")" : locOf(cl[0]);
   const q = `"${n}"`;
   const g = (s, timed) => `https://www.google.com/search?q=${enc(s)}${timed === false ? "" : "&tbs=" + enc("qdr:" + w.g)}`;
   const li = s => `https://www.linkedin.com/search/results/content/?keywords=${enc(s)}&datePosted=${enc('"' + w.li + '"')}&sortBy=${enc('"date_posted"')}&origin=FACETED_SEARCH`;
   const pe = s => `https://www.linkedin.com/search/results/people/?keywords=${enc(s)}&origin=GLOBAL_SEARCH_HEADER`;
-  const jobsUrl = `https://www.linkedin.com/jobs/search/?keywords=${enc(kw)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote ? "&f_WT=2" : ""}${cs.easy ? "&f_AL=true" : ""}${cs.exp ? "&f_E=" + cs.exp : ""}`;
+  const liJobs = c => `https://www.linkedin.com/jobs/search/?keywords=${enc(kw)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote ? "&f_WT=2" : ""}${liFilt()}`;
+  const jobsUrl = liJobs(cl[0]);
+  const where = c => multiLoc ? ` · ${c.n}` : "";
+  const jobItems = cl.flatMap(c => [
+    { n: "LinkedIn Jobs" + where(c), d: `${kw}, newest first${FILT.easy ? ", Easy Apply" : ""}`, u: liJobs(c), tag: w.n, ic: "linkedin.com" },
+    { n: "Indeed India" + where(c), d: `${kw} in ${c.ind}`, u: `https://in.indeed.com/jobs?q=${enc(kw)}&l=${enc(c.ind)}&fromage=${FROMAGE[w.k]}&sort=date`, tag: w.n, ic: "indeed.com" },
+    { n: "Google Jobs" + where(c), d: "Aggregates many boards", u: `https://www.google.com/search?q=${enc(`${n}${role ? " " + role : ""} jobs ${locOf(c)}`)}&ibp=htl%3Bjobs`, tag: "Listings", ic: "google.com" }]);
   const ATS = "(site:boards.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:myworkdayjobs.com)";
   const L = "linkedin.com", GG = "google.com";
   const rl = role ? ` ${role}` : "";
   const groups = [
     { g: `Jobs at ${n}`, items: [
-      { n: "LinkedIn Jobs", d: `${kw}, newest first${cs.easy ? ", Easy Apply" : ""}`, u: jobsUrl, tag: w.n, ic: L },
-      { n: "Indeed India", d: `${kw} in ${c.ind}`, u: `https://in.indeed.com/jobs?q=${enc(kw)}&l=${enc(c.ind)}&fromage=${FROMAGE[w.k]}&sort=date`, tag: w.n, ic: "indeed.com" },
-      { n: "Google Jobs", d: "Aggregates many boards", u: `https://www.google.com/search?q=${enc(`${n}${rl} jobs ${loc}`)}&ibp=htl%3Bjobs`, tag: "Listings", ic: GG },
-      { n: "Naukri", d: `Naukri listings found through Google`, u: g(`site:naukri.com ${q}${rl}`), tag: w.n, ic: "naukri.com" }] },
+      ...jobItems,
+      { n: "Naukri", d: `Naukri listings found through Google`, u: g(`site:naukri.com ${q}${rl} ${loc}`), tag: w.n, ic: "naukri.com" }] },
     { g: `${n} career pages`, items: [
       { n: "Official careers", d: `${n} careers${rl}`, u: g(`${q} careers${rl} ${loc}`, false), tag: "Careers", ic: GG },
       { n: "Greenhouse, Lever, Ashby, Workday", d: "Company job boards", u: g(`${ATS} ${q}${rl}`), tag: w.n, ic: "greenhouse.io" }] },
@@ -210,16 +216,16 @@ function companyLinks() {
 }
 function drawCompany() {
   $("c-roles").innerHTML = ROLES.map(r => chip(cs.roles.includes(r), "data-r", r, r)).join("");
-  $("c-cities").innerHTML = CITIES.map(x => chip(x.k === cs.city, "data-c", x.k, x.n)).join("");
+  $("c-cities").innerHTML = CITIES.map(x => chip(cs.cities.includes(x.k), "data-c", x.k, x.n)).join("");
   $("c-wins").innerHTML = WINS.map(x => chip(x.k === cs.win, "data-w", x.k, x.n)).join("");
-  $("c-flt").innerHTML = chip(cs.easy, "data-easy", "1", "Easy Apply only") + EXP.map(e => chip(cs.exp === e[0], "data-e", e[0], e[1])).join("");
+  $("c-flt").innerHTML = filtChips();
   $("c-watch").innerHTML = watch.length
     ? watch.map(w => `<button class="chip x ${cs.name.toLowerCase() === w.toLowerCase() ? "on" : ""}" data-w="${esc(w)}">${esc(w)}<i data-rm="${esc(w)}" title="Remove">✕</i></button>`).join("")
     : `<span class="hint" style="margin:0">Star a company to keep it here.</span>`;
   const { groups } = companyLinks();
   const total = groups.reduce((a, x) => a + x.items.length, 0);
   $("ccount").textContent = total ? total + " searches" : "";
-  $("c-now").innerHTML = cs.name.trim() ? `${esc(cs.name.trim())} <em>·</em> ${esc((CITIES.find(x => x.k === cs.city) || {}).n)}` : "";
+  $("c-now").innerHTML = cs.name.trim() ? `${esc(cs.name.trim())} <em>·</em> ${esc(pickCities(cs.cities).map(c => c.n).join(", "))}` : "";
   $("c-act").innerHTML = cs.name.trim()
     ? `<button class="btn ghost" id="c-star">${watch.some(w => w.toLowerCase() === cs.name.trim().toLowerCase()) ? "★ Watching" : "☆ Watch company"}</button><button class="btn ghost" id="c-track">+ Track this company</button>`
     : "";
@@ -235,9 +241,8 @@ $("cmp").addEventListener("click", e => {
   if (rm) { e.stopPropagation(); watch = watch.filter(w => w !== rm.dataset.rm); store.set(K.watch, watch); drawCompany(); return; }
   const b = e.target.closest("button"); if (!b) return;
   if (b.dataset.r !== undefined) cs.roles = cs.roles.includes(b.dataset.r) ? cs.roles.filter(r => r !== b.dataset.r) : [...cs.roles, b.dataset.r];
-  else if (b.dataset.c) cs.city = b.dataset.c;
-  else if (b.dataset.easy) cs.easy = !cs.easy;
-  else if (b.dataset.e !== undefined) cs.exp = b.dataset.e;
+  else if (b.closest("#c-flt")) { toggleFilt(b); drawBuilder(); drawSmart(); }
+  else if (b.dataset.c) cs.cities = toggleCity(cs.cities, b.dataset.c);
   else if (b.dataset.w && b.closest("#c-wins")) cs.win = b.dataset.w;
   else if (b.dataset.w) { cs.name = b.dataset.w; $("c-name").value = cs.name; }
   else if (b.id === "c-star") {
