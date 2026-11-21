@@ -1,4 +1,4 @@
-const CACHE = "jobhub-v8";
+const CACHE = "jobhub-v9";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./premium.css", "./theme-modern.css", "./premium.js", "./icons/icon-192.png", "./icons/icon-512.png"];
 
 // Install: fetch every file fresh (bypass the HTTP cache) so a new version never caches stale copies.

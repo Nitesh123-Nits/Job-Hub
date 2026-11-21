@@ -138,8 +138,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <div class="wrap" id="builder"><section>
   <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick one or more roles and locations. Search links for each board are built for you.</p></div>
-  <div class="bl">Role</div><div class="chips" id="roles"></div>
-  <input id="custom" class="custom" type="text" placeholder="Or type a role and press Enter" autocomplete="off" aria-label="Custom role">
+  <div class="bl">Roles</div><div id="roles"></div>
   <div class="bl">Location</div><div class="chips" id="cities"></div>
   <div class="bl">LinkedIn filters</div><div class="chips" id="rfilt"></div>
   <div class="now" id="now"></div>
@@ -149,8 +148,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="sh"><span class="no">00</span><h2>Smart Search</h2><span class="ct" id="scount"></span><p>One-tap searches for people who are hiring right now. Pick one or more locations. Each link is one short search, for example: hiring "Java Developer" Mumbai.</p></div>
   <div class="bl">Location</div><div class="chips" id="scities"></div>
   <div class="bl">Posted within</div><div class="chips" id="swins"></div>
-  <div class="bl">Roles</div><div class="chips" id="sroles"></div>
-  <input id="scustom" class="custom" type="text" placeholder="Or type a role and press Enter" autocomplete="off" aria-label="Custom role">
+  <div class="bl">Roles</div><div id="sroles"></div>
   <div class="bl">LinkedIn filters</div><div class="chips" id="sfilt"></div>
   <div class="now" id="snow"></div>
   <div id="sresults"></div>
@@ -161,7 +159,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="empty" id="empty">Nothing matches that.</div>
   <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
 </div>
-<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 8</span></div></footer>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 9</span></div></footer>
 
 <script>
 const DATA=[
@@ -365,7 +363,58 @@ render();
 
 
 // ---- Role search builder ----
-const ROLES=["Backend Developer","Java Backend Developer","Java Developer","Spring Boot Developer","Backend Engineer","Software Engineer","Software Development Engineer","SDE 2","Senior Software Engineer","Senior Java Developer","Senior Backend Engineer","Microservices Developer","Platform Engineer","Distributed Systems Engineer","Technical Lead"];
+const ROLE_GROUPS=[
+ ["Backend",["Backend Developer","Backend Engineer","Java Developer","Java Backend Developer","Spring Boot Developer","Microservices Developer"]],
+ ["Software engineer",["Software Engineer","Software Developer","Software Development Engineer","SDE 1","SDE 2","SDE 3"]],
+ ["Senior and lead",["Senior Software Engineer","Senior Backend Engineer","Senior Java Developer","Staff Engineer","Principal Engineer","Technical Lead","Engineering Manager"]],
+ ["Frontend and full stack",["Full Stack Developer","Full Stack Java Developer","Frontend Developer","React Developer"]],
+ ["Platform and data",["Platform Engineer","Distributed Systems Engineer","DevOps Engineer","Site Reliability Engineer","Cloud Engineer","AI Engineer"]]];
+const ROLES=ROLE_GROUPS.flatMap(g=>g[1]);
+// Multi-select dropdown. o: {get, set, none, min}. set(arr) must save and redraw; call refresh() after outside changes.
+function MS(host,o){
+  host.classList.add("ms");
+  host.innerHTML=`<button type="button" class="ms-btn" aria-haspopup="listbox" aria-expanded="false"><span class="ms-sum"></span><i aria-hidden="true">▾</i></button>
+  <div class="ms-panel" hidden><input class="ms-q" type="text" placeholder="Search, or type a new role and press Enter" autocomplete="off" aria-label="Search roles">
+  <div class="ms-list" role="listbox" aria-multiselectable="true"></div>
+  <div class="ms-foot"><button type="button" class="ms-clear">Clear</button><button type="button" class="ms-done">Done</button></div></div>`;
+  const btn=host.querySelector(".ms-btn"),panel=host.querySelector(".ms-panel"),q=host.querySelector(".ms-q"),list=host.querySelector(".ms-list"),min=o.min||0;
+  const open=v=>{panel.hidden=!v;btn.setAttribute("aria-expanded",v);if(v){q.value="";refresh();q.focus({preventScroll:true})}};
+  const sel=()=>o.get();
+  const commit=a=>{if(a.length<min)return;o.set(a);refresh()};
+  const toggle=v=>{const a=sel();commit(a.includes(v)?a.filter(x=>x!==v):[...a,v])};
+  function refresh(){
+    const a=sel();
+    host.querySelector(".ms-sum").innerHTML=a.length?`${a.slice(0,2).map(esc).join(", ")}${a.length>2?` <b>+${a.length-2}</b>`:""}`:`<span class="ms-none">${esc(o.none||"Any")}</span>`;
+    const t=q.value.trim().toLowerCase(),top=list.scrollTop;
+    const custom=a.filter(r=>!ROLES.includes(r));
+    const groups=(custom.length?[["Your roles",custom]]:[]).concat(ROLE_GROUPS);
+    let h="";
+    groups.forEach(([g,items])=>{const f=items.filter(r=>!t||r.toLowerCase().includes(t));
+      if(f.length)h+=`<div class="ms-g">${esc(g)}</div>`+f.map(r=>`<label class="ms-row" role="option"><input type="checkbox" data-v="${esc(r)}" ${a.includes(r)?"checked":""}><span>${esc(r)}</span></label>`).join("")});
+    const exact=[...ROLES,...custom].some(r=>r.toLowerCase()===t);
+    if(t&&!exact)h+=`<button type="button" class="ms-add" data-add="${esc(q.value.trim())}">+ Add “${esc(q.value.trim())}”</button>`;
+    list.innerHTML=h||`<div class="ms-empty">No match</div>`;list.scrollTop=top;
+  }
+  btn.addEventListener("click",()=>open(panel.hidden));
+  host.querySelector(".ms-done").addEventListener("click",()=>open(false));
+  host.querySelector(".ms-clear").addEventListener("click",()=>{if(min){commit(sel().slice(0,min))}else commit([])});
+  q.addEventListener("input",refresh);
+  q.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){open(false);btn.focus();return}
+    if(e.key!=="Enter")return;e.preventDefault();
+    const v=q.value.trim();if(!v)return;
+    const hit=[...ROLES,...sel()].find(r=>r.toLowerCase()===v.toLowerCase());
+    if(hit){if(!sel().includes(hit))commit([...sel(),hit])}else commit([...sel(),v]);
+    q.value="";refresh()});
+  list.addEventListener("change",e=>{const c=e.target.closest("[data-v]");if(!c)return;
+    const v=c.dataset.v,a=sel();
+    if(!c.checked&&a.length<=min){c.checked=true;return}
+    toggle(v)});
+  list.addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(!b)return;commit([...sel(),b.dataset.add]);q.value="";refresh()});
+  host.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden){open(false);btn.focus()}});
+  document.addEventListener("pointerdown",e=>{if(!panel.hidden&&!host.contains(e.target))open(false)});
+  refresh();return{refresh};
+}
 const CITIES=[
  {k:"India",n:"All India",nk:"",li:"India",ind:"India",fo:""},
  {k:"Remote",n:"Remote",remote:1,li:"India",ind:"Remote",fo:""},
@@ -427,8 +476,7 @@ function roleSites(roles,c){
 }
 function drawBuilder(){
   const cs=pickCities(bCities);
-  const allRoles=[...ROLES,...bRoles.filter(r=>!ROLES.includes(r))];
-  $("roles").innerHTML=allRoles.map(r=>`<button class="chip ${bRoles.includes(r)?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
+  bMS.refresh();
   $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${bCities.includes(x.k)?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
   $("rfilt").innerHTML=filtChips();
   const cardsOf=(list,c)=>`<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
@@ -445,10 +493,9 @@ function drawBuilder(){
   $("now").innerHTML=`${bRoles.map(esc).join(", ")} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
   try{localStorage.setItem("jobhub-roles",JSON.stringify(bRoles));localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
 }
-$("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;const r=b.dataset.r;bRoles=bRoles.includes(r)?(bRoles.length>1?bRoles.filter(x=>x!==r):bRoles):[...bRoles,r];drawBuilder()});
 $("rfilt").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;toggleFilt(b);drawBuilder();drawSmart()});
 $("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCities=toggleCity(bCities,b.dataset.c);drawBuilder()});
-$("custom").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const v=e.target.value.trim();if(!v)return;if(!bRoles.some(r=>r.toLowerCase()===v.toLowerCase()))bRoles=[...bRoles,v];e.target.value="";drawBuilder()});
+const bMS=MS($("roles"),{get:()=>bRoles,set:a=>{bRoles=a;drawBuilder()},min:1,none:"Pick a role"});
 drawBuilder();
 
 // ---- Smart search: who is hiring right now ----
@@ -501,7 +548,7 @@ function drawSmart(){
   const ch=(on,attr,val,label)=>`<button class="chip ${on?"on":""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
   $("scities").innerHTML=CITIES.map(x=>ch(sCs.includes(x.k),"data-c",x.k,x.n)).join("");
   $("swins").innerHTML=WINS.map(x=>ch(x.k===sW,"data-w",x.k,x.n)).join("");
-  $("sroles").innerHTML=[...ROLES,...sRoles.filter(r=>!ROLES.includes(r))].map(r=>ch(sRoles.includes(r),"data-r",r,r)).join("");
+  sMS.refresh();
   $("sfilt").innerHTML=filtChips();
   const gr=smartGroups();
   $("scount").textContent=gr.reduce((a,x)=>a+x.items.length,0)+" searches";
@@ -515,9 +562,8 @@ $("smart").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)
   if(b.closest("#sfilt")){toggleFilt(b);drawBuilder()}
   else if(b.dataset.c)sCs=toggleCity(sCs,b.dataset.c);
   else if(b.dataset.w)sW=b.dataset.w;
-  else if(b.dataset.r!==undefined)sRoles=toggleRole(sRoles,b.dataset.r);
   drawSmart()});
-$("scustom").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const v=e.target.value.trim();if(!v)return;if(!sRoles.some(r=>r.toLowerCase()===v.toLowerCase()))sRoles=[...sRoles,v];e.target.value="";drawSmart()});
+const sMS=MS($("sroles"),{get:()=>sRoles,set:a=>{sRoles=a;drawSmart()},min:1,none:"Pick a role"});
 drawSmart();
 
 // PWA

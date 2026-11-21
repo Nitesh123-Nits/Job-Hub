@@ -55,7 +55,10 @@ else if (!Array.isArray(savedCmp.roles)) { // migrate the single-role value save
   cs.roles = hit ? [hit] : []; cs.role = hit ? "" : String(savedCmp.role || "");
 }
 // selected quick-role chips plus any typed role, de-duplicated
-const activeRoles = () => { const t = cs.role.trim(); const a = [...cs.roles]; if (t && !a.some(r => r.toLowerCase() === t.toLowerCase())) a.push(t); return a; };
+if (cs.role && cs.role.trim() && !cs.roles.some(r => r.toLowerCase() === cs.role.trim().toLowerCase())) cs.roles.push(cs.role.trim()); // typed roles now live in the dropdown
+cs.role = "";
+const activeRoles = () => [...cs.roles];
+let liveRoles = store.get("jobhub2-lroles", []); if (!Array.isArray(liveRoles)) liveRoles = [];
 const roleExpr = list => list.length > 1 ? `(${list.map(r => `"${r}"`).join(" OR ")})` : (list[0] || "");
 let os = Object.assign({ company: "", contact: "", role: "" }, store.get(K.out, {}));
 const saveTrack = () => { store.set(K.track, track); drawStats(); };
@@ -66,10 +69,9 @@ $("main").insertAdjacentHTML("beforebegin", `
   <div class="sh"><span class="no">00</span><h2>Company Search</h2><span class="ct" id="ccount"></span><p>Type a company. Get its jobs, career pages, hiring posts, recruiters and reviews as ready-made searches.</p></div>
   <div class="row">
     <input id="c-name" class="custom" list="c-list" placeholder="Company, e.g. Razorpay" autocomplete="off" aria-label="Company name">
-    <input id="c-role" class="custom" placeholder="Or type a role (optional)" autocomplete="off" aria-label="Role">
   </div>
   <datalist id="c-list"></datalist>
-  <div class="bl">Quick roles (pick any, tap again to clear)</div><div class="chips" id="c-roles"></div>
+  <div class="bl">Roles</div><div id="c-roles"></div>
   <div class="bl">Location</div><div class="chips" id="c-cities"></div>
   <div class="bl">Posted within</div><div class="chips" id="c-wins"></div>
   <div class="bl">Filters (LinkedIn)</div><div class="chips" id="c-flt"></div>
@@ -117,8 +119,9 @@ $("main").insertAdjacentHTML("beforebegin", `
 
 <div class="wrap pane" id="live" hidden><section>
   <div class="sh"><span class="no">00</span><h2>Live Remote Jobs</h2><span class="ct" id="lcount"></span><p>Remote software listings gathered from several free job feeds. Apply on the original posting.</p></div>
+  <div class="bl">Roles</div><div id="l-roles"></div>
   <div class="row">
-    <input id="l-q" class="custom" placeholder="Filter, e.g. java, backend, kafka" autocomplete="off" aria-label="Filter jobs">
+    <input id="l-q" class="custom" placeholder="Filter by company or keyword, e.g. kafka" autocomplete="off" aria-label="Filter jobs">
     <button class="btn ghost" id="l-ref" style="margin-top:10px">Reload</button>
   </div>
   <div class="chips" id="l-chips" style="margin-top:10px"></div>
@@ -230,7 +233,7 @@ function companyLinks() {
   return { groups, jobsUrl };
 }
 function drawCompany() {
-  $("c-roles").innerHTML = ROLES.map(r => chip(cs.roles.includes(r), "data-r", r, r)).join("");
+  cMS.refresh();
   $("c-cities").innerHTML = CITIES.map(x => chip(cs.cities.includes(x.k), "data-c", x.k, x.n)).join("");
   $("c-wins").innerHTML = WINS.map(x => chip(x.k === cs.win, "data-w", x.k, x.n)).join("");
   $("c-flt").innerHTML = filtChips();
@@ -250,13 +253,13 @@ function drawCompany() {
   store.set(K.cmp, cs);
 }
 $("c-name").addEventListener("input", e => { cs.name = e.target.value; drawCompany(); });
-$("c-role").addEventListener("input", e => { cs.role = e.target.value; drawCompany(); });
+const cMS = MS($("c-roles"), { get: () => cs.roles, set: a => { cs.roles = a; drawCompany(); }, none: "Any role" });
 $("cmp").addEventListener("click", e => {
   const rm = e.target.closest("[data-rm]");
   if (rm) { e.stopPropagation(); watch = watch.filter(w => w !== rm.dataset.rm); store.set(K.watch, watch); drawCompany(); return; }
   const b = e.target.closest("button"); if (!b) return;
-  if (b.dataset.r !== undefined) cs.roles = cs.roles.includes(b.dataset.r) ? cs.roles.filter(r => r !== b.dataset.r) : [...cs.roles, b.dataset.r];
-  else if (b.closest("#c-flt")) { toggleFilt(b); drawBuilder(); drawSmart(); }
+  if (b.closest(".ms")) return;
+  if (b.closest("#c-flt")) { toggleFilt(b); drawBuilder(); drawSmart(); }
   else if (b.dataset.c) cs.cities = toggleCity(cs.cities, b.dataset.c);
   else if (b.dataset.w && b.closest("#c-wins")) cs.win = b.dataset.w;
   else if (b.dataset.w) { cs.name = b.dataset.w; $("c-name").value = cs.name; }
@@ -449,7 +452,17 @@ $("o-tpls").addEventListener("click", e => {
 const LIVE_URL = "https://remotive.com/api/remote-jobs?category=software-dev&limit=250";
 const SRC_URL = { "Remotive": "https://remotive.com", "Jobicy": "https://jobicy.com", "Remote OK": "https://remoteok.com", "Arbeitnow": "https://www.arbeitnow.com" };
 let liveJobs = [], liveQ = "", liveIndia = true, liveSrc = "", liveLoaded = false, liveFetchedAt = 0, liveMode = "", liveSources = [];
-const LIVE_CHIPS = ["Java", "Backend", "Spring", "Kafka", "Microservices", "Platform"];
+// Match a job title to a selected role: normalise synonyms, then require every role word to appear in the title or tags.
+const roleTokens = s => String(s).toLowerCase()
+  .replace(/back[\s-]?end/g, "backend").replace(/front[\s-]?end/g, "frontend").replace(/full[\s-]?stack/g, "fullstack")
+  .replace(/software development engineer|software developer/g, "software engineer").replace(/\bsde\s*-?\s*(i{1,3}|[123])\b/g, "software engineer")
+  .replace(/\bdeveloper\b/g, "engineer").replace(/\bsr\.?(?=\s)/g, "senior").replace(/\btechnical\b/g, "tech").replace(/\bspring boot\b/g, "spring")
+  .split(/[^a-z0-9+#]+/).filter(Boolean).map(t => t.length > 3 ? t.replace(/s$/, "") : t);
+const jobMatchesRoles = (j, roles) => {
+  if (!roles.length) return true;
+  const have = new Set(roleTokens(`${j.title} ${(j.tags || []).join(" ")}`));
+  return roles.some(r => roleTokens(r).every(t => have.has(t)));
+};
 // blank location = not stated by the source, so keep it
 const inIndia = j => !j.loc || /india|asia|apac|worldwide|anywhere|global/i.test(j.loc);
 
@@ -493,15 +506,14 @@ function ageText(iso) {
 function drawLive(err) {
   liveLoaded = true;
   const rx = liveQ.trim().toLowerCase();
-  const matches = liveJobs.filter(j => (!liveIndia || inIndia(j)) && (!liveSrc || j.source === liveSrc) &&
+  const matches = liveJobs.filter(j => (!liveIndia || inIndia(j)) && (!liveSrc || j.source === liveSrc) && jobMatchesRoles(j, liveRoles) &&
     (!rx || `${j.title} ${j.company} ${j.loc} ${(j.tags || []).join(" ")}`.toLowerCase().includes(rx)))
     .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
   const shown = matches.slice(0, 120);
   $("lcount").textContent = matches.length + " jobs";
   const names = [...new Set(liveJobs.map(j => j.source).filter(Boolean))];
   $("l-chips").innerHTML = chip(liveIndia, "data-india", "1", "India-eligible")
-    + (names.length > 1 ? chip(!liveSrc, "data-s", "", "All sources") + names.map(n => chip(liveSrc === n, "data-s", n, `${n} ${liveJobs.filter(j => j.source === n).length}`)).join("") : "")
-    + LIVE_CHIPS.map(c => chip(rx === c.toLowerCase(), "data-k", c, c)).join("");
+    + (names.length > 1 ? chip(!liveSrc, "data-s", "", "All sources") + names.map(n => chip(liveSrc === n, "data-s", n, `${n} ${liveJobs.filter(j => j.source === n).length}`)).join("") : "");
   const credit = names.map(n => SRC_URL[n] ? `<a href="${SRC_URL[n]}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>` : esc(n)).join(", ");
   const failed = liveSources.filter(s => s.ok === false).map(s => s.name);
   $("l-meta").innerHTML = `Sources: ${credit || "none yet"} · ${liveFetchedAt ? "updated " + new Date(liveFetchedAt).toLocaleString() : "not fetched yet"}`
@@ -516,15 +528,16 @@ function drawLive(err) {
       <div class="lj-a">${age ? `<span class="tag IN">${age}</span>` : ""}${j.source ? `<span class="tag">${esc(j.source)}</span>` : ""}
       <a class="btn" href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">Apply ↗</a>
       <button class="btn ghost" data-trk="${esc(j.id)}">+ Track</button></div></article>`;
-  }).join("") || `<div class="hint">No listings match. Try another filter or switch off India-eligible.</div>`;
+  }).join("") || `<div class="hint">No listings match. Try fewer roles, or switch off India-eligible.</div>`;
 }
+const lMS = MS($("l-roles"), { get: () => liveRoles, set: a => { liveRoles = a; store.set("jobhub2-lroles", a); if (liveLoaded) drawLive(); }, none: "All roles" });
 $("l-q").addEventListener("input", e => { liveQ = e.target.value; if (liveLoaded) drawLive(); });
 $("l-ref").addEventListener("click", () => loadLive(true));
 $("live").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
+  if (b.closest(".ms")) return;
   if (b.dataset.india) liveIndia = !liveIndia;
   else if (b.dataset.s !== undefined) liveSrc = b.dataset.s;
-  else if (b.dataset.k) { liveQ = liveQ.toLowerCase() === b.dataset.k.toLowerCase() ? "" : b.dataset.k; $("l-q").value = liveQ; }
   else if (b.dataset.trk) {
     const j = liveJobs.find(x => String(x.id) === b.dataset.trk);
     if (j) { addJob({ company: j.company, role: j.title, url: j.url, status: "saved" }); toast("Added to tracker"); }
@@ -538,7 +551,7 @@ function onTab(t) {
   document.body.dataset.tab = t;
   document.body.classList.toggle("tool", t !== "all"); // hero only on the home view, so results get the space
   for (const id of ["cmp", "trk", "out", "live"]) $(id).hidden = id !== t;
-  if (t === "cmp") { $("c-name").value = cs.name; $("c-role").value = cs.role; drawCompany(); }
+  if (t === "cmp") { $("c-name").value = cs.name; drawCompany(); }
   else if (t === "trk") drawTracker();
   else if (t === "out") drawOutreach();
   else if (t === "live" && !liveLoaded) loadLive(false);
