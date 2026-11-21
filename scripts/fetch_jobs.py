@@ -18,7 +18,16 @@ OUT = Path(__file__).resolve().parent.parent / "data" / "jobs.json"
 UA = "JobHubBot/1.0 (+https://github.com/Nitesh123-Nits/Job-Hub)"
 MAX_AGE_DAYS, MAX_JOBS = 45, 700
 DEV = re.compile(r"java|backend|back-end|back end|software|developer|engineer|devops|sre|golang|python|node|kotlin|"
-                 r"spring|kafka|platform|full.?stack|cloud|api|microservice|architect|programmer|data", re.I)
+                 r"spring|kafka|full.?stack|microservice|programmer", re.I)
+# non-engineering roles and language/country-specific postings are dropped from the broad feeds
+NOT_DEV = re.compile(r"\b(sales|support|customer|success|marketing|recruit\w*|account(?:ant|ing)?|legal|finance|content|writer|"
+                     r"designer|hr|talent|partnership|operations)\b|"
+                     r"(japanese|korean|mandarin|chinese|german|french|spanish|portuguese|italian|dutch|arabic|vietnamese|thai|indonesian)"
+                     r"[ -]?(speaking|speaker)|\b(japan|korea|china|taiwan)\b", re.I)
+
+
+def relevant(title, extra=""):
+    return bool(DEV.search(f"{title} {extra}")) and not NOT_DEV.search(title)
 
 
 def fetch_json(url, timeout=40):
@@ -88,7 +97,7 @@ def jobicy():
         d = fetch_json(f"https://jobicy.com/api/v2/remote-jobs?count=200&geo={g}")
         for x in d.get("jobs", []):
             t = text(x.get("jobTitle"))
-            if not DEV.search(t + " " + text(x.get("jobIndustry"))):
+            if not relevant(t, text(x.get("jobIndustry"))):
                 continue
             out.append(job("Jobicy", x.get("id"), t, x.get("companyName"), x.get("jobGeo"), x.get("jobType"), x.get("pubDate"),
                            x.get("url"), salary(x.get("salaryMin"), x.get("salaryMax"), x.get("salaryCurrency"), x.get("salaryPeriod"))))
@@ -100,7 +109,7 @@ def remoteok():
     out = []
     for x in d[1:] if isinstance(d, list) else []:  # element 0 is the legal notice
         t = text(x.get("position"))
-        if not DEV.search(t + " " + text(x.get("tags"))):
+        if not relevant(t, text(x.get("tags"))):
             continue
         out.append(job("Remote OK", x.get("id"), t, x.get("company"), x.get("location") or "", "",
                        x.get("date") or x.get("epoch"), x.get("url"), salary(x.get("salary_min"), x.get("salary_max"), "USD", "year"), x.get("tags")))
@@ -114,7 +123,7 @@ def arbeitnow():
         if not x.get("remote"):
             continue
         t = text(x.get("title"))
-        if not DEV.search(t + " " + text(x.get("tags"))):
+        if not relevant(t, text(x.get("tags"))):
             continue
         out.append(job("Arbeitnow", x.get("slug"), t, x.get("company_name"), x.get("location") or "Remote", x.get("job_types"),
                        x.get("created_at"), x.get("url"), "", x.get("tags")))
