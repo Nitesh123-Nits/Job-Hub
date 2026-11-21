@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T09:49:36+00:00",
+ "updated": "2026-11-21T21:41:03+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -14,15 +14,73 @@
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 31
+   "count": 29
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 3
+   "count": 6
   }
  ],
  "jobs": [
+  {
+   "id": "arbeitnow-remote-backend-engineer-ruby-plan-spec-driven-development-90346",
+   "title": "Backend Engineer (Ruby), Plan: Spec-Driven Development",
+   "company": "gitlab",
+   "loc": "Remote",
+   "type": "",
+   "date": "2026-11-21T18:55:25+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/gitlab/remote-backend-engineer-ruby-plan-spec-driven-development-90346",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "DevOps Engineering"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-principal-enterprise-architect-ai-cloud-integrations-162065",
+   "title": "Principal Enterprise Architect - AI & Cloud Integrations",
+   "company": "celonis",
+   "loc": "Remote",
+   "type": "",
+   "date": "2026-11-21T15:55:26+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/celonis/remote-principal-enterprise-architect-ai-cloud-integrations-162065",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Value Engineering"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-1227-back-end-developer-germany-388586",
+   "title": "1227 | Back-end Developer",
+   "company": "Intetics 2",
+   "loc": "Germany",
+   "type": "Part time",
+   "date": "2026-11-21T12:20:17+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/intetics-2/remote-1227-back-end-developer-germany-388586",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Information Technology and Services",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-1226-front-end-developer-germany-84712",
+   "title": "1226 | Front-end Developer",
+   "company": "Intetics 2",
+   "loc": "Germany",
+   "type": "Part time",
+   "date": "2026-11-21T12:20:17+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/intetics-2/remote-1226-front-end-developer-germany-84712",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Information Technology and Services",
+    "Remote"
+   ]
+  },
   {
    "id": "jobicy-150994",
    "title": "Software Engineer - Secure Container Images",
@@ -48,20 +106,6 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-remote-ai-fabric-architect-51975",
-   "title": "AI Fabric Architect",
-   "company": "Fal Ai",
-   "loc": "Remote",
-   "type": "Full Time",
-   "date": "2026-11-20T21:40:14+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/fal-ai/remote-ai-fabric-architect-51975",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Engineering"
-   ]
-  },
-  {
    "id": "arbeitnow-remote-backend-software-developer-hilversum-417173",
    "title": "Backend Software Developer",
    "company": "Dawn Technology",
@@ -74,6 +118,25 @@
    "tags": [
     "Dawn Technology",
     "Remote"
+   ]
+  },
+  {
+   "id": "remoteok-1137914",
+   "title": "Quality Engineer",
+   "company": "Quartermaster",
+   "loc": "Arlington",
+   "type": "",
+   "date": "2026-11-20T16:00:18+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-quality-engineer-quartermaster-1137914",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "design",
+    "sys admin",
+    "customer support",
+    "testing",
+    "travel",
+    "video"
    ]
   },
   {
@@ -587,44 +650,6 @@
    ]
   },
   {
-   "id": "remoteok-1137804",
-   "title": "Manager EDI",
-   "company": "Gravie",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-18T16:00:25+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-manager-edi-gravie-1137804",
-   "source": "Remote OK",
-   "salary": "USD 110,625–147,500/year",
-   "tags": [
-    "exec",
-    "sys admin",
-    "infosec",
-    "education",
-    "technical",
-    "testing"
-   ]
-  },
-  {
-   "id": "remoteok-1137802",
-   "title": "Business Development Manager",
-   "company": "Maya HTT",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-18T16:00:13+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-business-development-manager-maya-htt-1137802",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "product manager",
-    "exec",
-    "salesforce",
-    "hr",
-    "education",
-    "consulting"
-   ]
-  },
-  {
    "id": "jobicy-163153",
    "title": "Manager, Developer Advocacy, APJ",
    "company": "Temporal Technologies",
@@ -719,25 +744,6 @@
    "source": "Jobicy",
    "salary": "USD 200,000–250,000/yearly",
    "tags": []
-  },
-  {
-   "id": "remoteok-1137797",
-   "title": "Engineering Manager Network Engineering",
-   "company": "PatientPoint",
-   "loc": "Remote",
-   "type": "",
-   "date": "2026-11-17T00:00:17+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-network-engineering-patientpoint-1137797",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "exec",
-    "design",
-    "infosec",
-    "technical",
-    "dev",
-    "travel"
-   ]
   },
   {
    "id": "jobicy-162556",
