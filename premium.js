@@ -488,6 +488,8 @@ $("live").addEventListener("click", e => {
 
 /* ---------- tab routing (called from index.html render()) ---------- */
 function onTab(t) {
+  document.body.dataset.tab = t;
+  document.body.classList.toggle("tool", t !== "all"); // hero only on the home view, so results get the space
   for (const id of ["cmp", "trk", "out", "live"]) $(id).hidden = id !== t;
   if (t === "cmp") { $("c-name").value = cs.name; $("c-role").value = cs.role; drawCompany(); }
   else if (t === "trk") drawTracker();
