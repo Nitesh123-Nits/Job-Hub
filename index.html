@@ -154,12 +154,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div id="sresults"></div>
   <div class="note"><b>Tips</b>LinkedIn post search needs you to be signed in. LinkedIn post search has only 24 hours, week and month, so "3 days" uses the past week there. Message the poster within a few hours, never pay to apply, and be careful with unknown email addresses.</div>
 </section></div>
+<div class="wrap" id="fbar"><div class="fbar">
+  <div class="fl"><div class="bl">Roles</div><div id="fb-roles"></div></div>
+  <div class="fl"><div class="bl">Location</div><div id="fb-cities"></div></div>
+  <button class="chip on" id="fb-on" aria-pressed="true" type="button">Filters on</button></div>
+  <div class="hint" id="fb-note">Added to each site\'s search where supported (marked Filtered). Sites that can\'t combine roles use your first role.</div></div>
 <main class="wrap" id="main"></main>
 <div class="wrap">
   <div class="empty" id="empty">Nothing matches that.</div>
   <div class="note"><b>Note</b>Built In lists India by city (Bangalore, Hyderabad, Pune, Mumbai and so on), not by state. Only the India and Bangalore pages were confirmed open. The other city pages follow the same address pattern, so if one fails, open the India page and pick the city there.</div>
 </div>
-<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 9</span></div></footer>
+<footer><div class="wrap"><span>Links open each site's own page</span><span>★ pins a favourite</span><span id="ver">Version 10</span></div></footer>
 
 <script>
 const DATA=[
@@ -326,11 +331,11 @@ let tab="all",q="";
 // letter fallback if the official favicon can't load (offline / blocked)
 window.noIcon=img=>{const b=document.createElement("b");b.textContent=img.dataset.l;img.replaceWith(b)};
 
-function card(x){
-  const on=favs.includes(x.url);
-  return `<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+function card(x,v){
+  v=v||x;const on=favs.includes(x.url);
+  return `<a class="card" href="${esc(v.url)}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" loading="lazy" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
-    <div>${x.reg?`<span class="tag ${x.reg}">${REG[x.reg]}</span>`:""}<div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div>
+    <div>${x.reg?`<span class="tag ${x.reg}">${REG[x.reg]}</span>`:""}${v.f?`<span class="tag FL">Filtered</span>`:""}<div class="nm">${esc(v.name||x.name)}</div><div class="ds">${esc(v.desc||x.desc)}</div></div>
     <button class="fav ${on?"on":""}" data-u="${x.url}" aria-label="${on?"Remove favourite":"Add favourite"}">${on?"★":"☆"}</button></a>`;
 }
 function buildTabs(){
@@ -342,16 +347,20 @@ function render(){
   const match=x=>(!scope||x.reg!=="GL")&&(!q||(x.name+" "+x.desc+" "+x.cat.t).toLowerCase().includes(q));
   let html="",shown=0,n=0;
   const fv=all.filter(x=>favs.includes(x.url)&&match(x));
-  const sec=(title,desc,items)=>{n++;shown+=items.length;
-    return `<section><div class="sh"><span class="no">${String(n).padStart(2,"0")}</span><h2>${title}</h2><span class="ct">${items.length} sites</span><p>${desc}</p></div><div class="grid">${items.map(card).join("")}</div></section>`};
+  const sec=(title,desc,items)=>{n++;shown+=items.reduce((a,x)=>a+variants(x).length,0);
+    return `<section><div class="sh"><span class="no">${String(n).padStart(2,"0")}</span><h2>${title}</h2><span class="ct">${items.length} sites</span><p>${desc}</p></div><div class="grid">${items.flatMap(x=>variants(x).map(v=>card(x,v))).join("")}</div></section>`};
   if(tab==="all"&&fv.length)html+=sec("Favourites","Your pinned sites.",fv);
   DATA.filter(c=>tab==="all"||tab===c.id).forEach(c=>{
-    const items=all.filter(x=>x.cat===c&&match(x));if(items.length)html+=sec(c.t,c.d,items)});
+    const items=all.filter(x=>x.cat===c&&match(x)&&hubOk(x));if(items.length)html+=sec(c.t,c.d,items)});
   buildTabs();
   $("scope").classList.toggle("on",scope);$("scope").setAttribute("aria-pressed",scope);
   $("main").innerHTML=html;$("empty").style.display=(shown||["role","smart","cmp","trk","out","live"].includes(tab))?"none":"block";
   $("smart").style.display=tab==="smart"?"block":"none";
-  $("builder").style.display=(tab==="all"||tab==="role")&&!q?"block":"none";
+  $("builder").style.display=tab==="role"&&!q?"block":"none";
+  const TOOLS=["role","smart","cmp","trk","out","live"];
+  $("fbar").style.display=TOOLS.includes(tab)?"none":"block";
+  $("fb-on").classList.toggle("on",inject);$("fb-on").setAttribute("aria-pressed",inject);$("fb-on").textContent=inject?"Filters on":"Filters off";
+  if(fRoles){fRoles.refresh();fCities.refresh()}
   if(window.PREMIUM)PREMIUM.onTab(tab);
 }
 $("tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;tab=b.dataset.t;render()});
@@ -359,8 +368,6 @@ $("scope").addEventListener("click",()=>{scope=!scope;try{localStorage.setItem("
 $("q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();render()});
 $("main").addEventListener("click",e=>{const f=e.target.closest(".fav");if(!f)return;e.preventDefault();e.stopPropagation();
   const u=f.dataset.u;favs=favs.includes(u)?favs.filter(x=>x!==u):[...favs,u];save();render()});
-render();
-
 
 // ---- Role search builder ----
 const ROLE_GROUPS=[
@@ -374,37 +381,39 @@ const ROLES=ROLE_GROUPS.flatMap(g=>g[1]);
 function MS(host,o){
   host.classList.add("ms");
   host.innerHTML=`<button type="button" class="ms-btn" aria-haspopup="listbox" aria-expanded="false"><span class="ms-sum"></span><i aria-hidden="true">▾</i></button>
-  <div class="ms-panel" hidden><input class="ms-q" type="text" placeholder="Search, or type a new role and press Enter" autocomplete="off" aria-label="Search roles">
+  <div class="ms-panel" hidden><input class="ms-q" type="text" placeholder="Search, or type a new role and press Enter" autocomplete="off" aria-label="Search">
   <div class="ms-list" role="listbox" aria-multiselectable="true"></div>
   <div class="ms-foot"><button type="button" class="ms-clear">Clear</button><button type="button" class="ms-done">Done</button></div></div>`;
+  const G=o.groups||ROLE_GROUPS,L=o.label||(x=>x),known=G.flatMap(g=>g[1]),custom_ok=o.custom!==false;
+  if(o.ph)host.querySelector(".ms-q").placeholder=o.ph;
   const btn=host.querySelector(".ms-btn"),panel=host.querySelector(".ms-panel"),q=host.querySelector(".ms-q"),list=host.querySelector(".ms-list"),min=o.min||0;
   const open=v=>{panel.hidden=!v;btn.setAttribute("aria-expanded",v);if(v){q.value="";refresh();q.focus({preventScroll:true})}};
   const sel=()=>o.get();
   const commit=a=>{if(a.length<min)return;o.set(a);refresh()};
-  const toggle=v=>{const a=sel();commit(a.includes(v)?a.filter(x=>x!==v):[...a,v])};
+  const toggle=v=>{const a=sel();commit(o.toggle?o.toggle(a,v):a.includes(v)?a.filter(x=>x!==v):[...a,v])};
   function refresh(){
     const a=sel();
-    host.querySelector(".ms-sum").innerHTML=a.length?`${a.slice(0,2).map(esc).join(", ")}${a.length>2?` <b>+${a.length-2}</b>`:""}`:`<span class="ms-none">${esc(o.none||"Any")}</span>`;
+    host.querySelector(".ms-sum").innerHTML=a.length?`${a.slice(0,2).map(x=>esc(L(x))).join(", ")}${a.length>2?` <b>+${a.length-2}</b>`:""}`:`<span class="ms-none">${esc(o.none||"Any")}</span>`;
     const t=q.value.trim().toLowerCase(),top=list.scrollTop;
-    const custom=a.filter(r=>!ROLES.includes(r));
-    const groups=(custom.length?[["Your roles",custom]]:[]).concat(ROLE_GROUPS);
+    const custom=custom_ok?a.filter(r=>!known.includes(r)):[];
+    const groups=(custom.length?[["Your roles",custom]]:[]).concat(G);
     let h="";
-    groups.forEach(([g,items])=>{const f=items.filter(r=>!t||r.toLowerCase().includes(t));
-      if(f.length)h+=`<div class="ms-g">${esc(g)}</div>`+f.map(r=>`<label class="ms-row" role="option"><input type="checkbox" data-v="${esc(r)}" ${a.includes(r)?"checked":""}><span>${esc(r)}</span></label>`).join("")});
-    const exact=[...ROLES,...custom].some(r=>r.toLowerCase()===t);
-    if(t&&!exact)h+=`<button type="button" class="ms-add" data-add="${esc(q.value.trim())}">+ Add “${esc(q.value.trim())}”</button>`;
+    groups.forEach(([g,items])=>{const f=items.filter(r=>!t||L(r).toLowerCase().includes(t));
+      if(f.length)h+=`<div class="ms-g">${esc(g)}</div>`+f.map(r=>`<label class="ms-row" role="option"><input type="checkbox" data-v="${esc(r)}" ${a.includes(r)?"checked":""}><span>${esc(L(r))}</span></label>`).join("")});
+    const exact=[...known,...custom].some(r=>L(r).toLowerCase()===t);
+    if(custom_ok&&t&&!exact)h+=`<button type="button" class="ms-add" data-add="${esc(q.value.trim())}">+ Add “${esc(q.value.trim())}”</button>`;
     list.innerHTML=h||`<div class="ms-empty">No match</div>`;list.scrollTop=top;
   }
   btn.addEventListener("click",()=>open(panel.hidden));
   host.querySelector(".ms-done").addEventListener("click",()=>open(false));
-  host.querySelector(".ms-clear").addEventListener("click",()=>{if(min){commit(sel().slice(0,min))}else commit([])});
+  host.querySelector(".ms-clear").addEventListener("click",()=>{if(o.clear)commit(o.clear());else if(min){commit(sel().slice(0,min))}else commit([])});
   q.addEventListener("input",refresh);
   q.addEventListener("keydown",e=>{
     if(e.key==="Escape"){open(false);btn.focus();return}
     if(e.key!=="Enter")return;e.preventDefault();
     const v=q.value.trim();if(!v)return;
-    const hit=[...ROLES,...sel()].find(r=>r.toLowerCase()===v.toLowerCase());
-    if(hit){if(!sel().includes(hit))commit([...sel(),hit])}else commit([...sel(),v]);
+    const hit=[...known,...sel()].find(r=>L(r).toLowerCase()===v.toLowerCase());
+    if(hit){if(!sel().includes(hit))toggle(hit)}else if(custom_ok)commit([...sel(),v]);
     q.value="";refresh()});
   list.addEventListener("change",e=>{const c=e.target.closest("[data-v]");if(!c)return;
     const v=c.dataset.v,a=sel();
@@ -449,6 +458,41 @@ catch(e){}
 try{const o=localStorage.getItem("jobhub-role");if(o&&!localStorage.getItem("jobhub-roles"))bRoles=[o]}catch(e){}
 bCities=loadCities("jobhub-cities","jobhub-city");
 const enc=encodeURIComponent;
+
+// ---- Filter injection for the built-in site cards ----
+// u(role,city,roles): role is the OR expression when b (boolean) is set, otherwise the first selected role. l: uses the city.
+let fRoles,fCities,inject=true;try{inject=localStorage.getItem("jobhub-inject")!=="0"}catch(e){}
+const slug=r=>r.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const INJ={
+ "https://www.naukri.com/jobs-in-india":{b:1,l:1,u:(r,c,rs)=>{
+   let u=c.remote?`https://www.naukri.com/${slug(rs[0])}-jobs?wfhType=2`:`https://www.naukri.com/${slug(rs[0])}-jobs${c.nk?"-in-"+c.nk:""}`;
+   if(rs.length>1)u+=(u.includes("?")?"&":"?")+"k="+enc(r)+(c.nk&&!c.remote?"&l="+enc(c.nk):"");return u}},
+ "https://www.linkedin.com/jobs/search/?location=India":{b:1,l:1,u:(r,c)=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}${liFilt()}`},
+ "https://www.linkedin.com/jobs/search/?f_WT=2":{b:1,u:r=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&f_WT=2${liFilt()}`},
+ "https://www.linkedin.com/jobs/":{b:1,l:1,u:(r,c)=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}${c.remote?"&f_WT=2":""}${liFilt()}`},
+ "https://in.indeed.com/":{b:1,l:1,u:(r,c)=>`https://in.indeed.com/jobs?q=${enc(r)}&l=${enc(c.ind)}`},
+ "https://www.indeed.com/":{b:1,l:1,u:(r,c)=>`https://www.indeed.com/jobs?q=${enc(r)}&l=${enc(c.ind)}`},
+ "https://www.foundit.in/":{l:1,u:(r,c)=>`https://www.foundit.in/srp/results?query=${enc(r+(c.remote?" remote":""))}${c.fo?"&locations="+enc(c.fo):""}`},
+ "https://www.glassdoor.co.in/Job/index.htm":{u:r=>`https://www.glassdoor.co.in/Job/jobs.htm?sc.keyword=${enc(r)}`},
+ "https://www.glassdoor.com/Job/index.htm":{u:r=>`https://www.glassdoor.com/Job/jobs.htm?sc.keyword=${enc(r)}`},
+ "https://www.dice.com/jobs":{u:r=>`https://www.dice.com/jobs?q=${enc(r)}`},
+ "https://weworkremotely.com/":{u:r=>`https://weworkremotely.com/remote-jobs/search?term=${enc(r)}`},
+ "https://www.amazon.jobs/en/":{l:1,u:(r,c)=>`https://www.amazon.jobs/en/search?base_query=${enc(r)}&loc_query=${enc(c.k==="India"||c.remote?"India":c.ind+", India")}`},
+ "https://www.google.com/about/careers/applications/jobs/results":{l:1,u:(r,c)=>`https://www.google.com/about/careers/applications/jobs/results?q=${enc(r)}&location=${enc(c.k==="India"||c.remote?"India":c.ind)}`}
+};
+for(const x of all)if(x.cat.id==="builtin")INJ[x.url]={u:r=>x.url+"?search="+enc(r)};
+const HUB={Bangalore:"Bangalore",Hyderabad:"Hyderabad",Pune:"Pune",Mumbai:"Mumbai","Navi Mumbai":"Mumbai","Delhi NCR":"Delhi",Noida:"Delhi",Gurgaon:"Gurgaon",Chennai:"Chennai",Kolkata:"Kolkata"};
+// with specific cities picked, Built In shows "India (All)" plus only the matching city hubs
+const hubOk=x=>{if(!inject||x.cat.id!=="builtin"||bCities.includes("India")||x.name.includes("(All)"))return true;
+  return bCities.some(k=>HUB[k]&&x.name.endsWith("· "+HUB[k]))||!bCities.some(k=>HUB[k])};
+function variants(x){
+  const g=INJ[x.url];if(!inject||!g)return[x];
+  const rs=bRoles,multi=rs.length>1,role=g.b&&multi?"("+rs.map(r=>`"${r}"`).join(" OR ")+")":rs[0];
+  const rl=g.b?(multi?rs.length+" roles, one search":rs[0]):rs[0]+(multi?" (first of "+rs.length+" roles)":"");
+  const cs=g.l?pickCities(bCities):[null];
+  return cs.map(c=>({f:1,url:g.u(role,c||CITIES[0],rs),name:c&&cs.length>1?`${x.name} · ${c.n}`:x.name,desc:rl+(c&&!c.remote&&c.k!=="India"?" · "+c.n:c&&c.remote?" · Remote":"")}));
+}
+
 // One combined search per board when several roles are picked (boolean OR). Boards whose
 // search can't be combined reliably (Naukri URL path, Foundit, WWR) also get one link per role in `extras`.
 function roleSites(roles,c){
@@ -492,11 +536,16 @@ function drawBuilder(){
   $("bcount").textContent=total+" searches";
   $("now").innerHTML=`${bRoles.map(esc).join(", ")} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
   try{localStorage.setItem("jobhub-roles",JSON.stringify(bRoles));localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
+  if(fRoles){fRoles.refresh();fCities.refresh();if(tab!=="role")render()}
 }
 $("rfilt").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;toggleFilt(b);drawBuilder();drawSmart()});
 $("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCities=toggleCity(bCities,b.dataset.c);drawBuilder()});
 const bMS=MS($("roles"),{get:()=>bRoles,set:a=>{bRoles=a;drawBuilder()},min:1,none:"Pick a role"});
 drawBuilder();
+$("fb-on").addEventListener("click",()=>{inject=!inject;try{localStorage.setItem("jobhub-inject",inject?"1":"0")}catch(e){}render()});
+fRoles=MS($("fb-roles"),{get:()=>bRoles,set:a=>{bRoles=a;drawBuilder()},min:1,none:"Pick a role"});
+fCities=MS($("fb-cities"),{get:()=>bCities,set:a=>{bCities=a;drawBuilder()},groups:[["Locations",CITIES.map(c=>c.k)]],label:k=>(CITIES.find(c=>c.k===k)||{n:k}).n,custom:false,toggle:toggleCity,clear:()=>["India"],ph:"Search locations",none:"All India"});
+render();
 
 // ---- Smart search: who is hiring right now ----
 const WINS=[

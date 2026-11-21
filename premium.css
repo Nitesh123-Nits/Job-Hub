@@ -186,3 +186,12 @@ body:not([data-tab="all"]):not([data-tab="builtin"]) main ~ .wrap .note{display:
 .ms-foot button{background:transparent;border:0;color:var(--mute);font:600 13px var(--sans);padding:6px 10px;cursor:pointer}
 .ms-foot .ms-done{color:var(--accent)}
 .ms-foot button:hover{text-decoration:underline}
+
+/* ---- built-in site filter bar ---- */
+#fbar{padding-top:4px;padding-bottom:0}
+.fbar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:flex-end}
+.fbar .fl{flex:1 1 220px;min-width:0}
+.fbar .ms{max-width:none}
+.fbar .chip{margin-bottom:0}
+#fb-note{margin:8px 0 0}
+.tag.FL{background:var(--accent);color:var(--on-accent,#fff);margin-left:4px}
