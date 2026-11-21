@@ -45,8 +45,9 @@ const chip = (on, attr, val, label) => `<button class="chip ${on ? "on" : ""}" $
 let prof = Object.assign({ name: "", role: "", years: "", skills: "" }, store.get(K.prof, {}));
 let track = store.get(K.track, []);
 let watch = store.get(K.watch, []);
-let cs = Object.assign({ name: "", role: "", city: "India", win: "w", easy: false, exp: "" }, store.get(K.cmp, {}));
-if (!cs.role) cs.role = prof.role || "Java Backend Developer";
+const savedCmp = store.get(K.cmp, null);
+let cs = Object.assign({ name: "", role: "", city: "India", win: "w", easy: false, exp: "" }, savedCmp || {});
+if (!savedCmp) cs.role = prof.role || "Java Backend Developer";
 let os = Object.assign({ company: "", contact: "", role: "" }, store.get(K.out, {}));
 const saveTrack = () => { store.set(K.track, track); drawStats(); };
 
@@ -59,6 +60,7 @@ $("main").insertAdjacentHTML("beforebegin", `
     <input id="c-role" class="custom" placeholder="Role (optional)" autocomplete="off" aria-label="Role">
   </div>
   <datalist id="c-list"></datalist>
+  <div class="bl">Quick roles (tap again to clear)</div><div class="chips" id="c-roles"></div>
   <div class="bl">Location</div><div class="chips" id="c-cities"></div>
   <div class="bl">Posted within</div><div class="chips" id="c-wins"></div>
   <div class="bl">Filters (LinkedIn)</div><div class="chips" id="c-flt"></div>
@@ -200,6 +202,7 @@ function companyLinks() {
   return { groups, jobsUrl };
 }
 function drawCompany() {
+  $("c-roles").innerHTML = ROLES.map(r => chip(cs.role.trim().toLowerCase() === r.toLowerCase(), "data-r", r, r)).join("");
   $("c-cities").innerHTML = CITIES.map(x => chip(x.k === cs.city, "data-c", x.k, x.n)).join("");
   $("c-wins").innerHTML = WINS.map(x => chip(x.k === cs.win, "data-w", x.k, x.n)).join("");
   $("c-flt").innerHTML = chip(cs.easy, "data-easy", "1", "Easy Apply only") + EXP.map(e => chip(cs.exp === e[0], "data-e", e[0], e[1])).join("");
@@ -224,7 +227,8 @@ $("cmp").addEventListener("click", e => {
   const rm = e.target.closest("[data-rm]");
   if (rm) { e.stopPropagation(); watch = watch.filter(w => w !== rm.dataset.rm); store.set(K.watch, watch); drawCompany(); return; }
   const b = e.target.closest("button"); if (!b) return;
-  if (b.dataset.c) cs.city = b.dataset.c;
+  if (b.dataset.r !== undefined) { cs.role = cs.role.trim().toLowerCase() === b.dataset.r.toLowerCase() ? "" : b.dataset.r; $("c-role").value = cs.role; }
+  else if (b.dataset.c) cs.city = b.dataset.c;
   else if (b.dataset.easy) cs.easy = !cs.easy;
   else if (b.dataset.e !== undefined) cs.exp = b.dataset.e;
   else if (b.dataset.w && b.closest("#c-wins")) cs.win = b.dataset.w;

@@ -136,15 +136,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></div>
 
 <div class="wrap" id="builder"><section>
-  <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick a role and a location. Search links for each board are built for you.</p></div>
+  <div class="sh"><span class="no">00</span><h2>Role Search</h2><span class="ct" id="bcount"></span><p>Pick a role and one or more locations. Search links for each board are built for you.</p></div>
   <div class="bl">Role</div><div class="chips" id="roles"></div>
   <input id="custom" class="custom" type="text" placeholder="Or type any role…" autocomplete="off" aria-label="Custom role">
   <div class="bl">Location</div><div class="chips" id="cities"></div>
   <div class="now" id="now"></div>
-  <div class="grid" id="results"></div>
+  <div id="results"></div>
 </section></div>
 <div class="wrap" id="smart" style="display:none"><section>
-  <div class="sh"><span class="no">00</span><h2>Smart Search</h2><span class="ct" id="scount"></span><p>One-tap searches for people who are hiring right now. Each link is one short search, for example: hiring "Java Developer" Mumbai.</p></div>
+  <div class="sh"><span class="no">00</span><h2>Smart Search</h2><span class="ct" id="scount"></span><p>One-tap searches for people who are hiring right now. Pick one or more locations. Each link is one short search, for example: hiring "Java Developer" Mumbai.</p></div>
   <div class="bl">Location</div><div class="chips" id="scities"></div>
   <div class="bl">Posted within</div><div class="chips" id="swins"></div>
   <input id="scustom" class="custom" type="text" placeholder="Add your own role, e.g. Kafka Engineer" autocomplete="off" aria-label="Custom role">
@@ -375,8 +375,13 @@ const CITIES=[
  {k:"Noida",n:"Noida",nk:"noida",li:"Noida, Uttar Pradesh, India",ind:"Noida",fo:"Noida"},
  {k:"Chennai",n:"Chennai",nk:"chennai",li:"Chennai, Tamil Nadu, India",ind:"Chennai",fo:"Chennai"},
  {k:"Kolkata",n:"Kolkata",nk:"kolkata",li:"Kolkata, West Bengal, India",ind:"Kolkata",fo:"Kolkata"}];
-let bRole="Java Backend Developer",bCity="India";
-try{bRole=localStorage.getItem("jobhub-role")||bRole;bCity=localStorage.getItem("jobhub-city")||bCity}catch(e){}
+let bRole="Java Backend Developer",bCities=["India"];
+// multi-select locations: stored as a JSON array; falls back to the old single-city key
+const loadCities=(k,old)=>{try{const a=JSON.parse(localStorage.getItem(k));if(Array.isArray(a)){const v=a.filter(x=>CITIES.some(c=>c.k===x));if(v.length)return v}}catch(e){}try{const o=localStorage.getItem(old);if(o&&CITIES.some(c=>c.k===o))return[o]}catch(e){}return["India"]};
+const pickCities=a=>CITIES.filter(c=>a.includes(c.k));
+const toggleCity=(a,k)=>a.includes(k)?(a.length>1?a.filter(x=>x!==k):a):[...a,k];
+try{bRole=localStorage.getItem("jobhub-role")||bRole}catch(e){}
+bCities=loadCities("jobhub-cities","jobhub-city");
 const enc=encodeURIComponent;
 function roleSites(role,c){
   const slug=role.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
@@ -391,19 +396,20 @@ function roleSites(role,c){
   return out;
 }
 function drawBuilder(){
-  const c=CITIES.find(x=>x.k===bCity)||CITIES[0];
+  const cs=pickCities(bCities);
   $("roles").innerHTML=ROLES.map(r=>`<button class="chip ${r===bRole?"on":""}" data-r="${esc(r)}">${esc(r)}</button>`).join("");
-  $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${x.k===bCity?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
-  const list=roleSites(bRole,c);
-  $("bcount").textContent=list.length+" searches";
-  $("now").innerHTML=`${esc(bRole)} <em>·</em> ${c.n}`;
-  $("results").innerHTML=list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
+  $("cities").innerHTML=CITIES.map(x=>`<button class="chip ${bCities.includes(x.k)?"on":""}" data-c="${x.k}">${x.n}</button>`).join("");
+  let total=0;
+  $("results").innerHTML=cs.map(c=>{const list=roleSites(bRole,c);total+=list.length;
+    return `${cs.length>1?`<div class="bl">${c.n}</div>`:""}<div class="grid">${list.map(x=>`<a class="card" href="${x.url}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${icon(x.url)}" alt="" data-l="${esc(x.name[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
-    <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("");
-  try{localStorage.setItem("jobhub-role",bRole);localStorage.setItem("jobhub-city",bCity)}catch(e){}
+    <div><span class="tag ${c.remote?"RM":"IN"}">${c.n}</span><div class="nm">${esc(x.name)}</div><div class="ds">${esc(x.desc)}</div></div></a>`).join("")}</div>`}).join("");
+  $("bcount").textContent=total+" searches";
+  $("now").innerHTML=`${esc(bRole)} <em>·</em> ${cs.map(c=>c.n).join(", ")}`;
+  try{localStorage.setItem("jobhub-role",bRole);localStorage.setItem("jobhub-cities",JSON.stringify(bCities))}catch(e){}
 }
 $("roles").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;bRole=b.dataset.r;$("custom").value="";drawBuilder()});
-$("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCity=b.dataset.c;drawBuilder()});
+$("cities").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b)return;bCities=toggleCity(bCities,b.dataset.c);drawBuilder()});
 $("custom").addEventListener("input",e=>{const v=e.target.value.trim();if(v){bRole=v;drawBuilder()}});
 drawBuilder();
 
@@ -414,19 +420,21 @@ const WINS=[
  {k:"3",n:"3 days",li:"past-week",jr:"r259200",g:"d3",pl:"Past week"},
  {k:"w",n:"Week",li:"past-week",jr:"r604800",g:"w",pl:"Week"},
  {k:"m",n:"Month",li:"past-month",jr:"r2592000",g:"m",pl:"Month"}];
-let sC="India",sW="d",sCustom="";
-try{sC=localStorage.getItem("jobhub-sc")||sC;sW=localStorage.getItem("jobhub-sw")||sW}catch(e){}
+let sCs=loadCities("jobhub-scs","jobhub-sc"),sW="d",sCustom="";
+try{sW=localStorage.getItem("jobhub-sw")||sW}catch(e){}
 if(!WINS.some(x=>x.k===sW))sW="d";
 const favi=d=>`https://www.google.com/s2/favicons?domain=${d}&sz=64`;
 function smartGroups(){
-  const w=WINS.find(x=>x.k===sW), c=CITIES.find(x=>x.k===sC)||CITIES[0];
-  const loc=c.remote?"remote":c.k;
+  const w=WINS.find(x=>x.k===sW), cs=pickCities(sCs);
+  // several locations are combined with OR in keyword searches; location-based job searches get one link per city
+  const q1=x=>x.remote?"remote":(/\s/.test(x.k)?`"${x.k}"`:x.k);
+  const loc=cs.length===1?(cs[0].remote?"remote":cs[0].k):"("+cs.map(q1).join(" OR ")+")";
   const roles=(sCustom?[sCustom]:[]).concat(SROLES);
   const jobRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Developer","Backend Engineer","Software Engineer","Senior Software Engineer","Spring Boot Developer"]);
   const atsRoles=(sCustom?[sCustom]:[]).concat(["Java Developer","Backend Engineer","Software Engineer","Senior Software Engineer"]);
   const li=kw=>`https://www.linkedin.com/search/results/content/?keywords=${enc(kw)}&datePosted=${enc('"'+w.li+'"')}&sortBy=${enc('"date_posted"')}&origin=FACETED_SEARCH`;
   const pe=kw=>`https://www.linkedin.com/search/results/people/?keywords=${enc(kw)}&origin=GLOBAL_SEARCH_HEADER`;
-  const jb=r=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote?"&f_WT=2":""}`;
+  const jb=(r,c)=>`https://www.linkedin.com/jobs/search/?keywords=${enc(r)}&location=${enc(c.li)}&f_TPR=${w.jr}&sortBy=DD${c.remote?"&f_WT=2":""}`;
   const g=(q,t)=>`https://www.google.com/search?q=${enc(q)}${t===false?"":"&tbs="+enc("qdr:"+w.g)}`;
   const ATS="(site:boards.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:myworkdayjobs.com)";
   const L="linkedin.com", PL=w.pl;
@@ -443,7 +451,7 @@ function smartGroups(){
     {n:"Java recruiters",d:`People: technical recruiter java ${loc}`,u:pe(`technical recruiter java ${loc}`),tag:"People",ic:L},
     {n:"Backend recruiters",d:`People: technical recruiter backend ${loc}`,u:pe(`technical recruiter backend ${loc}`),tag:"People",ic:L},
     {n:"Engineering managers",d:`People: engineering manager hiring ${loc}`,u:pe(`engineering manager hiring ${loc}`),tag:"People",ic:L}]},
-   {g:"LinkedIn · jobs",items:jobRoles.map(r=>({n:r,d:`Jobs, newest first, ${c.n}`,u:jb(r),tag:w.n,ic:L}))},
+   {g:"LinkedIn · jobs",items:cs.flatMap(c=>jobRoles.map(r=>({n:r,d:`Jobs, newest first, ${c.n}`,u:jb(r,c),tag:w.n,ic:L})))},
    {g:"Google · hiring posts on LinkedIn",items:roles.map(r=>({n:`Hiring ${r}`,d:`site:linkedin.com/posts hiring "${r}" ${loc}`,u:g(`site:linkedin.com/posts hiring "${r}" ${loc}`),tag:w.n,ic:L}))},
    {g:"Google · posts with an email address",items:[
     {n:"Java, resume by email",d:"Posts that list a Gmail or Outlook address",u:g(`site:linkedin.com/posts hiring "Java Developer" ${loc} ("@gmail.com" OR "@outlook.com")`),tag:w.n,ic:L},
@@ -457,18 +465,18 @@ function smartGroups(){
 }
 function drawSmart(){
   const ch=(on,attr,val,label)=>`<button class="chip ${on?"on":""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
-  $("scities").innerHTML=CITIES.map(x=>ch(x.k===sC,"data-c",x.k,x.n)).join("");
+  $("scities").innerHTML=CITIES.map(x=>ch(sCs.includes(x.k),"data-c",x.k,x.n)).join("");
   $("swins").innerHTML=WINS.map(x=>ch(x.k===sW,"data-w",x.k,x.n)).join("");
   const gr=smartGroups();
   $("scount").textContent=gr.reduce((a,x)=>a+x.items.length,0)+" searches";
-  $("snow").innerHTML=`Hiring now <em>·</em> ${(CITIES.find(x=>x.k===sC)||{}).n} <em>·</em> ${(WINS.find(x=>x.k===sW)||{}).n}`;
+  $("snow").innerHTML=`Hiring now <em>·</em> ${pickCities(sCs).map(c=>c.n).join(", ")} <em>·</em> ${(WINS.find(x=>x.k===sW)||{}).n}`;
   $("sresults").innerHTML=gr.map(g=>`<div class="bl">${g.g}</div><div class="grid">${g.items.map(x=>`<a class="card" href="${x.u}" target="_blank" rel="noopener noreferrer">
     <div class="top"><span class="logo"><img src="${favi(x.ic)}" alt="" data-l="${esc(x.n[0])}" onerror="noIcon(this)"></span><span class="arrow">↗</span></div>
     <div><span class="tag IN">${esc(x.tag)}</span><div class="nm">${esc(x.n)}</div><div class="ds">${esc(x.d)}</div></div></a>`).join("")}</div>`).join("");
-  try{localStorage.setItem("jobhub-sc",sC);localStorage.setItem("jobhub-sw",sW)}catch(e){}
+  try{localStorage.setItem("jobhub-scs",JSON.stringify(sCs));localStorage.setItem("jobhub-sw",sW)}catch(e){}
 }
 $("smart").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
-  if(b.dataset.c)sC=b.dataset.c;else if(b.dataset.w)sW=b.dataset.w;drawSmart()});
+  if(b.dataset.c)sCs=toggleCity(sCs,b.dataset.c);else if(b.dataset.w)sW=b.dataset.w;drawSmart()});
 $("scustom").addEventListener("input",e=>{sCustom=e.target.value.trim();drawSmart()});
 drawSmart();
 
