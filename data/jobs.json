@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T21:41:03+00:00",
+ "updated": "2026-11-22T06:55:58+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,32 +9,44 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 28
+   "count": 24
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 29
+   "count": 33
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 6
+   "count": 4
   }
  ],
  "jobs": [
   {
-   "id": "arbeitnow-remote-backend-engineer-ruby-plan-spec-driven-development-90346",
-   "title": "Backend Engineer (Ruby), Plan: Spec-Driven Development",
-   "company": "gitlab",
+   "id": "jobicy-151256",
+   "title": "Lead Solutions Engineer",
+   "company": "Acquia, Inc.",
+   "loc": "Japan",
+   "type": "Full-Time",
+   "date": "2026-11-22T03:40:23+00:00",
+   "url": "https://jobicy.com/jobs/151256-lead-solutions-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-solutions-engineer-veeam-data-cloud-vault-242654",
+   "title": "Solutions Engineer, Veeam Data Cloud Vault",
+   "company": "veeamsoftware",
    "loc": "Remote",
    "type": "",
-   "date": "2026-11-21T18:55:25+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/gitlab/remote-backend-engineer-ruby-plan-spec-driven-development-90346",
+   "date": "2026-11-21T21:55:28+00:00",
+   "url": "https://www.arbeitnow.fr/jobs/companies/veeamsoftware/remote-solutions-engineer-veeam-data-cloud-vault-242654",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "DevOps Engineering"
+    "Strategic Workloads - Global 1008556"
    ]
   },
   {
@@ -52,33 +64,73 @@
    ]
   },
   {
-   "id": "arbeitnow-remote-1227-back-end-developer-germany-388586",
-   "title": "1227 | Back-end Developer",
-   "company": "Intetics 2",
-   "loc": "Germany",
-   "type": "Part time",
-   "date": "2026-11-21T12:20:17+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/intetics-2/remote-1227-back-end-developer-germany-388586",
-   "source": "Arbeitnow",
+   "id": "remoteok-1137948",
+   "title": "Senior Software Engineer - Behavioral Security Products",
+   "company": "Abnormal",
+   "loc": "UK Only",
+   "type": "",
+   "date": "2026-11-21T05:20:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-behavioral-security-products-abnormal-1137948",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Information Technology and Services",
-    "Remote"
+    "devops"
    ]
   },
   {
-   "id": "arbeitnow-remote-1226-front-end-developer-germany-84712",
-   "title": "1226 | Front-end Developer",
-   "company": "Intetics 2",
-   "loc": "Germany",
-   "type": "Part time",
-   "date": "2026-11-21T12:20:17+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/intetics-2/remote-1226-front-end-developer-germany-84712",
-   "source": "Arbeitnow",
+   "id": "remoteok-1137946",
+   "title": "Engineering Manager, Ranking Platform",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T05:00:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-ranking-platform-reddit-1137946",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Information Technology and Services",
-    "Remote"
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137945",
+   "title": "Principal Software Engineer, Infrastructure",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T04:40:06+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-principal-software-engineer-infrastructure-reddit-1137945",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137940",
+   "title": "Lead, Office of Software Assurance",
+   "company": "Natera",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T04:00:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-lead-office-of-software-assurance-natera-1137940",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137936",
+   "title": "Business Services Assistant",
+   "company": "Ping Identity",
+   "loc": "UK Only",
+   "type": "",
+   "date": "2026-11-21T03:20:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-business-services-assistant-ping-identity-1137936",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
    ]
   },
   {
@@ -104,6 +156,95 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
+  },
+  {
+   "id": "remoteok-1137933",
+   "title": "Associate Counsel, Vendor and Provider Contracting",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T02:40:06+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-associate-counsel-vendor-and-provider-contracting-clover-health-1137933",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137932",
+   "title": "Senior Staff Machine Learning Engineer, Ads Ranking",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T02:40:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-staff-machine-learning-engineer-ads-ranking-reddit-1137932",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "product"
+   ]
+  },
+  {
+   "id": "remoteok-1137924",
+   "title": "Senior Software Engineer II - Agentic Intelligence",
+   "company": "Honeycomb.io",
+   "loc": "Canada Only",
+   "type": "",
+   "date": "2026-11-21T01:20:20+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-ii-agentic-intelligence-honeycomb-io-1137924",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137923",
+   "title": "Sr Mgr, Software Engineering (Cribl Detect)",
+   "company": "Cribl",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T01:00:06+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-sr-mgr-software-engineering-cribl-detect-cribl-1137923",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137922",
+   "title": "Technical Solutions Engineer",
+   "company": "Stripe",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T01:00:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-technical-solutions-engineer-stripe-1137922",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137917",
+   "title": "Senior Applied AI Engineer",
+   "company": "Wemolo",
+   "loc": "MÃ¼nchen",
+   "type": "",
+   "date": "2026-11-21T00:00:11+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-applied-ai-engineer-wemolo-1137917",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "embedded",
+    "sys admin",
+    "python",
+    "technical",
+    "dev",
+    "testing"
+   ]
   },
   {
    "id": "arbeitnow-remote-backend-software-developer-hilversum-417173",
@@ -472,63 +613,6 @@
    ]
   },
   {
-   "id": "remoteok-1137839",
-   "title": "Engineer Software Defined Vehicle Simulation and Development",
-   "company": "NIKI Digital Engineering",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-19T16:00:34+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-engineer-software-defined-vehicle-simulation-and-development-niki-digital-engineering-1137839",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "dev",
-    "design",
-    "embedded",
-    "sys admin",
-    "infosec",
-    "python"
-   ]
-  },
-  {
-   "id": "remoteok-1137837",
-   "title": "Postdoc PhD PhD cand. Physics Computer Science",
-   "company": "NIKI Digital Engineering",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-19T16:00:21+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-postdoc-phd-phd-cand-physics-computer-science-niki-digital-engineering-1137837",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "design",
-    "python",
-    "consulting",
-    "technical",
-    "exec",
-    "c"
-   ]
-  },
-  {
-   "id": "remoteok-1137835",
-   "title": "Technical Lead Norm Compliance",
-   "company": "Norm",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-19T16:00:15+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-technical-lead-norm-compliance-norm-1137835",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "design",
-    "python",
-    "education",
-    "technical",
-    "customer support",
-    "dev"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -548,20 +632,6 @@
    ]
   },
   {
-   "id": "remoteok-1137826",
-   "title": "Enterprise Solutions Engineer, East",
-   "company": "Glean",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T13:45:02+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-enterprise-solutions-engineer-east-glean-1137826",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "sales"
-   ]
-  },
-  {
    "id": "jobicy-163297",
    "title": "Site Reliability Engineer (Australia, Remote)",
    "company": "Axon",
@@ -572,39 +642,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "remoteok-1137809",
-   "title": "Senior Analytics Engineer",
-   "company": "Tebra",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T09:58:02+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-analytics-engineer-tebra-1137809",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137808",
-   "title": "Software Engineer AI Coding Tasks",
-   "company": "Askable",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-19T05:56:01+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-software-engineer-ai-coding-tasks-askable-1137808",
-   "source": "Remote OK",
-   "salary": "USD 10,000/year",
-   "tags": [
-    "dev",
-    "golang",
-    "python",
-    "javascript",
-    "typescript",
-    "java"
-   ]
   },
   {
    "id": "jobicy-155939",
@@ -629,25 +666,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "remoteok-1137805",
-   "title": "SEO Full Stack Engineer",
-   "company": "Treatwell",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-18T16:00:31+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-seo-full-stack-engineer-treatwell-1137805",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "full stack",
-    "react",
-    "rabbitmq",
-    "front end",
-    "technical",
-    "customer support"
-   ]
   },
   {
    "id": "jobicy-163153",
@@ -746,30 +764,6 @@
    "tags": []
   },
   {
-   "id": "jobicy-162556",
-   "title": "Senior Cloud Infrastructure Engineer",
-   "company": "Tala",
-   "loc": "APAC",
-   "type": "Full-Time",
-   "date": "2026-11-16T11:52:01+00:00",
-   "url": "https://jobicy.com/jobs/162556-senior-cloud-infrastructure-engineer",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-153195",
-   "title": "Senior+ Backend Software Engineer - Asia",
-   "company": "Palmstreet",
-   "loc": "China",
-   "type": "Full-Time",
-   "date": "2026-11-16T03:11:43+00:00",
-   "url": "https://jobicy.com/jobs/153195-senior-backend-software-engineer-asia",
-   "source": "Jobicy",
-   "salary": "CNY 600,000–1,000,000/yearly",
-   "tags": []
-  },
-  {
    "id": "jobicy-162315",
    "title": "IT Department Lead - Remote, Worldwide",
    "company": "Nethermind",
@@ -777,42 +771,6 @@
    "type": "Full-Time",
    "date": "2026-11-15T10:20:16+00:00",
    "url": "https://jobicy.com/jobs/162315-it-department-lead-remote-worldwide",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-155391",
-   "title": "Site Reliability Engineer",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-15T03:45:14+00:00",
-   "url": "https://jobicy.com/jobs/155391-site-reliability-engineer-4",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-155389",
-   "title": "Platform Engineer, Managed Postgres",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-15T03:45:12+00:00",
-   "url": "https://jobicy.com/jobs/155389-platform-engineer-managed-postgres",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-155385",
-   "title": "AI Platform Engineer",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-15T03:45:11+00:00",
-   "url": "https://jobicy.com/jobs/155385-ai-platform-engineer",
    "source": "Jobicy",
    "salary": "",
    "tags": []
