@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T06:55:58+00:00",
+ "updated": "2026-11-22T16:19:54+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,12 +9,12 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 24
+   "count": 20
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 33
+   "count": 28
   },
   {
    "name": "Arbeitnow",
@@ -23,6 +23,33 @@
   }
  ],
  "jobs": [
+  {
+   "id": "arbeitnow-remote-software-test-engineer-bern-110215",
+   "title": "Software Test Engineer",
+   "company": "SwissPeak Partners GmbH",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-22T12:31:14+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/swisspeak-partners-gmbh/remote-software-test-engineer-bern-110215",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Software Engineering",
+    "Remote"
+   ]
+  },
+  {
+   "id": "jobicy-163805",
+   "title": "Solutions Engineer, Singapore",
+   "company": "Cribl",
+   "loc": "Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-22T05:54:42+00:00",
+   "url": "https://jobicy.com/jobs/163805-solutions-engineer-singapore-2",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
   {
    "id": "jobicy-151256",
    "title": "Lead Solutions Engineer",
@@ -36,20 +63,6 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-remote-solutions-engineer-veeam-data-cloud-vault-242654",
-   "title": "Solutions Engineer, Veeam Data Cloud Vault",
-   "company": "veeamsoftware",
-   "loc": "Remote",
-   "type": "",
-   "date": "2026-11-21T21:55:28+00:00",
-   "url": "https://www.arbeitnow.fr/jobs/companies/veeamsoftware/remote-solutions-engineer-veeam-data-cloud-vault-242654",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Strategic Workloads - Global 1008556"
-   ]
-  },
-  {
    "id": "arbeitnow-remote-principal-enterprise-architect-ai-cloud-integrations-162065",
    "title": "Principal Enterprise Architect - AI & Cloud Integrations",
    "company": "celonis",
@@ -61,6 +74,62 @@
    "salary": "",
    "tags": [
     "Value Engineering"
+   ]
+  },
+  {
+   "id": "remoteok-1137962",
+   "title": "Sr Analyst, Analytics & Insights",
+   "company": "BeyondTrust",
+   "loc": "North America",
+   "type": "",
+   "date": "2026-11-21T11:00:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-sr-analyst-analytics-insights-beyondtrust-1137962",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137957",
+   "title": "Senior Database Engineer",
+   "company": "Bitwarden",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T10:00:07+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-database-engineer-bitwarden-1137957",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137955",
+   "title": "Staff Software Engineer, Agentic Tools",
+   "company": "Cribl",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T09:40:06+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-staff-software-engineer-agentic-tools-cribl-1137955",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137954",
+   "title": "Senior Software Engineer, Partner Integrations",
+   "company": "Airbnb",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-21T09:40:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-partner-integrations-airbnb-1137954",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
    ]
   },
   {
@@ -487,132 +556,6 @@
    ]
   },
   {
-   "id": "remoteok-1137857",
-   "title": "Infrastructure Software Engineer",
-   "company": "Dropbox",
-   "loc": "North America",
-   "type": "",
-   "date": "2026-11-19T20:30:17+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-infrastructure-software-engineer-dropbox-1137857",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137856",
-   "title": "Senior Software Engineer",
-   "company": "Tebra",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T20:15:13+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-tebra-1137856",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137855",
-   "title": "Engineering Manager",
-   "company": "Clover Health",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T20:00:13+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-clover-health-1137855",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137853",
-   "title": "Engineering Lead, Growth",
-   "company": "Clover Health",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T19:30:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-engineering-lead-growth-clover-health-1137853",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137851",
-   "title": "Senior GTM Engineer",
-   "company": "Salesloft",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T19:00:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-gtm-engineer-salesloft-1137851",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137849",
-   "title": "Senior Software Engineer Guest & Host",
-   "company": "Airbnb",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T18:30:15+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-guest-host-airbnb-1137849",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137848",
-   "title": "Engineering Manager, External Search & AI Optimization",
-   "company": "Airbnb",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T18:15:04+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-engineering-manager-external-search-ai-optimization-airbnb-1137848",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137846",
-   "title": "Senior Data Engineer Tech Foundations",
-   "company": "Airbnb",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T17:45:24+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-data-engineer-tech-foundations-airbnb-1137846",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137844",
-   "title": "Staff Software Engineer (Interfaces)",
-   "company": "Netlify",
-   "loc": "Worldwide",
-   "type": "",
-   "date": "2026-11-19T17:15:52+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-staff-software-engineer-interfaces-netlify-1137844",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -761,18 +704,6 @@
    "url": "https://jobicy.com/jobs/155601-staff-software-engineer-sre-2",
    "source": "Jobicy",
    "salary": "USD 200,000–250,000/yearly",
-   "tags": []
-  },
-  {
-   "id": "jobicy-162315",
-   "title": "IT Department Lead - Remote, Worldwide",
-   "company": "Nethermind",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-15T10:20:16+00:00",
-   "url": "https://jobicy.com/jobs/162315-it-department-lead-remote-worldwide",
-   "source": "Jobicy",
-   "salary": "",
    "tags": []
   },
   {
