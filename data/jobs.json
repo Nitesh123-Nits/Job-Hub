@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T16:19:54+00:00",
+ "updated": "2026-11-23T07:45:21+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,20 +9,150 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 20
+   "count": 27
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 28
+   "count": 27
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 4
+   "count": 7
   }
  ],
  "jobs": [
+  {
+   "id": "jobicy-156583",
+   "title": "Cloud Platform Engineer",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:40:28+00:00",
+   "url": "https://jobicy.com/jobs/156583-cloud-platform-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156582",
+   "title": "Performance Engineer - Benchmarking",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:40:27+00:00",
+   "url": "https://jobicy.com/jobs/156582-performance-engineer-benchmarking",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156581",
+   "title": "Performance Engineer - Performance Analysis & Tuning",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:40:25+00:00",
+   "url": "https://jobicy.com/jobs/156581-performance-engineer-performance-analysis-tuning",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156579",
+   "title": "Release Engineer",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:40:24+00:00",
+   "url": "https://jobicy.com/jobs/156579-release-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-hands-on-engineering-manager-c-vue-6698",
+   "title": "Hands-on Engineering Manager (C#/Vue)",
+   "company": "Miaplaza",
+   "loc": "Remote job",
+   "type": "Manager, fulltime permanent",
+   "date": "2026-11-23T03:31:35+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/miaplaza/remote-hands-on-engineering-manager-c-vue-6698",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote"
+   ]
+  },
+  {
+   "id": "jobicy-151197",
+   "title": "C++/Rust Graphics and Windowing System Software Engineer - Mir",
+   "company": "Canonical",
+   "loc": "APAC,  EMEA",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:25:31+00:00",
+   "url": "https://jobicy.com/jobs/151197-c-rust-graphics-and-windowing-system-software-engineer-mir",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-151281",
+   "title": "Senior Web Security Engineer, Browser Platform",
+   "company": "DuckDuckGo",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-23T03:25:13+00:00",
+   "url": "https://jobicy.com/jobs/151281-senior-web-security-engineer-browser-platform",
+   "source": "Jobicy",
+   "salary": "USD 178,500/yearly",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-java-entwicklerin-java-developer-backend-munster-85293",
+   "title": "Java Entwickler:in / Java Developer Backend (w/m/d)",
+   "company": "BBHT Beratungsgesellschaft mbH & Co. KG",
+   "loc": "Homeoffice",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-23T00:31:19+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/bbht-beratungsgesellschaft-mbh-co-kg/remote-java-entwicklerin-java-developer-backend-munster-85293",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-engineering-manager-eu-uk-berlin-491641",
+   "title": "Engineering Manager EU/UK (m/f/x)",
+   "company": "Makersite GmbH",
+   "loc": "Remote job",
+   "type": "Senior manager, fulltime permanent",
+   "date": "2026-11-22T15:31:28+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/makersite-gmbh/remote-engineering-manager-eu-uk-berlin-491641",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Technology",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
+   "title": "Kubernetes Administrator/Private Cloud Engineer (m/w/d)",
+   "company": "virtual7 GmbH",
+   "loc": "Homeoffice",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-22T15:31:18+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Customer Cluster Justice",
+    "Remote"
+   ]
+  },
   {
    "id": "arbeitnow-remote-software-test-engineer-bern-110215",
    "title": "Software Test Engineer",
@@ -61,6 +191,62 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
+  },
+  {
+   "id": "remoteok-1137977",
+   "title": "Product Manager, Developer Ecosystem",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-22T02:00:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-product-manager-developer-ecosystem-reddit-1137977",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "product"
+   ]
+  },
+  {
+   "id": "remoteok-1137975",
+   "title": "Senior SRE, Site Experience",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-22T01:40:06+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-sre-site-experience-reddit-1137975",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137974",
+   "title": "Senior Staff SRE, Site Experience",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-22T01:40:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-staff-sre-site-experience-reddit-1137974",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1137970",
+   "title": "Sr. Forward Deployed Data Engineer",
+   "company": "Natera",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-22T01:00:07+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-sr-forward-deployed-data-engineer-natera-1137970",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
   },
   {
    "id": "arbeitnow-remote-principal-enterprise-architect-ai-cloud-integrations-162065",
@@ -350,22 +536,6 @@
    ]
   },
   {
-   "id": "arbeitnow-remote-senior-platform-engineer-amsterdam-429264",
-   "title": "Senior Platform Engineer",
-   "company": "Treatwell",
-   "loc": "Amsterdam, Netherlands",
-   "type": "Full time, mid-senior",
-   "date": "2026-11-20T13:20:10+00:00",
-   "url": "https://www.arbeitnow.nl/jobs/companies/treatwell/remote-senior-platform-engineer-amsterdam-429264",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Internet",
-    "Tech",
-    "Remote"
-   ]
-  },
-  {
    "id": "jobicy-163534",
    "title": "Android Engineer (APAC Remote)",
    "company": "Binance",
@@ -476,86 +646,6 @@
    ]
   },
   {
-   "id": "remoteok-1137871",
-   "title": "Senior Software Engineer",
-   "company": "Clover Health",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T01:30:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-clover-health-1137871",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137865",
-   "title": "Senior Product Engineer",
-   "company": "Arbor Education",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-20T00:00:47+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-product-engineer-arbor-education-1137865",
-   "source": "Remote OK",
-   "salary": "USD 70,000–80,000/year",
-   "tags": [
-    "design",
-    "react",
-    "backend",
-    "education",
-    "consulting",
-    "docker"
-   ]
-  },
-  {
-   "id": "remoteok-1137864",
-   "title": "IT Manager",
-   "company": "1mind",
-   "loc": "United States",
-   "type": "",
-   "date": "2026-11-20T00:00:41+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-it-manager-1mind-1137864",
-   "source": "Remote OK",
-   "salary": "USD 140,000–170,000/year",
-   "tags": [
-    "exec",
-    "saas",
-    "infosec",
-    "recruiter",
-    "customer support",
-    "dev"
-   ]
-  },
-  {
-   "id": "remoteok-1137860",
-   "title": "Senior Atlassian Cloud Admininstrator",
-   "company": "Dropbox",
-   "loc": "North America",
-   "type": "",
-   "date": "2026-11-19T21:15:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-atlassian-cloud-admininstrator-dropbox-1137860",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137858",
-   "title": "Principal DevSecOps Engineer",
-   "company": "Upgrade",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-19T20:45:40+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-principal-devsecops-engineer-upgrade-1137858",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -606,54 +696,6 @@
    "type": "Full-Time",
    "date": "2026-11-19T02:40:17+00:00",
    "url": "https://jobicy.com/jobs/146254-atlassian-administrator-1726",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-163153",
-   "title": "Manager, Developer Advocacy, APJ",
-   "company": "Temporal Technologies",
-   "loc": "Singapore",
-   "type": "Full-Time",
-   "date": "2026-11-18T14:00:42+00:00",
-   "url": "https://jobicy.com/jobs/163153-manager-developer-advocacy-apj",
-   "source": "Jobicy",
-   "salary": "SGD 208,000–273,000/yearly",
-   "tags": []
-  },
-  {
-   "id": "jobicy-163152",
-   "title": "Service Desk Engineer",
-   "company": "RFA",
-   "loc": "Philippines",
-   "type": "Full-Time",
-   "date": "2026-11-18T14:00:40+00:00",
-   "url": "https://jobicy.com/jobs/163152-service-desk-engineer",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-163150",
-   "title": "Senior Service Desk Engineer",
-   "company": "RFA",
-   "loc": "Philippines",
-   "type": "Full-Time",
-   "date": "2026-11-18T14:00:12+00:00",
-   "url": "https://jobicy.com/jobs/163150-senior-service-desk-engineer",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-163148",
-   "title": "Senior Network Engineer",
-   "company": "RFA",
-   "loc": "Philippines",
-   "type": "Full-Time",
-   "date": "2026-11-18T14:00:08+00:00",
-   "url": "https://jobicy.com/jobs/163148-senior-network-engineer-2",
    "source": "Jobicy",
    "salary": "",
    "tags": []
