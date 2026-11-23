@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-23T07:45:21+00:00",
+ "updated": "2026-11-23T20:17:45+00:00",
  "sources": [
   {
    "name": "Remotive",
    "ok": true,
-   "count": 16
+   "count": 15
   },
   {
    "name": "Jobicy",
@@ -14,15 +14,75 @@
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 27
+   "count": 30
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 7
+   "count": 6
   }
  ],
  "jobs": [
+  {
+   "id": "arbeitnow-remote-senior-sap-abap-developer-architect-technical-migration-berlin-269633",
+   "title": "(Senior) SAP ABAP Developer/ Architect – Technical Migration (m/w/d)",
+   "company": "Natuvion GmbH",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-23T18:31:24+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/natuvion-gmbh/remote-senior-sap-abap-developer-architect-technical-migration-berlin-269633",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Technical Migration",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-founding-full-stack-engineer-berlin-304822",
+   "title": "Founding Full-Stack Engineer",
+   "company": "planqor.ai",
+   "loc": "Berlin",
+   "type": "Permanent employment, professional / experienced",
+   "date": "2026-11-23T16:00:50+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/planqorai/founding-full-stack-engineer-berlin-304822",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "arbeitnow-founding-optimization-engineer-berlin-97593",
+   "title": "Founding Optimization Engineer",
+   "company": "planqor.ai",
+   "loc": "Berlin",
+   "type": "Permanent employment, professional / experienced",
+   "date": "2026-11-23T16:00:48+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/planqorai/founding-optimization-engineer-berlin-97593",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-ai-engineer-rotterdam-22878",
+   "title": "AI Engineer",
+   "company": "AnywhereNow",
+   "loc": "Remote job",
+   "type": "Mid, fulltime fixed term",
+   "date": "2026-11-23T12:31:42+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/anywherenow/remote-ai-engineer-rotterdam-22878",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Product Development",
+    "Remote"
+   ]
+  },
   {
    "id": "jobicy-156583",
    "title": "Cloud Platform Engineer",
@@ -72,20 +132,6 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-remote-hands-on-engineering-manager-c-vue-6698",
-   "title": "Hands-on Engineering Manager (C#/Vue)",
-   "company": "Miaplaza",
-   "loc": "Remote job",
-   "type": "Manager, fulltime permanent",
-   "date": "2026-11-23T03:31:35+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/miaplaza/remote-hands-on-engineering-manager-c-vue-6698",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote"
-   ]
-  },
-  {
    "id": "jobicy-151197",
    "title": "C++/Rust Graphics and Windowing System Software Engineer - Mir",
    "company": "Canonical",
@@ -108,50 +154,6 @@
    "source": "Jobicy",
    "salary": "USD 178,500/yearly",
    "tags": []
-  },
-  {
-   "id": "arbeitnow-remote-java-entwicklerin-java-developer-backend-munster-85293",
-   "title": "Java Entwickler:in / Java Developer Backend (w/m/d)",
-   "company": "BBHT Beratungsgesellschaft mbH & Co. KG",
-   "loc": "Homeoffice",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-23T00:31:19+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/bbht-beratungsgesellschaft-mbh-co-kg/remote-java-entwicklerin-java-developer-backend-munster-85293",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote"
-   ]
-  },
-  {
-   "id": "arbeitnow-remote-engineering-manager-eu-uk-berlin-491641",
-   "title": "Engineering Manager EU/UK (m/f/x)",
-   "company": "Makersite GmbH",
-   "loc": "Remote job",
-   "type": "Senior manager, fulltime permanent",
-   "date": "2026-11-22T15:31:28+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/makersite-gmbh/remote-engineering-manager-eu-uk-berlin-491641",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Technology",
-    "Remote"
-   ]
-  },
-  {
-   "id": "arbeitnow-remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
-   "title": "Kubernetes Administrator/Private Cloud Engineer (m/w/d)",
-   "company": "virtual7 GmbH",
-   "loc": "Homeoffice",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-22T15:31:18+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Customer Cluster Justice",
-    "Remote"
-   ]
   },
   {
    "id": "arbeitnow-remote-software-test-engineer-bern-110215",
@@ -502,21 +504,6 @@
    ]
   },
   {
-   "id": "arbeitnow-remote-backend-software-developer-hilversum-417173",
-   "title": "Backend Software Developer",
-   "company": "Dawn Technology",
-   "loc": "Werken op afstand",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-20T21:31:27+00:00",
-   "url": "https://www.arbeitnow.nl/jobs/companies/dawn-technology/remote-backend-software-developer-hilversum-417173",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Dawn Technology",
-    "Remote"
-   ]
-  },
-  {
    "id": "remoteok-1137914",
    "title": "Quality Engineer",
    "company": "Quartermaster",
@@ -643,6 +630,58 @@
    "salary": "",
    "tags": [
     "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137871",
+   "title": "Senior Software Engineer",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-20T01:30:14+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-clover-health-1137871",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1137865",
+   "title": "Senior Product Engineer",
+   "company": "Arbor Education",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-20T00:00:47+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-product-engineer-arbor-education-1137865",
+   "source": "Remote OK",
+   "salary": "USD 70,000–80,000/year",
+   "tags": [
+    "design",
+    "react",
+    "backend",
+    "education",
+    "consulting",
+    "docker"
+   ]
+  },
+  {
+   "id": "remoteok-1137864",
+   "title": "IT Manager",
+   "company": "1mind",
+   "loc": "United States",
+   "type": "",
+   "date": "2026-11-20T00:00:41+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-it-manager-1mind-1137864",
+   "source": "Remote OK",
+   "salary": "USD 140,000–170,000/year",
+   "tags": [
+    "exec",
+    "saas",
+    "infosec",
+    "recruiter",
+    "customer support",
+    "dev"
    ]
   },
   {
@@ -967,12 +1006,12 @@
   },
   {
    "id": "remotive-2091135",
-   "title": "Senior Back-end Developer",
+   "title": "Senior Back-end Developerusa",
    "company": "Lemon.io",
    "loc": "Europe, USA, Canada, Australia, Singapore, Mexico, Saudi Arabia",
    "type": "full time",
    "date": "2026-10-27T12:56:13+00:00",
-   "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-developer-2091135",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-developerusa-2091135",
    "source": "Remotive",
    "salary": "",
    "tags": [
@@ -982,22 +1021,6 @@
     "C#",
     "C++",
     "cloud"
-   ]
-  },
-  {
-   "id": "remotive-2091161",
-   "title": "AI Trainer - Video Annotation",
-   "company": "iMerit Technology",
-   "loc": "Worldwide",
-   "type": "freelance",
-   "date": "2026-10-22T18:40:19+00:00",
-   "url": "https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161",
-   "source": "Remotive",
-   "salary": "70K-80K",
-   "tags": [
-    "video",
-    "AI/ML",
-    "robotics"
    ]
   }
  ]
