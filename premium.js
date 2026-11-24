@@ -42,7 +42,7 @@ const cardHTML = x => `<a class="card" href="${esc(x.u)}" target="_blank" rel="n
 const chip = (on, attr, val, label) => `<button class="chip ${on ? "on" : ""}" ${attr}="${esc(val)}">${esc(label)}</button>`;
 
 /* ---------- state ---------- */
-let prof = Object.assign({ name: "", role: "", years: "", skills: "" }, store.get(K.prof, {}));
+let prof = Object.assign({ name: "", role: "", years: "", skills: "", resume: "" }, store.get(K.prof, {}));
 let track = store.get(K.track, []);
 let watch = store.get(K.watch, []);
 const savedCmp = store.get(K.cmp, null);
@@ -107,6 +107,7 @@ $("main").insertAdjacentHTML("beforebegin", `
     <input id="o-name" class="custom" placeholder="Your name" autocomplete="off" aria-label="Your name">
     <input id="o-years" class="custom" placeholder="Years of experience" autocomplete="off" inputmode="numeric" aria-label="Years of experience">
     <input id="o-skills" class="custom" placeholder="Key skills, e.g. Java, Spring Boot, Kafka" autocomplete="off" aria-label="Key skills">
+    <input id="o-resume" class="custom" placeholder="Resume link (Google Drive, PDF or Dropbox URL)" autocomplete="off" inputmode="url" aria-label="Resume link">
   </div>
   <div class="bl">This application</div>
   <div class="row">
@@ -380,6 +381,7 @@ $("t-file").addEventListener("change", async e => {
 const v = (x, ph) => (x && String(x).trim()) || ph;
 function templates() {
   const name = v(prof.name, "[Your name]"), years = v(prof.years, "[X]"), skills = v(prof.skills, "[your key skills]");
+  const link = String(prof.resume || "").trim();
   const co = v(os.company, "[Company]"), role = v(os.role || prof.role, "[Role]"), who = v(os.contact, "[Name]"), jobId = v(os.jobId, "[Job ID]");
   return [
     { t: "LinkedIn connection note", max: 300, body:
@@ -389,7 +391,7 @@ function templates() {
 
 I saw the ${role} opening at ${co}. I have ${years}+ years of experience in ${skills}, and the role looks like a close match for my background.
 
-Could you tell me the next steps, or point me to the right person? I can share my resume right away.
+Could you tell me the next steps, or point me to the right person? ${link ? `My resume is here: ${link}` : "I can share my resume right away."}
 
 Thanks,
 ${name}` },
@@ -398,7 +400,7 @@ ${name}` },
 
 I'm writing to apply for the ${role} position at ${co}. I have ${years}+ years of experience in ${skills}.
 
-My resume is attached. I'd be glad to discuss how I can contribute to your team and am available for a call at your convenience.
+${link ? `My resume is here: ${link}` : "My resume is attached."} I'd be glad to discuss how I can contribute to your team and am available for a call at your convenience.
 
 Regards,
 ${name}` },
@@ -409,7 +411,7 @@ Hope you're doing well. I noticed ${co} is hiring for ${role} and I'd like to ap
 
 Job ID: ${jobId}
 
-Would you be comfortable referring me? I can send my resume and a short summary so it's easy for you. Thanks either way!
+Would you be comfortable referring me? ${link ? `My resume is here: ${link}, and I can send a short summary too.` : "I can send my resume and a short summary so it's easy for you."} Thanks either way!
 
 ${name}` },
     { t: "Follow-up after applying", subject: `Following up: ${role} application – ${name}`, body:
@@ -445,12 +447,12 @@ function drawTemplates() {
   }).join("");
 }
 function drawOutreach() {
-  $("o-name").value = prof.name; $("o-years").value = prof.years; $("o-skills").value = prof.skills;
+  $("o-name").value = prof.name; $("o-years").value = prof.years; $("o-skills").value = prof.skills; $("o-resume").value = prof.resume || "";
   $("o-company").value = os.company; $("o-role").value = os.role; $("o-contact").value = os.contact; $("o-jobid").value = os.jobId || "";
   drawTemplates();
 }
 const bindO = (id, obj, key, storeKey) => $(id).addEventListener("input", e => { obj[key] = e.target.value; store.set(storeKey, obj); drawTemplates(); });
-bindO("o-name", prof, "name", K.prof); bindO("o-years", prof, "years", K.prof); bindO("o-skills", prof, "skills", K.prof);
+bindO("o-name", prof, "name", K.prof); bindO("o-years", prof, "years", K.prof); bindO("o-skills", prof, "skills", K.prof); bindO("o-resume", prof, "resume", K.prof);
 bindO("o-company", os, "company", K.out); bindO("o-role", os, "role", K.out); bindO("o-contact", os, "contact", K.out); bindO("o-jobid", os, "jobId", K.out);
 $("o-tpls").addEventListener("click", e => {
   const b = e.target.closest("[data-copy]"); if (!b) return;
