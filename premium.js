@@ -130,6 +130,18 @@ $("main").insertAdjacentHTML("beforebegin", `
   <div id="l-err"></div>
   <div id="l-list"></div>
 </section></div>
+<div class="wrap pane" id="ai" hidden><section>
+  <div class="sh"><span class="no">00</span><h2>AI Tools</h2><span class="ct">6 tools</span><p>Your Claude-powered tools. Each one opens in claude.ai in a new tab, where it uses your Claude account. Sign in to claude.ai first.</p></div>
+  <div class="ai-grid">
+    <a class="ai-card" href="https://claude.ai/artifact/6a2YjqLm2oUqgkKJJzZSKo" target="_blank" rel="noopener"><span class="ai-tag">Resume</span><b>Resume Tailor</b><span>Paste a job description and get a tailored LaTeX resume, a PDF and an ATS score.</span></a>
+    <a class="ai-card" href="https://claude.ai/artifact/K5xRSc2xGM3BVgVYTx7Ysq" target="_blank" rel="noopener"><span class="ai-tag">Outreach</span><b>Outreach Studio</b><span>Cover letters, HR emails, LinkedIn notes and referral requests.</span></a>
+    <a class="ai-card" href="https://claude.ai/artifact/7vybnJ6PwvWxxdaunnzimi" target="_blank" rel="noopener"><span class="ai-tag">Pipeline</span><b>Job Hunt Board</b><span>Applications from wishlist to offer, with follow-ups and AI drafts.</span></a>
+    <a class="ai-card" href="https://claude.ai/artifact/NVjDkNS9RTPjuqNri4dmNV" target="_blank" rel="noopener"><span class="ai-tag">Learning</span><b>Interview Dojo</b><span>Mock interviews, system design rounds, a DSA solver and resume-based questions.</span></a>
+    <a class="ai-card" href="https://claude.ai/artifact/1P4mn4q6E8Gwg8wiM36yjo" target="_blank" rel="noopener"><span class="ai-tag">Interviews</span><b>HR &amp; Manager Round Coach</b><span>HR screens, salary talks, behavioural, manager, Googliness and Amazon Leadership Principle rounds.</span></a>
+    <a class="ai-card" href="https://claude.ai/artifact/M4nMe44bHAmaEGLj9Gq4vz" target="_blank" rel="noopener"><span class="ai-tag">Reading</span><b>Blog Digest</b><span>Paste a blog link and get a structured summary.</span></a>
+  </div>
+  <p class="ai-note">These tools need a Claude account, so they run on claude.ai rather than inside this page. Links open in a new tab.</p>
+</section></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>`);
 
 // hero: stats tiles + quick company search
@@ -553,7 +565,7 @@ $("live").addEventListener("click", e => {
 function onTab(t) {
   document.body.dataset.tab = t;
   document.body.classList.toggle("tool", t !== "all"); // hero only on the home view, so results get the space
-  for (const id of ["cmp", "trk", "out", "live"]) $(id).hidden = id !== t;
+  for (const id of ["cmp", "trk", "out", "live", "ai"]) $(id).hidden = id !== t;
   if (t === "cmp") { $("c-name").value = cs.name; drawCompany(); }
   else if (t === "trk") drawTracker();
   else if (t === "out") drawOutreach();
