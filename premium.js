@@ -113,6 +113,7 @@ $("main").insertAdjacentHTML("beforebegin", `
     <input id="o-company" class="custom" placeholder="Company" autocomplete="off" aria-label="Company">
     <input id="o-role" class="custom" placeholder="Role" autocomplete="off" aria-label="Role">
     <input id="o-contact" class="custom" placeholder="Recruiter / referrer name" autocomplete="off" aria-label="Contact name">
+    <input id="o-jobid" class="custom" placeholder="Job ID / requisition no. (for referrals)" autocomplete="off" aria-label="Job ID">
   </div>
   <div id="o-tpls"></div>
 </section></div>
@@ -369,7 +370,7 @@ $("t-file").addEventListener("change", async e => {
 const v = (x, ph) => (x && String(x).trim()) || ph;
 function templates() {
   const name = v(prof.name, "[Your name]"), years = v(prof.years, "[X]"), skills = v(prof.skills, "[your key skills]");
-  const co = v(os.company, "[Company]"), role = v(os.role || prof.role, "[Role]"), who = v(os.contact, "[Name]");
+  const co = v(os.company, "[Company]"), role = v(os.role || prof.role, "[Role]"), who = v(os.contact, "[Name]"), jobId = v(os.jobId, "[Job ID]");
   return [
     { t: "LinkedIn connection note", max: 300, body:
 `Hi ${who}, I'm a ${role} with ${years}+ years in ${skills}. I'm interested in the work at ${co} and would love to connect.` },
@@ -395,6 +396,9 @@ ${name}` },
 `Hi ${who},
 
 Hope you're doing well. I noticed ${co} is hiring for ${role} and I'd like to apply. I have ${years}+ years of experience in ${skills}.
+
+Job ID: ${jobId}
+(You can search this ID on the ${co} careers page to find the exact opening.)
 
 Would you be comfortable referring me? I can send my resume and a short summary so it's easy for you. Thanks either way!
 
@@ -433,12 +437,12 @@ function drawTemplates() {
 }
 function drawOutreach() {
   $("o-name").value = prof.name; $("o-years").value = prof.years; $("o-skills").value = prof.skills;
-  $("o-company").value = os.company; $("o-role").value = os.role; $("o-contact").value = os.contact;
+  $("o-company").value = os.company; $("o-role").value = os.role; $("o-contact").value = os.contact; $("o-jobid").value = os.jobId || "";
   drawTemplates();
 }
 const bindO = (id, obj, key, storeKey) => $(id).addEventListener("input", e => { obj[key] = e.target.value; store.set(storeKey, obj); drawTemplates(); });
 bindO("o-name", prof, "name", K.prof); bindO("o-years", prof, "years", K.prof); bindO("o-skills", prof, "skills", K.prof);
-bindO("o-company", os, "company", K.out); bindO("o-role", os, "role", K.out); bindO("o-contact", os, "contact", K.out);
+bindO("o-company", os, "company", K.out); bindO("o-role", os, "role", K.out); bindO("o-contact", os, "contact", K.out); bindO("o-jobid", os, "jobId", K.out);
 $("o-tpls").addEventListener("click", e => {
   const b = e.target.closest("[data-copy]"); if (!b) return;
   const t = tplCache[+b.dataset.copy]; copy(t.subject ? `Subject: ${t.subject}\n\n${t.body}` : t.body);
