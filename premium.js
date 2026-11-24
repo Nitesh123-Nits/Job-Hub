@@ -398,7 +398,6 @@ ${name}` },
 Hope you're doing well. I noticed ${co} is hiring for ${role} and I'd like to apply. I have ${years}+ years of experience in ${skills}.
 
 Job ID: ${jobId}
-(You can search this ID on the ${co} careers page to find the exact opening.)
 
 Would you be comfortable referring me? I can send my resume and a short summary so it's easy for you. Thanks either way!
 
