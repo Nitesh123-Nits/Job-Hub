@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T20:17:45+00:00",
+ "updated": "2026-11-24T09:58:42+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,63 +9,163 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 27
+   "count": 24
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 30
+   "count": 32
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 6
+   "count": 10
   }
  ],
  "jobs": [
   {
-   "id": "arbeitnow-remote-senior-sap-abap-developer-architect-technical-migration-berlin-269633",
-   "title": "(Senior) SAP ABAP Developer/ Architect – Technical Migration (m/w/d)",
-   "company": "Natuvion GmbH",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-23T18:31:24+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/natuvion-gmbh/remote-senior-sap-abap-developer-architect-technical-migration-berlin-269633",
+   "id": "arbeitnow-pki-iam-engineer-zurich-300405",
+   "title": "PKI & IAM Engineer",
+   "company": "Coopers Group AG",
+   "loc": "Zürich",
+   "type": "Interim, interim, berufserfahren",
+   "date": "2026-11-24T09:00:59+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/coopers-group-ag/pki-iam-engineer-zurich-300405",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Technical Migration",
+    "Remote",
+    "IT Security"
+   ]
+  },
+  {
+   "id": "arbeitnow-developer-community-lead-berlin-292234",
+   "title": "Developer Community Lead",
+   "company": "RhymeQ Technologies GmbH",
+   "loc": "Berlin",
+   "type": "Permanent employment, professional / experienced",
+   "date": "2026-11-24T08:30:34+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/rhymeq-technologies-gmbh/developer-community-lead-berlin-292234",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Social Media Manager"
+   ]
+  },
+  {
+   "id": "arbeitnow-quantum-compiler-engineer-berlin-52057",
+   "title": "Quantum Compiler Engineer (m/f/d)",
+   "company": "RhymeQ Technologies GmbH",
+   "loc": "Berlin",
+   "type": "Permanent employment, professional / experienced",
+   "date": "2026-11-24T08:30:34+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/rhymeq-technologies-gmbh/quantum-compiler-engineer-berlin-52057",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "arbeitnow-freelance-full-stack-developer-django-ai-products-python-llm-integration-remote-100-berlin-290567",
+   "title": "Freelance Full-Stack Developer | Django | AI Products | Python & LLM Integration | Remote 100%",
+   "company": "hurra.com",
+   "loc": "Berlin",
+   "type": "Freelancer / independent contractor, freelance, professional / experienced",
+   "date": "2026-11-24T08:30:34+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/hurracom/freelance-full-stack-developer-django-ai-products-python-llm-integration-remote-100-berlin-290567",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "arbeitnow-full-stack-developer-java-spring-boot-typescript-berlin-318262",
+   "title": "Full-Stack Developer (m/w/d) – Java/Spring Boot & TypeScript",
+   "company": "P&T Software",
+   "loc": "Berlin",
+   "type": "Unbefristeter arbeitsvertrag, berufserfahren",
+   "date": "2026-11-24T08:30:33+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/pt-software/full-stack-developer-java-spring-boot-typescript-berlin-318262",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "jobicy-156835",
+   "title": "AI Agent Engineer",
+   "company": "Binance",
+   "loc": "Hong Kong,  Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-24T04:45:27+00:00",
+   "url": "https://jobicy.com/jobs/156835-ai-agent-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-senior-web-compatibility-engineer-285874",
+   "title": "Senior Web Compatibility Engineer",
+   "company": "Duck Duck Go",
+   "loc": "Remote",
+   "type": "Full Time",
+   "date": "2026-11-24T03:43:31+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/duck-duck-go/remote-senior-web-compatibility-engineer-285874",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-privacy-engineer-269228",
+   "title": "Senior Privacy Engineer",
+   "company": "Duck Duck Go",
+   "loc": "Remote",
+   "type": "Full Time",
+   "date": "2026-11-24T03:43:31+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/duck-duck-go/remote-senior-privacy-engineer-269228",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering"
+   ]
+  },
+  {
+   "id": "arbeitnow-senior-devops-engineer-100-remote-worldwide-london-168519",
+   "title": "Senior Devops Engineer (100% Remote, Worldwide)",
+   "company": "Tether Operations Limited",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-24T03:31:48+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/tether-operations-limited/senior-devops-engineer-100-remote-worldwide-london-168519",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering",
     "Remote"
    ]
   },
   {
-   "id": "arbeitnow-founding-full-stack-engineer-berlin-304822",
-   "title": "Founding Full-Stack Engineer",
-   "company": "planqor.ai",
-   "loc": "Berlin",
-   "type": "Permanent employment, professional / experienced",
-   "date": "2026-11-23T16:00:50+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/planqorai/founding-full-stack-engineer-berlin-304822",
+   "id": "arbeitnow-staff-product-engineer-saas-remote-amsterdam-176256",
+   "title": "Staff Product Engineer ( SaaS / Remote )",
+   "company": "Publitas.com B.V.",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-24T03:31:42+00:00",
+   "url": "https://www.arbeitnow.nl/jobs/companies/publitascom-bv/staff-product-engineer-saas-remote-amsterdam-176256",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Remote",
-    "Software Development"
-   ]
-  },
-  {
-   "id": "arbeitnow-founding-optimization-engineer-berlin-97593",
-   "title": "Founding Optimization Engineer",
-   "company": "planqor.ai",
-   "loc": "Berlin",
-   "type": "Permanent employment, professional / experienced",
-   "date": "2026-11-23T16:00:48+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/planqorai/founding-optimization-engineer-berlin-97593",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Software Development"
+    "Product",
+    "Remote"
    ]
   },
   {
@@ -81,6 +181,34 @@
    "tags": [
     "Product Development",
     "Remote"
+   ]
+  },
+  {
+   "id": "remoteok-1138070",
+   "title": "Senior Software Engineer, Agentic AI",
+   "company": "Clover Health",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-23T09:40:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-agentic-ai-clover-health-1138070",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1138068",
+   "title": "Senior Software Developer, Agentic AI - Canada",
+   "company": "Clover Health",
+   "loc": "Canada Only",
+   "type": "",
+   "date": "2026-11-23T09:20:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-developer-agentic-ai-canada-clover-health-1138068",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
    ]
   },
   {
@@ -156,18 +284,31 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-remote-software-test-engineer-bern-110215",
-   "title": "Software Test Engineer",
-   "company": "SwissPeak Partners GmbH",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-22T12:31:14+00:00",
-   "url": "https://www.arbeitnow.ch/jobs/companies/swisspeak-partners-gmbh/remote-software-test-engineer-bern-110215",
-   "source": "Arbeitnow",
+   "id": "remoteok-1138067",
+   "title": "Threat Research Engineer, Security Factory: Threat Research",
+   "company": "GitLab",
+   "loc": "EMEA",
+   "type": "",
+   "date": "2026-11-23T00:20:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-threat-research-engineer-security-factory-threat-research-gitlab-1138067",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Software Engineering",
-    "Remote"
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1138066",
+   "title": "Staff Backend Engineer, Performance Enablement",
+   "company": "GitLab",
+   "loc": "Europe",
+   "type": "",
+   "date": "2026-11-23T00:00:08+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-staff-backend-engineer-performance-enablement-gitlab-1138066",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
    ]
   },
   {
@@ -244,34 +385,6 @@
    "type": "",
    "date": "2026-11-22T01:00:07+00:00",
    "url": "https://remoteOK.com/remote-jobs/remote-sr-forward-deployed-data-engineer-natera-1137970",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "arbeitnow-remote-principal-enterprise-architect-ai-cloud-integrations-162065",
-   "title": "Principal Enterprise Architect - AI & Cloud Integrations",
-   "company": "celonis",
-   "loc": "Remote",
-   "type": "",
-   "date": "2026-11-21T15:55:26+00:00",
-   "url": "https://www.arbeitnow.nl/jobs/companies/celonis/remote-principal-enterprise-architect-ai-cloud-integrations-162065",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Value Engineering"
-   ]
-  },
-  {
-   "id": "remoteok-1137962",
-   "title": "Sr Analyst, Analytics & Insights",
-   "company": "BeyondTrust",
-   "loc": "North America",
-   "type": "",
-   "date": "2026-11-21T11:00:05+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-sr-analyst-analytics-insights-beyondtrust-1137962",
    "source": "Remote OK",
    "salary": "",
    "tags": [
@@ -591,20 +704,6 @@
    ]
   },
   {
-   "id": "remoteok-1137877",
-   "title": "PreSales Solutions Engineer",
-   "company": "Sumo Logic",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T03:00:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-presales-solutions-engineer-sumo-logic-1137877",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
    "id": "remoteok-1137874",
    "title": "Senior Atlassian Cloud Administrator",
    "company": "Dropbox",
@@ -704,18 +803,6 @@
    ]
   },
   {
-   "id": "jobicy-163297",
-   "title": "Site Reliability Engineer (Australia, Remote)",
-   "company": "Axon",
-   "loc": "Australia",
-   "type": "Full-Time",
-   "date": "2026-11-19T11:35:17+00:00",
-   "url": "https://jobicy.com/jobs/163297-site-reliability-engineer-australia-remote",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
    "id": "jobicy-155939",
    "title": "Full-Stack Engineer (Backend Leaning) - Creative Agents",
    "company": "Elevenlabs",
@@ -773,18 +860,6 @@
    "url": "https://jobicy.com/jobs/162979-platform-engineer-compute",
    "source": "Jobicy",
    "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-155601",
-   "title": "Staff Software Engineer (SRE)",
-   "company": "Phantom",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-17T03:00:18+00:00",
-   "url": "https://jobicy.com/jobs/155601-staff-software-engineer-sre-2",
-   "source": "Jobicy",
-   "salary": "USD 200,000–250,000/yearly",
    "tags": []
   },
   {
