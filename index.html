@@ -340,7 +340,7 @@ function card(x,v){
 }
 function buildTabs(){
   const vis=x=>!scope||x.reg!=="GL";
-  $("tabs").innerHTML=[{id:"all",t:"All",n:all.filter(vis).length},{id:"role",t:"Role Search"},{id:"smart",t:"Smart Search"},{id:"cmp",t:"Company Search"},{id:"trk",t:"Tracker"},{id:"out",t:"Outreach"},{id:"live",t:"Live Remote"},...DATA.map(c=>({id:c.id,t:c.t,n:all.filter(x=>x.cat===c&&vis(x)).length}))]
+  $("tabs").innerHTML=[{id:"all",t:"All",n:all.filter(vis).length},{id:"role",t:"Role Search"},{id:"smart",t:"Smart Search"},{id:"cmp",t:"Company Search"},{id:"trk",t:"Tracker"},{id:"out",t:"Outreach"},{id:"live",t:"Live Remote"},{id:"ai",t:"AI Tools"},...DATA.map(c=>({id:c.id,t:c.t,n:all.filter(x=>x.cat===c&&vis(x)).length}))]
     .map(c=>`<button class="tab ${c.id===tab?"on":""}" data-t="${c.id}">${c.t}${c.n!==undefined?`<small>${c.n}</small>`:""}</button>`).join("");
 }
 function render(){
@@ -354,10 +354,10 @@ function render(){
     const items=all.filter(x=>x.cat===c&&match(x)&&hubOk(x));if(items.length)html+=sec(c.t,c.d,items)});
   buildTabs();
   $("scope").classList.toggle("on",scope);$("scope").setAttribute("aria-pressed",scope);
-  $("main").innerHTML=html;$("empty").style.display=(shown||["role","smart","cmp","trk","out","live"].includes(tab))?"none":"block";
+  $("main").innerHTML=html;$("empty").style.display=(shown||["role","smart","cmp","trk","out","live","ai"].includes(tab))?"none":"block";
   $("smart").style.display=tab==="smart"?"block":"none";
   $("builder").style.display=tab==="role"&&!q?"block":"none";
-  const TOOLS=["role","smart","cmp","trk","out","live"];
+  const TOOLS=["role","smart","cmp","trk","out","live","ai"];
   $("fbar").style.display=TOOLS.includes(tab)?"none":"block";
   $("fb-on").classList.toggle("on",inject);$("fb-on").setAttribute("aria-pressed",inject);$("fb-on").textContent=inject?"Filters on":"Filters off";
   if(fRoles){fRoles.refresh();fCities.refresh()}
