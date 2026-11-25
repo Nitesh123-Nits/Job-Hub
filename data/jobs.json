@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T09:58:42+00:00",
+ "updated": "2026-11-25T00:48:19+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,20 +9,103 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 24
+   "count": 22
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 32
+   "count": 33
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 10
+   "count": 6
   }
  ],
  "jobs": [
+  {
+   "id": "arbeitnow-remote-frontend-software-engineer-120939",
+   "title": "Frontend Software Engineer",
+   "company": "Newsweek",
+   "loc": "Remote",
+   "type": "",
+   "date": "2026-11-24T21:55:17+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/newsweek/remote-frontend-software-engineer-120939",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "IT"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-backend-software-engineer-206351",
+   "title": "Backend Software Engineer",
+   "company": "Newsweek",
+   "loc": "Remote",
+   "type": "",
+   "date": "2026-11-24T21:55:17+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/newsweek/remote-backend-software-engineer-206351",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "IT"
+   ]
+  },
+  {
+   "id": "arbeitnow-no-code-developer-bubbleio-100-remote-berlin-260267",
+   "title": "No-Code Developer (m/w/d) | Bubble.io | 100 % Remote",
+   "company": "ALPHA Software GmbH",
+   "loc": "Berlin",
+   "type": "Unbefristeter arbeitsvertrag, berufserfahren",
+   "date": "2026-11-24T17:00:59+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/alpha-software-gmbh/no-code-developer-bubbleio-100-remote-berlin-260267",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "jobicy-164167",
+   "title": "Network Engineer",
+   "company": "Nebius",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-24T15:25:01+00:00",
+   "url": "https://jobicy.com/jobs/164167-network-engineer-3",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-senior-business-analyst-data-process-transformation-bern-221671",
+   "title": "Senior Business Analyst (Data & Process Transformation)",
+   "company": "Coopers Group AG",
+   "loc": "Bern",
+   "type": "Freiberufler / selbstständiger, freelance, berufserfahren",
+   "date": "2026-11-24T15:00:53+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/coopers-group-ag/senior-business-analyst-data-process-transformation-bern-221671",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Consulting",
+    "Engineering"
+   ]
+  },
+  {
+   "id": "jobicy-164107",
+   "title": "Software Engineer- Agentic AI & Integrations",
+   "company": "WIN Home Inspection",
+   "loc": "APAC",
+   "type": "Full-Time",
+   "date": "2026-11-24T12:58:56+00:00",
+   "url": "https://jobicy.com/jobs/164107-software-engineer-agentic-ai-integrations",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
   {
    "id": "arbeitnow-pki-iam-engineer-zurich-300405",
    "title": "PKI & IAM Engineer",
@@ -39,66 +122,6 @@
    ]
   },
   {
-   "id": "arbeitnow-developer-community-lead-berlin-292234",
-   "title": "Developer Community Lead",
-   "company": "RhymeQ Technologies GmbH",
-   "loc": "Berlin",
-   "type": "Permanent employment, professional / experienced",
-   "date": "2026-11-24T08:30:34+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/rhymeq-technologies-gmbh/developer-community-lead-berlin-292234",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Social Media Manager"
-   ]
-  },
-  {
-   "id": "arbeitnow-quantum-compiler-engineer-berlin-52057",
-   "title": "Quantum Compiler Engineer (m/f/d)",
-   "company": "RhymeQ Technologies GmbH",
-   "loc": "Berlin",
-   "type": "Permanent employment, professional / experienced",
-   "date": "2026-11-24T08:30:34+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/rhymeq-technologies-gmbh/quantum-compiler-engineer-berlin-52057",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Software Development"
-   ]
-  },
-  {
-   "id": "arbeitnow-freelance-full-stack-developer-django-ai-products-python-llm-integration-remote-100-berlin-290567",
-   "title": "Freelance Full-Stack Developer | Django | AI Products | Python & LLM Integration | Remote 100%",
-   "company": "hurra.com",
-   "loc": "Berlin",
-   "type": "Freelancer / independent contractor, freelance, professional / experienced",
-   "date": "2026-11-24T08:30:34+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/hurracom/freelance-full-stack-developer-django-ai-products-python-llm-integration-remote-100-berlin-290567",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Software Development"
-   ]
-  },
-  {
-   "id": "arbeitnow-full-stack-developer-java-spring-boot-typescript-berlin-318262",
-   "title": "Full-Stack Developer (m/w/d) – Java/Spring Boot & TypeScript",
-   "company": "P&T Software",
-   "loc": "Berlin",
-   "type": "Unbefristeter arbeitsvertrag, berufserfahren",
-   "date": "2026-11-24T08:30:33+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/pt-software/full-stack-developer-java-spring-boot-typescript-berlin-318262",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Software Development"
-   ]
-  },
-  {
    "id": "jobicy-156835",
    "title": "AI Agent Engineer",
    "company": "Binance",
@@ -109,49 +132,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "arbeitnow-remote-senior-web-compatibility-engineer-285874",
-   "title": "Senior Web Compatibility Engineer",
-   "company": "Duck Duck Go",
-   "loc": "Remote",
-   "type": "Full Time",
-   "date": "2026-11-24T03:43:31+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/duck-duck-go/remote-senior-web-compatibility-engineer-285874",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Engineering"
-   ]
-  },
-  {
-   "id": "arbeitnow-remote-senior-privacy-engineer-269228",
-   "title": "Senior Privacy Engineer",
-   "company": "Duck Duck Go",
-   "loc": "Remote",
-   "type": "Full Time",
-   "date": "2026-11-24T03:43:31+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/duck-duck-go/remote-senior-privacy-engineer-269228",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Engineering"
-   ]
-  },
-  {
-   "id": "arbeitnow-senior-devops-engineer-100-remote-worldwide-london-168519",
-   "title": "Senior Devops Engineer (100% Remote, Worldwide)",
-   "company": "Tether Operations Limited",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-24T03:31:48+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/tether-operations-limited/senior-devops-engineer-100-remote-worldwide-london-168519",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Engineering",
-    "Remote"
-   ]
   },
   {
    "id": "arbeitnow-staff-product-engineer-saas-remote-amsterdam-176256",
@@ -169,18 +149,50 @@
    ]
   },
   {
-   "id": "arbeitnow-remote-ai-engineer-rotterdam-22878",
-   "title": "AI Engineer",
-   "company": "AnywhereNow",
-   "loc": "Remote job",
-   "type": "Mid, fulltime fixed term",
-   "date": "2026-11-23T12:31:42+00:00",
-   "url": "https://www.arbeitnow.nl/jobs/companies/anywherenow/remote-ai-engineer-rotterdam-22878",
-   "source": "Arbeitnow",
+   "id": "remoteok-1138079",
+   "title": "Senior Manager, Enterprise Application Development Engineering",
+   "company": "GitLab",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-24T00:20:07+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-manager-enterprise-application-development-engineering-gitlab-1138079",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Product Development",
-    "Remote"
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1138075",
+   "title": "Senior CX Platform Engineer",
+   "company": "GitLab",
+   "loc": "Canada Only",
+   "type": "",
+   "date": "2026-11-24T00:00:07+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-cx-platform-engineer-gitlab-1138075",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1138074",
+   "title": "Strategic Technical Advisor",
+   "company": "Thrive",
+   "loc": "",
+   "type": "",
+   "date": "2026-11-23T16:00:27+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-strategic-technical-advisor-thrive-1138074",
+   "source": "Remote OK",
+   "salary": "USD 128,091/year",
+   "tags": [
+    "infosec",
+    "education",
+    "technical",
+    "customer support",
+    "finance",
+    "cloud"
    ]
   },
   {
@@ -636,18 +648,6 @@
    ]
   },
   {
-   "id": "jobicy-163534",
-   "title": "Android Engineer (APAC Remote)",
-   "company": "Binance",
-   "loc": "APAC",
-   "type": "Full-Time",
-   "date": "2026-11-20T09:39:20+00:00",
-   "url": "https://jobicy.com/jobs/163534-android-engineer-apac-remote",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
    "id": "remoteok-1137901",
    "title": "Art Director",
    "company": "Abnormal",
@@ -746,44 +746,6 @@
    ]
   },
   {
-   "id": "remoteok-1137865",
-   "title": "Senior Product Engineer",
-   "company": "Arbor Education",
-   "loc": "",
-   "type": "",
-   "date": "2026-11-20T00:00:47+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-product-engineer-arbor-education-1137865",
-   "source": "Remote OK",
-   "salary": "USD 70,000–80,000/year",
-   "tags": [
-    "design",
-    "react",
-    "backend",
-    "education",
-    "consulting",
-    "docker"
-   ]
-  },
-  {
-   "id": "remoteok-1137864",
-   "title": "IT Manager",
-   "company": "1mind",
-   "loc": "United States",
-   "type": "",
-   "date": "2026-11-20T00:00:41+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-it-manager-1mind-1137864",
-   "source": "Remote OK",
-   "salary": "USD 140,000–170,000/year",
-   "tags": [
-    "exec",
-    "saas",
-    "infosec",
-    "recruiter",
-    "customer support",
-    "dev"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -846,18 +808,6 @@
    "type": "Full-Time",
    "date": "2026-11-18T03:05:06+00:00",
    "url": "https://jobicy.com/jobs/153446-postgres-deployment-engineer-nix",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-162979",
-   "title": "Platform Engineer - Compute",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-17T13:39:12+00:00",
-   "url": "https://jobicy.com/jobs/162979-platform-engineer-compute",
    "source": "Jobicy",
    "salary": "",
    "tags": []
