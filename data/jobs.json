@@ -1,15 +1,15 @@
 {
- "updated": "2026-11-25T00:48:19+00:00",
+ "updated": "2026-11-25T18:40:23+00:00",
  "sources": [
   {
    "name": "Remotive",
    "ok": true,
-   "count": 15
+   "count": 16
   },
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 22
+   "count": 96
   },
   {
    "name": "Remote OK",
@@ -19,52 +19,616 @@
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 6
+   "count": 9
   }
  ],
  "jobs": [
   {
-   "id": "arbeitnow-remote-frontend-software-engineer-120939",
-   "title": "Frontend Software Engineer",
-   "company": "Newsweek",
+   "id": "arbeitnow-remote-sr-data-platform-engineer-85741",
+   "title": "Sr Data Platform Engineer",
+   "company": "dataiku",
    "loc": "Remote",
    "type": "",
-   "date": "2026-11-24T21:55:17+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/newsweek/remote-frontend-software-engineer-120939",
+   "date": "2026-11-25T15:55:24+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/dataiku/remote-sr-data-platform-engineer-85741",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "IT"
+    "Enterprise Data & Analytics"
    ]
   },
   {
-   "id": "arbeitnow-remote-backend-software-engineer-206351",
-   "title": "Backend Software Engineer",
-   "company": "Newsweek",
+   "id": "arbeitnow-remote-fullstack-software-engineer-core-engineering-469912",
+   "title": "Fullstack Software Engineer - Core Engineering",
+   "company": "dataiku",
    "loc": "Remote",
    "type": "",
-   "date": "2026-11-24T21:55:17+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/newsweek/remote-backend-software-engineer-206351",
+   "date": "2026-11-25T15:55:24+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/dataiku/remote-fullstack-software-engineer-core-engineering-469912",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "IT"
+    "Engineering"
    ]
   },
   {
-   "id": "arbeitnow-no-code-developer-bubbleio-100-remote-berlin-260267",
-   "title": "No-Code Developer (m/w/d) | Bubble.io | 100 % Remote",
-   "company": "ALPHA Software GmbH",
-   "loc": "Berlin",
-   "type": "Unbefristeter arbeitsvertrag, berufserfahren",
-   "date": "2026-11-24T17:00:59+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/alpha-software-gmbh/no-code-developer-bubbleio-100-remote-berlin-260267",
+   "id": "arbeitnow-remote-full-stack-developer-nodejs-ipswich-333211",
+   "title": "Full Stack Developer (node.js)",
+   "company": "Delta Capita",
+   "loc": "Remote job",
+   "type": "Mid, fulltime permanent",
+   "date": "2026-11-25T15:31:33+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/delta-capita/remote-full-stack-developer-nodejs-ipswich-333211",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "MACH",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-python-backend-engineer-berlin-277686",
+   "title": "Senior Python Backend Engineer (m/f/x)",
+   "company": "Makersite GmbH",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-25T15:31:31+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/makersite-gmbh/remote-senior-python-backend-engineer-berlin-277686",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Technology",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-engineering-team-lead-paris-127335",
+   "title": "Senior Engineering Team Lead",
+   "company": "Adikteev",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-25T12:31:33+00:00",
+   "url": "https://www.arbeitnow.fr/jobs/companies/adikteev/remote-senior-engineering-team-lead-paris-127335",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Engineering",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-developpeur-full-stack-nodejs-react-flutter-paris-474619",
+   "title": "Développeur Full-Stack (Node.js / React / Flutter)",
+   "company": "OHana Entreprise",
+   "loc": "Paris",
+   "type": "Travailleur indépendant / freelance, freelance, professionnel / expérimenté",
+   "date": "2026-11-25T12:00:52+00:00",
+   "url": "https://www.arbeitnow.fr/jobs/companies/ohana-entreprise/developpeur-full-stack-nodejs-react-flutter-paris-474619",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
     "Remote",
     "Software Development"
    ]
+  },
+  {
+   "id": "arbeitnow-full-stack-developer-paris-311610",
+   "title": "Full-stack Developer",
+   "company": "ADOMIK",
+   "loc": "Paris",
+   "type": "Self-employed/freelance (auto-entrepreneur/indépendant), freelance, professional / experienced",
+   "date": "2026-11-25T11:01:26+00:00",
+   "url": "https://www.arbeitnow.fr/jobs/companies/adomik/full-stack-developer-paris-311610",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "Software Development"
+   ]
+  },
+  {
+   "id": "jobicy-156997",
+   "title": "Linux Software Engineer - Ubuntu for Next-Gen Silicon (multiple roles and seniority levels)",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:30:39+00:00",
+   "url": "https://jobicy.com/jobs/156997-linux-software-engineer-ubuntu-for-next-gen-silicon-multiple-roles-and-seniority-levels",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156946",
+   "title": "Platform Engineer - Compute Capacity",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:25:20+00:00",
+   "url": "https://jobicy.com/jobs/156946-platform-engineer-compute-capacity",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156945",
+   "title": "Distributed Systems Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:25:18+00:00",
+   "url": "https://jobicy.com/jobs/156945-distributed-systems-engineer-3",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156940",
+   "title": "Software Engineer - Storage",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:25:15+00:00",
+   "url": "https://jobicy.com/jobs/156940-software-engineer-storage",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-156939",
+   "title": "Data API Engineer",
+   "company": "Supabase",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:25:13+00:00",
+   "url": "https://jobicy.com/jobs/156939-data-api-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149556",
+   "title": "Engineering Manager - Solutions Engineering",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:54+00:00",
+   "url": "https://jobicy.com/jobs/149556-engineering-manager-solutions-engineering",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149572",
+   "title": "Engineering Manager - Ubuntu Security",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:51+00:00",
+   "url": "https://jobicy.com/jobs/149572-engineering-manager-ubuntu-security",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149566",
+   "title": "Rust Engineering Lead - Linux and Open Source",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:49+00:00",
+   "url": "https://jobicy.com/jobs/149566-rust-engineering-lead-linux-and-open-source",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149576",
+   "title": "Containerization & Virtualisation Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:35+00:00",
+   "url": "https://jobicy.com/jobs/149576-containerization-virtualisation-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149565",
+   "title": "Ubuntu Security Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:33+00:00",
+   "url": "https://jobicy.com/jobs/149565-ubuntu-security-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149562",
+   "title": "Lead Linux Kernel Engineer - Ubuntu",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:31+00:00",
+   "url": "https://jobicy.com/jobs/149562-lead-linux-kernel-engineer-ubuntu",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149558",
+   "title": "Microservices Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:29+00:00",
+   "url": "https://jobicy.com/jobs/149558-microservices-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149557",
+   "title": "Senior Site Reliability Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:28+00:00",
+   "url": "https://jobicy.com/jobs/149557-senior-site-reliability-engineer-5",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149528",
+   "title": "Engineering Manager, Managed Services",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:23+00:00",
+   "url": "https://jobicy.com/jobs/149528-engineering-manager-managed-services",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149523",
+   "title": "Cloud Field Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:15:21+00:00",
+   "url": "https://jobicy.com/jobs/149523-cloud-field-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149543",
+   "title": "Python Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:56+00:00",
+   "url": "https://jobicy.com/jobs/149543-python-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149569",
+   "title": "Cloud Engineering Manager",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:55+00:00",
+   "url": "https://jobicy.com/jobs/149569-cloud-engineering-manager",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149561",
+   "title": "Engineering Manager - Data Platform",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:51+00:00",
+   "url": "https://jobicy.com/jobs/149561-engineering-manager-data-platform",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149571",
+   "title": "Software Engineering Director",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:48+00:00",
+   "url": "https://jobicy.com/jobs/149571-software-engineering-director",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149567",
+   "title": "Embedded & Desktop Linux Systems Engineer - Optimisation",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:46+00:00",
+   "url": "https://jobicy.com/jobs/149567-embedded-desktop-linux-systems-engineer-optimisation",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149570",
+   "title": "Engineering Manager - Ubuntu Linux Kernel",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:42+00:00",
+   "url": "https://jobicy.com/jobs/149570-engineering-manager-ubuntu-linux-kernel",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149560",
+   "title": "Software Engineer - Solutions Engineering",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:38+00:00",
+   "url": "https://jobicy.com/jobs/149560-software-engineer-solutions-engineering",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149537",
+   "title": "Ubuntu Engineering Lead",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:37+00:00",
+   "url": "https://jobicy.com/jobs/149537-ubuntu-engineering-lead",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149535",
+   "title": "Embedded Linux Field Engineer for Devices/IoT",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:35+00:00",
+   "url": "https://jobicy.com/jobs/149535-embedded-linux-field-engineer-for-devices-iot",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149536",
+   "title": "Engineering Manager - Security Standards and Hardening",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:33+00:00",
+   "url": "https://jobicy.com/jobs/149536-engineering-manager-security-standards-and-hardening",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149563",
+   "title": "Python and Kubernetes Software Engineer - Data, Workflows, AI/ML & Analytics",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:30+00:00",
+   "url": "https://jobicy.com/jobs/149563-python-and-kubernetes-software-engineer-data-workflows-ai-ml-analytics",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149575",
+   "title": "Engineering Manager",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:28+00:00",
+   "url": "https://jobicy.com/jobs/149575-engineering-manager",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149524",
+   "title": "Software Engineer, Sustaining Engineering",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:26+00:00",
+   "url": "https://jobicy.com/jobs/149524-software-engineer-sustaining-engineering",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149522",
+   "title": "Senior/Staff/Principal Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:24+00:00",
+   "url": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149574",
+   "title": "Linux Platform Integration - Ubuntu Systems Senior Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:21+00:00",
+   "url": "https://jobicy.com/jobs/149574-linux-platform-integration-ubuntu-systems-senior-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149573",
+   "title": "OpenStack Engineering Manager",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:15+00:00",
+   "url": "https://jobicy.com/jobs/149573-openstack-engineering-manager",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149534",
+   "title": "Alliances Field Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:12+00:00",
+   "url": "https://jobicy.com/jobs/149534-alliances-field-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149577",
+   "title": "Community Engineer (multiple roles and seniority levels)",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:10:08+00:00",
+   "url": "https://jobicy.com/jobs/149577-community-engineer-multiple-roles-and-seniority-levels",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149553",
+   "title": "Site Reliability / Gitops Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:35+00:00",
+   "url": "https://jobicy.com/jobs/149553-site-reliability-gitops-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149552",
+   "title": "Software Engineer - App Stores",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:34+00:00",
+   "url": "https://jobicy.com/jobs/149552-software-engineer-app-stores",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149551",
+   "title": "Performance Engineer - Open Source",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:32+00:00",
+   "url": "https://jobicy.com/jobs/149551-performance-engineer-open-source",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149547",
+   "title": "Site Reliability Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:27+00:00",
+   "url": "https://jobicy.com/jobs/149547-site-reliability-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149544",
+   "title": "Senior Site Reliability / Gitops Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:23+00:00",
+   "url": "https://jobicy.com/jobs/149544-senior-site-reliability-gitops-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149538",
+   "title": "Golang Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:17+00:00",
+   "url": "https://jobicy.com/jobs/149538-golang-engineer-2",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149533",
+   "title": "Ubuntu Linux Kernel Engineer - Silicon Enablement",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:16+00:00",
+   "url": "https://jobicy.com/jobs/149533-ubuntu-linux-kernel-engineer-silicon-enablement",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149527",
+   "title": "Web Frontend Engineer - JS, CSS, React, Flutter",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:10+00:00",
+   "url": "https://jobicy.com/jobs/149527-web-frontend-engineer-js-css-react-flutter",
+   "source": "Jobicy",
+   "salary": "USD 48,000–70,000/yearly",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149526",
+   "title": "Engineering Manager - AppArmor",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-25T03:05:09+00:00",
+   "url": "https://jobicy.com/jobs/149526-engineering-manager-apparmor",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
   },
   {
    "id": "jobicy-164167",
@@ -79,22 +643,6 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-senior-business-analyst-data-process-transformation-bern-221671",
-   "title": "Senior Business Analyst (Data & Process Transformation)",
-   "company": "Coopers Group AG",
-   "loc": "Bern",
-   "type": "Freiberufler / selbstständiger, freelance, berufserfahren",
-   "date": "2026-11-24T15:00:53+00:00",
-   "url": "https://www.arbeitnow.ch/jobs/companies/coopers-group-ag/senior-business-analyst-data-process-transformation-bern-221671",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Consulting",
-    "Engineering"
-   ]
-  },
-  {
    "id": "jobicy-164107",
    "title": "Software Engineer- Agentic AI & Integrations",
    "company": "WIN Home Inspection",
@@ -107,18 +655,90 @@
    "tags": []
   },
   {
-   "id": "arbeitnow-pki-iam-engineer-zurich-300405",
-   "title": "PKI & IAM Engineer",
-   "company": "Coopers Group AG",
-   "loc": "Zürich",
-   "type": "Interim, interim, berufserfahren",
-   "date": "2026-11-24T09:00:59+00:00",
-   "url": "https://www.arbeitnow.ch/jobs/companies/coopers-group-ag/pki-iam-engineer-zurich-300405",
-   "source": "Arbeitnow",
+   "id": "remoteok-1138096",
+   "title": "Security Engineer, Offensive Security",
+   "company": "Dropbox",
+   "loc": "North America",
+   "type": "",
+   "date": "2026-11-24T11:00:04+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-security-engineer-offensive-security-dropbox-1138096",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Remote",
-    "IT Security"
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1138095",
+   "title": "Principal Software Engineer",
+   "company": "Ping Identity",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-24T10:52:58+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-principal-software-engineer-ping-identity-1138095",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "devops"
+   ]
+  },
+  {
+   "id": "remoteok-1138093",
+   "title": "Senior Software Engineer, AI & Science Platform",
+   "company": "Reddit",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-24T10:52:19+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-ai-science-platform-reddit-1138093",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1138092",
+   "title": "Staff Software Engineer, Control Plane",
+   "company": "Cribl",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-24T10:52:17+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-staff-software-engineer-control-plane-cribl-1138092",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remoteok-1138091",
+   "title": "Senior Web Engineer, Profile & Community",
+   "company": "Airbnb",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-24T10:40:05+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-web-engineer-profile-community-airbnb-1138091",
+   "source": "Remote OK",
+   "salary": "",
+   "tags": [
+    "programming"
+   ]
+  },
+  {
+   "id": "remotive-2091179",
+   "title": "WordPress Theme & Plugin Developer",
+   "company": "Steward Web Development",
+   "loc": "Americas, LATAM, Canada, USA timezones",
+   "type": "contract",
+   "date": "2026-11-24T10:31:32+00:00",
+   "url": "https://remotive.com/remote-jobs/software-development/wordpress-theme-plugin-developer-2091179",
+   "source": "Remotive",
+   "salary": "$57K - $67K",
+   "tags": [
+    "fullstack",
+    "wordpress",
+    "OOP",
+    "themes"
    ]
   },
   {
@@ -132,21 +752,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "arbeitnow-staff-product-engineer-saas-remote-amsterdam-176256",
-   "title": "Staff Product Engineer ( SaaS / Remote )",
-   "company": "Publitas.com B.V.",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-24T03:31:42+00:00",
-   "url": "https://www.arbeitnow.nl/jobs/companies/publitascom-bv/staff-product-engineer-saas-remote-amsterdam-176256",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Product",
-    "Remote"
-   ]
   },
   {
    "id": "remoteok-1138079",
@@ -272,18 +877,6 @@
    "tags": []
   },
   {
-   "id": "jobicy-151197",
-   "title": "C++/Rust Graphics and Windowing System Software Engineer - Mir",
-   "company": "Canonical",
-   "loc": "APAC,  EMEA",
-   "type": "Full-Time",
-   "date": "2026-11-23T03:25:31+00:00",
-   "url": "https://jobicy.com/jobs/151197-c-rust-graphics-and-windowing-system-software-engineer-mir",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
    "id": "jobicy-151281",
    "title": "Senior Web Security Engineer, Browser Platform",
    "company": "DuckDuckGo",
@@ -322,30 +915,6 @@
    "tags": [
     "programming"
    ]
-  },
-  {
-   "id": "jobicy-163805",
-   "title": "Solutions Engineer, Singapore",
-   "company": "Cribl",
-   "loc": "Singapore",
-   "type": "Full-Time",
-   "date": "2026-11-22T05:54:42+00:00",
-   "url": "https://jobicy.com/jobs/163805-solutions-engineer-singapore-2",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-151256",
-   "title": "Lead Solutions Engineer",
-   "company": "Acquia, Inc.",
-   "loc": "Japan",
-   "type": "Full-Time",
-   "date": "2026-11-22T03:40:23+00:00",
-   "url": "https://jobicy.com/jobs/151256-lead-solutions-engineer",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
   },
   {
    "id": "remoteok-1137977",
@@ -610,25 +1179,6 @@
    ]
   },
   {
-   "id": "remoteok-1137917",
-   "title": "Senior Applied AI Engineer",
-   "company": "Wemolo",
-   "loc": "MÃ¼nchen",
-   "type": "",
-   "date": "2026-11-21T00:00:11+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-applied-ai-engineer-wemolo-1137917",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "embedded",
-    "sys admin",
-    "python",
-    "technical",
-    "dev",
-    "testing"
-   ]
-  },
-  {
    "id": "remoteok-1137914",
    "title": "Quality Engineer",
    "company": "Quartermaster",
@@ -690,62 +1240,6 @@
    ]
   },
   {
-   "id": "remoteok-1137890",
-   "title": "Sr Director, L2C Process Owner",
-   "company": "BeyondTrust",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T06:15:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-sr-director-l2c-process-owner-beyondtrust-1137890",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137874",
-   "title": "Senior Atlassian Cloud Administrator",
-   "company": "Dropbox",
-   "loc": "Europe",
-   "type": "",
-   "date": "2026-11-20T02:15:13+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-atlassian-cloud-administrator-dropbox-1137874",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137872",
-   "title": "Senior Software Developer - Canada",
-   "company": "Clover Health",
-   "loc": "Canada Only",
-   "type": "",
-   "date": "2026-11-20T01:45:13+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-developer-canada-clover-health-1137872",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137871",
-   "title": "Senior Software Engineer",
-   "company": "Clover Health",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T01:30:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-clover-health-1137871",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -784,30 +1278,6 @@
    "type": "Full-Time",
    "date": "2026-11-19T02:40:17+00:00",
    "url": "https://jobicy.com/jobs/146254-atlassian-administrator-1726",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-153449",
-   "title": "Software Engineer - Auth",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-18T03:05:09+00:00",
-   "url": "https://jobicy.com/jobs/153449-software-engineer-auth",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-153446",
-   "title": "Postgres Deployment Engineer (Nix)",
-   "company": "Supabase",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-18T03:05:06+00:00",
-   "url": "https://jobicy.com/jobs/153446-postgres-deployment-engineer-nix",
    "source": "Jobicy",
    "salary": "",
    "tags": []
