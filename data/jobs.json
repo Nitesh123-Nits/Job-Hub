@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T18:40:23+00:00",
+ "updated": "2026-11-26T08:27:10+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,7 +9,7 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 96
+   "count": 100
   },
   {
    "name": "Remote OK",
@@ -19,111 +19,138 @@
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 9
+   "count": 3
   }
  ],
  "jobs": [
   {
-   "id": "arbeitnow-remote-sr-data-platform-engineer-85741",
-   "title": "Sr Data Platform Engineer",
-   "company": "dataiku",
+   "id": "arbeitnow-remote-senior-product-owner-355662",
+   "title": "Senior Product Owner",
+   "company": "Nmi",
    "loc": "Remote",
    "type": "",
-   "date": "2026-11-25T15:55:24+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/dataiku/remote-sr-data-platform-engineer-85741",
+   "date": "2026-11-26T06:55:16+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/nmi/remote-senior-product-owner-355662",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Enterprise Data & Analytics"
+    "Product Engineering"
    ]
   },
   {
-   "id": "arbeitnow-remote-fullstack-software-engineer-core-engineering-469912",
-   "title": "Fullstack Software Engineer - Core Engineering",
-   "company": "dataiku",
+   "id": "arbeitnow-remote-manager-engineering-identity-64436",
+   "title": "Manager, Engineering - Identity",
+   "company": "Camunda",
    "loc": "Remote",
-   "type": "",
-   "date": "2026-11-25T15:55:24+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/dataiku/remote-fullstack-software-engineer-core-engineering-469912",
+   "type": "Full Time",
+   "date": "2026-11-26T06:40:11+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/camunda/remote-manager-engineering-identity-64436",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Engineering"
+    "Products"
    ]
   },
   {
-   "id": "arbeitnow-remote-full-stack-developer-nodejs-ipswich-333211",
-   "title": "Full Stack Developer (node.js)",
-   "company": "Delta Capita",
-   "loc": "Remote job",
-   "type": "Mid, fulltime permanent",
-   "date": "2026-11-25T15:31:33+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/delta-capita/remote-full-stack-developer-nodejs-ipswich-333211",
-   "source": "Arbeitnow",
+   "id": "jobicy-157144",
+   "title": "Backend Engineer, Java - Web 3 Wallet",
+   "company": "Binance",
+   "loc": "Hong Kong,  Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:30:34+00:00",
+   "url": "https://jobicy.com/jobs/157144-backend-engineer-java-web-3-wallet",
+   "source": "Jobicy",
    "salary": "",
-   "tags": [
-    "MACH",
-    "Remote"
-   ]
+   "tags": []
   },
   {
-   "id": "arbeitnow-remote-senior-python-backend-engineer-berlin-277686",
-   "title": "Senior Python Backend Engineer (m/f/x)",
-   "company": "Makersite GmbH",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-25T15:31:31+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/makersite-gmbh/remote-senior-python-backend-engineer-berlin-277686",
-   "source": "Arbeitnow",
+   "id": "jobicy-157048",
+   "title": "Safety Engineer (Backend Leaning)",
+   "company": "Elevenlabs",
+   "loc": "Ireland,  Japan,  Poland,  UK,  USA",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:25:14+00:00",
+   "url": "https://jobicy.com/jobs/157048-safety-engineer-backend-leaning",
+   "source": "Jobicy",
    "salary": "",
-   "tags": [
-    "Technology",
-    "Remote"
-   ]
+   "tags": []
   },
   {
-   "id": "arbeitnow-remote-senior-engineering-team-lead-paris-127335",
-   "title": "Senior Engineering Team Lead",
-   "company": "Adikteev",
-   "loc": "Remote job",
-   "type": "Experienced, fulltime permanent",
-   "date": "2026-11-25T12:31:33+00:00",
-   "url": "https://www.arbeitnow.fr/jobs/companies/adikteev/remote-senior-engineering-team-lead-paris-127335",
+   "id": "jobicy-157045",
+   "title": "Systems Architect - APAC",
+   "company": "Elevenlabs",
+   "loc": "Singapore",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:25:13+00:00",
+   "url": "https://jobicy.com/jobs/157045-systems-architect-apac",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149550",
+   "title": "Security Software Engineer",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:20:43+00:00",
+   "url": "https://jobicy.com/jobs/149550-security-software-engineer",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149521",
+   "title": "Engineering Manager - MLOps & Analytics",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:20:41+00:00",
+   "url": "https://jobicy.com/jobs/149521-engineering-manager-mlops-analytics",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "jobicy-149520",
+   "title": "Junior Linux Kernel Engineer - Ubuntu",
+   "company": "Canonical",
+   "loc": "Anywhere",
+   "type": "Full-Time",
+   "date": "2026-11-26T04:20:39+00:00",
+   "url": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu",
+   "source": "Jobicy",
+   "salary": "",
+   "tags": []
+  },
+  {
+   "id": "arbeitnow-remote-senior-frontend-developer-switzerland-292678",
+   "title": "Senior Frontend Developer",
+   "company": "Divio",
+   "loc": "Switzerland",
+   "type": "Full time, mid-senior",
+   "date": "2026-11-25T21:20:04+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/divio/remote-senior-frontend-developer-switzerland-292678",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
     "Engineering",
+    "Computer Software",
     "Remote"
    ]
   },
   {
-   "id": "arbeitnow-developpeur-full-stack-nodejs-react-flutter-paris-474619",
-   "title": "Développeur Full-Stack (Node.js / React / Flutter)",
-   "company": "OHana Entreprise",
-   "loc": "Paris",
-   "type": "Travailleur indépendant / freelance, freelance, professionnel / expérimenté",
-   "date": "2026-11-25T12:00:52+00:00",
-   "url": "https://www.arbeitnow.fr/jobs/companies/ohana-entreprise/developpeur-full-stack-nodejs-react-flutter-paris-474619",
-   "source": "Arbeitnow",
+   "id": "remoteok-1138105",
+   "title": "Knowledge Engineer",
+   "company": "Jobgether",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-25T07:28:47+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-knowledge-engineer-jobgether-1138105",
+   "source": "Remote OK",
    "salary": "",
    "tags": [
-    "Remote",
-    "Software Development"
-   ]
-  },
-  {
-   "id": "arbeitnow-full-stack-developer-paris-311610",
-   "title": "Full-stack Developer",
-   "company": "ADOMIK",
-   "loc": "Paris",
-   "type": "Self-employed/freelance (auto-entrepreneur/indépendant), freelance, professional / experienced",
-   "date": "2026-11-25T11:01:26+00:00",
-   "url": "https://www.arbeitnow.fr/jobs/companies/adomik/full-stack-developer-paris-311610",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Remote",
-    "Software Development"
+    "customer support"
    ]
   },
   {
@@ -631,28 +658,18 @@
    "tags": []
   },
   {
-   "id": "jobicy-164167",
-   "title": "Network Engineer",
-   "company": "Nebius",
-   "loc": "APAC",
-   "type": "Full-Time",
-   "date": "2026-11-24T15:25:01+00:00",
-   "url": "https://jobicy.com/jobs/164167-network-engineer-3",
-   "source": "Jobicy",
+   "id": "remoteok-1138104",
+   "title": "Intermediate Security Engineer, Security Incident Response Team (SIRT)",
+   "company": "GitLab",
+   "loc": "US Only",
+   "type": "",
+   "date": "2026-11-25T00:20:28+00:00",
+   "url": "https://remoteOK.com/remote-jobs/remote-intermediate-security-engineer-security-incident-response-team-sirt-gitlab-1138104",
+   "source": "Remote OK",
    "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-164107",
-   "title": "Software Engineer- Agentic AI & Integrations",
-   "company": "WIN Home Inspection",
-   "loc": "APAC",
-   "type": "Full-Time",
-   "date": "2026-11-24T12:58:56+00:00",
-   "url": "https://jobicy.com/jobs/164107-software-engineer-agentic-ai-integrations",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
+   "tags": [
+    "devops"
+   ]
   },
   {
    "id": "remoteok-1138096",
@@ -740,18 +757,6 @@
     "OOP",
     "themes"
    ]
-  },
-  {
-   "id": "jobicy-156835",
-   "title": "AI Agent Engineer",
-   "company": "Binance",
-   "loc": "Hong Kong,  Singapore",
-   "type": "Full-Time",
-   "date": "2026-11-24T04:45:27+00:00",
-   "url": "https://jobicy.com/jobs/156835-ai-agent-engineer",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
   },
   {
    "id": "remoteok-1138079",
@@ -1212,34 +1217,6 @@
    ]
   },
   {
-   "id": "remoteok-1137898",
-   "title": "Security Analyst - Governance, Risk, and Compliance",
-   "company": "LaunchDarkly",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T07:40:18+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-security-analyst-governance-risk-and-compliance-launchdarkly-1137898",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137897",
-   "title": "Staff Security Engineer - AppSec",
-   "company": "6sense",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T07:40:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-staff-security-engineer-appsec-6sense-1137897",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
    "id": "remotive-2091177",
    "title": "Content Reviewer - United States",
    "company": "TELUS Digital",
@@ -1257,30 +1234,6 @@
     "AI/ML",
     "research"
    ]
-  },
-  {
-   "id": "jobicy-155939",
-   "title": "Full-Stack Engineer (Backend Leaning) - Creative Agents",
-   "company": "Elevenlabs",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-19T03:30:18+00:00",
-   "url": "https://jobicy.com/jobs/155939-full-stack-engineer-backend-leaning-creative-agents",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
-  },
-  {
-   "id": "jobicy-146254",
-   "title": "Atlassian Administrator 1726",
-   "company": "Softgic",
-   "loc": "Anywhere",
-   "type": "Full-Time",
-   "date": "2026-11-19T02:40:17+00:00",
-   "url": "https://jobicy.com/jobs/146254-atlassian-administrator-1726",
-   "source": "Jobicy",
-   "salary": "",
-   "tags": []
   },
   {
    "id": "remotive-2069746",
