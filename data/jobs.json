@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T08:27:10+00:00",
+ "updated": "2026-11-27T00:37:40+00:00",
  "sources": [
   {
    "name": "Remotive",
@@ -9,46 +9,125 @@
   {
    "name": "Jobicy",
    "ok": true,
-   "count": 100
+   "count": 93
   },
   {
    "name": "Remote OK",
    "ok": true,
-   "count": 33
+   "count": 24
   },
   {
    "name": "Arbeitnow",
    "ok": true,
-   "count": 3
+   "count": 7
   }
  ],
  "jobs": [
   {
-   "id": "arbeitnow-remote-senior-product-owner-355662",
-   "title": "Senior Product Owner",
-   "company": "Nmi",
-   "loc": "Remote",
-   "type": "",
-   "date": "2026-11-26T06:55:16+00:00",
-   "url": "https://www.arbeitnow.co.uk/jobs/companies/nmi/remote-senior-product-owner-355662",
+   "id": "arbeitnow-remote-ai-research-engineer-multi-modal-agents-united-kindom-321418",
+   "title": "AI Research Engineer (Multi-Modal Agents)",
+   "company": "Tether Operations Limited",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-26T21:31:47+00:00",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/tether-operations-limited/remote-ai-research-engineer-multi-modal-agents-united-kindom-321418",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Product Engineering"
+    "Data",
+    "Remote"
    ]
   },
   {
-   "id": "arbeitnow-remote-manager-engineering-identity-64436",
-   "title": "Manager, Engineering - Identity",
-   "company": "Camunda",
-   "loc": "Remote",
-   "type": "Full Time",
-   "date": "2026-11-26T06:40:11+00:00",
-   "url": "https://www.arbeitnow.com/jobs/companies/camunda/remote-manager-engineering-identity-64436",
+   "id": "arbeitnow-senior-backend-developer-go-full-remote-european-timezones-only-utc1-to-utc3-mendrisio-337104",
+   "title": "Senior Backend Developer (Go) — Full Remote, European Timezones Only (UTC−1 to UTC+3)",
+   "company": "Jobtome",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-26T15:31:20+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/jobtome/senior-backend-developer-go-full-remote-european-timezones-only-utc1-to-utc3-mendrisio-337104",
    "source": "Arbeitnow",
    "salary": "",
    "tags": [
-    "Products"
+    "Engineering",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-remote-senior-react-native-engineer-zurich-397105",
+   "title": "Senior React Native Engineer",
+   "company": "S-PRO",
+   "loc": "Remote job",
+   "type": "Experienced, fulltime permanent",
+   "date": "2026-11-26T15:31:17+00:00",
+   "url": "https://www.arbeitnow.ch/jobs/companies/s-pro/remote-senior-react-native-engineer-zurich-397105",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Mobile Development",
+    "Remote"
+   ]
+  },
+  {
+   "id": "arbeitnow-senior-sap-fiori-lead-developer-technical-lead-freelance-berlin-286936",
+   "title": "Senior SAP Fiori Lead Developer / Technical Lead – Freelance (m/f/d)",
+   "company": "Sidekick Network GmbH & Co. KG",
+   "loc": "Berlin",
+   "type": "Freelancer / independent contractor, freelance, professional / experienced",
+   "date": "2026-11-26T14:31:22+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/sidekick-network-gmbh-co-kg/senior-sap-fiori-lead-developer-technical-lead-freelance-berlin-286936",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "SAP/ERP Consulting",
+    "Development"
+   ]
+  },
+  {
+   "id": "arbeitnow-senior-platform-engineer-remote-within-the-eu-berlin-387492",
+   "title": "Senior Platform Engineer (w/m/d) (remote within the EU)",
+   "company": "Weflow",
+   "loc": "Berlin",
+   "type": "Permanent employment, professional / experienced",
+   "date": "2026-11-26T14:31:21+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/weflow/senior-platform-engineer-remote-within-the-eu-berlin-387492",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "System and Network Administration"
+   ]
+  },
+  {
+   "id": "arbeitnow-m365-engineer-100-remote-berlin-364735",
+   "title": "M365 Engineer (m/w/d), 100 % remote",
+   "company": "Kigen IT-Systemhaus",
+   "loc": "Berlin",
+   "type": "Unbefristeter arbeitsvertrag, berufserfahren",
+   "date": "2026-11-26T13:31:11+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/kigen-it-systemhaus/m365-engineer-100-remote-berlin-364735",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "System and Network Administration"
+   ]
+  },
+  {
+   "id": "arbeitnow-senior-sap-fiori-sapui5-developer-plant-maintenance-freelance-berlin-298397",
+   "title": "Senior SAP Fiori / SAPUI5 Developer – Plant Maintenance (Freelance)",
+   "company": "Sidekick Network GmbH & Co. KG",
+   "loc": "Berlin",
+   "type": "Freelancer / independent contractor, freelance, professional / experienced",
+   "date": "2026-11-26T13:31:11+00:00",
+   "url": "https://www.arbeitnow.com/jobs/companies/sidekick-network-gmbh-co-kg/senior-sap-fiori-sapui5-developer-plant-maintenance-freelance-berlin-298397",
+   "source": "Arbeitnow",
+   "salary": "",
+   "tags": [
+    "Remote",
+    "SAP/ERP Consulting",
+    "Development"
    ]
   },
   {
@@ -122,22 +201,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "arbeitnow-remote-senior-frontend-developer-switzerland-292678",
-   "title": "Senior Frontend Developer",
-   "company": "Divio",
-   "loc": "Switzerland",
-   "type": "Full time, mid-senior",
-   "date": "2026-11-25T21:20:04+00:00",
-   "url": "https://www.arbeitnow.ch/jobs/companies/divio/remote-senior-frontend-developer-switzerland-292678",
-   "source": "Arbeitnow",
-   "salary": "",
-   "tags": [
-    "Engineering",
-    "Computer Software",
-    "Remote"
-   ]
   },
   {
    "id": "remoteok-1138105",
@@ -1062,34 +1125,6 @@
    ]
   },
   {
-   "id": "remoteok-1137940",
-   "title": "Lead, Office of Software Assurance",
-   "company": "Natera",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-21T04:00:04+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-lead-office-of-software-assurance-natera-1137940",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137936",
-   "title": "Business Services Assistant",
-   "company": "Ping Identity",
-   "loc": "UK Only",
-   "type": "",
-   "date": "2026-11-21T03:20:04+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-business-services-assistant-ping-identity-1137936",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
    "id": "jobicy-150994",
    "title": "Software Engineer - Secure Container Images",
    "company": "Canonical",
@@ -1112,109 +1147,6 @@
    "source": "Jobicy",
    "salary": "",
    "tags": []
-  },
-  {
-   "id": "remoteok-1137933",
-   "title": "Associate Counsel, Vendor and Provider Contracting",
-   "company": "Clover Health",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-21T02:40:06+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-associate-counsel-vendor-and-provider-contracting-clover-health-1137933",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
-  },
-  {
-   "id": "remoteok-1137932",
-   "title": "Senior Staff Machine Learning Engineer, Ads Ranking",
-   "company": "Reddit",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-21T02:40:04+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-staff-machine-learning-engineer-ads-ranking-reddit-1137932",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "product"
-   ]
-  },
-  {
-   "id": "remoteok-1137924",
-   "title": "Senior Software Engineer II - Agentic Intelligence",
-   "company": "Honeycomb.io",
-   "loc": "Canada Only",
-   "type": "",
-   "date": "2026-11-21T01:20:20+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-senior-software-engineer-ii-agentic-intelligence-honeycomb-io-1137924",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137923",
-   "title": "Sr Mgr, Software Engineering (Cribl Detect)",
-   "company": "Cribl",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-21T01:00:06+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-sr-mgr-software-engineering-cribl-detect-cribl-1137923",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137922",
-   "title": "Technical Solutions Engineer",
-   "company": "Stripe",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-21T01:00:04+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-technical-solutions-engineer-stripe-1137922",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "programming"
-   ]
-  },
-  {
-   "id": "remoteok-1137914",
-   "title": "Quality Engineer",
-   "company": "Quartermaster",
-   "loc": "Arlington",
-   "type": "",
-   "date": "2026-11-20T16:00:18+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-quality-engineer-quartermaster-1137914",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "design",
-    "sys admin",
-    "customer support",
-    "testing",
-    "travel",
-    "video"
-   ]
-  },
-  {
-   "id": "remoteok-1137901",
-   "title": "Art Director",
-   "company": "Abnormal",
-   "loc": "US Only",
-   "type": "",
-   "date": "2026-11-20T08:20:14+00:00",
-   "url": "https://remoteOK.com/remote-jobs/remote-art-director-abnormal-1137901",
-   "source": "Remote OK",
-   "salary": "",
-   "tags": [
-    "devops"
-   ]
   },
   {
    "id": "remotive-2091177",
